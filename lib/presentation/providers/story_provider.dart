@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/data/repositories/story_repository.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/models/story_model.dart';
-import '../../data/repositories/story_repository.dart';
 
 class StoryProvider extends ChangeNotifier {
   final StoryRepository repository;

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -29,13 +30,16 @@ class _PostStoryPageState extends State<PostStoryPage> {
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source, imageQuality: 70);
 
-    if (pickedFile == null) return;
+    if (!mounted || pickedFile == null) return;
 
     final cropped = await ImageCropper().cropImage(
       sourcePath: pickedFile.path,
       uiSettings: [
-        AndroidUiSettings(toolbarTitle: 'Crop Gambar', lockAspectRatio: true),
-        IOSUiSettings(title: 'Crop Gambar'),
+        AndroidUiSettings(
+          toolbarTitle: AppLocalizations.of(context)!.cropImage,
+          lockAspectRatio: true,
+        ),
+        IOSUiSettings(title: AppLocalizations.of(context)!.cropImage),
       ],
     );
 
@@ -46,55 +50,14 @@ class _PostStoryPageState extends State<PostStoryPage> {
     });
   }
 
-  /*Future<void> _uploadStory() async {
-    if (_imageFile == null || _descriptionController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Gambar dan deskripsi wajib diisi')),
-      );
-      return;
-    }
-
-    final storyProvider = context.read<StoryProvider>();
-    final messenger = ScaffoldMessenger.of(context);
-
-    setState(() => _isUploading = true);
-
-    try {
-      final request = http.MultipartRequest(
-        'POST',
-        Uri.parse('${ApiConstants.baseUrl}/stories'),
-      );
-
-      request.headers['Authorization'] = 'Bearer ${SessionManager.token}';
-
-      request.fields['description'] = _descriptionController.text.trim();
-
-      request.files.add(
-        await http.MultipartFile.fromPath('photo', _imageFile!.path),
-      );
-
-      final response = await request.send();
-
-      if (response.statusCode == 201) {
-        await storyProvider.fetchInitialStories();
-
-        if (mounted) context.go('/');
-      } else {
-        throw Exception('Gagal mengunggah cerita');
-      }
-    } catch (e) {
-      messenger.showSnackBar(SnackBar(content: Text(e.toString())));
-    } finally {
-      if (mounted) {
-        setState(() => _isUploading = false);
-      }
-    }
-  }*/
-
   Future<void> _uploadStory() async {
     if (_imageFile == null || _descriptionController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Gambar dan deskripsi wajib diisi')),
+        SnackBar(
+          content: Text(
+            AppLocalizations.of(context)!.imageAndDescriptionRequired,
+          ),
+        ),
       );
       return;
     }
@@ -126,7 +89,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tambah Cerita')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.postStoryTitle)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -137,7 +100,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
               color: Colors.grey.shade200,
               child: _imageFile != null
                   ? Image.file(_imageFile!, fit: BoxFit.cover)
-                  : const Center(child: Text('Belum ada gambar')),
+                  : Center(child: Text(AppLocalizations.of(context)!.noImage)),
             ),
             const SizedBox(height: 12),
 
@@ -147,12 +110,12 @@ class _PostStoryPageState extends State<PostStoryPage> {
                 OutlinedButton.icon(
                   onPressed: () => _pickImage(ImageSource.camera),
                   icon: const Icon(Icons.camera_alt),
-                  label: const Text('Kamera'),
+                  label: Text(AppLocalizations.of(context)!.camera),
                 ),
                 OutlinedButton.icon(
                   onPressed: () => _pickImage(ImageSource.gallery),
                   icon: const Icon(Icons.photo),
-                  label: const Text('Galeri'),
+                  label: Text(AppLocalizations.of(context)!.gallery),
                 ),
               ],
             ),
@@ -161,8 +124,8 @@ class _PostStoryPageState extends State<PostStoryPage> {
             TextField(
               controller: _descriptionController,
               maxLines: 3,
-              decoration: const InputDecoration(
-                labelText: 'Deskripsi',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.descriptionLabel,
                 border: OutlineInputBorder(),
               ),
             ),
@@ -179,7 +142,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                         color: Colors.white,
                       ),
                     )
-                  : const Text('Upload'),
+                  : Text(AppLocalizations.of(context)!.uploadButton),
             ),
           ],
         ),

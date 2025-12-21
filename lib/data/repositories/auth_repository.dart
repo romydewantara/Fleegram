@@ -1,40 +1,23 @@
-import 'dart:convert';
-
-import 'package:fleegram/core/constants/api_constants.dart';
-import 'package:http/http.dart' as http;
+import 'package:fleegram/core/network/api_client.dart';
 
 class AuthRepository {
-  final http.Client client;
+  final ApiClient apiClient;
 
-  AuthRepository({http.Client? client}) : client = client ?? http.Client();
+  AuthRepository(this.apiClient);
 
   Future<String> login(String email, String password) async {
-    final response = await client.post(
-      Uri.parse('${ApiConstants.baseUrl}/login'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'email': email, 'password': password}),
+    final json = await apiClient.post(
+      '/login',
+      body: {'email': email, 'password': password},
     );
 
-    final Map<String, dynamic> json = jsonDecode(response.body);
-
-    if (response.statusCode == 200) {
-      return json['loginResult']['token'];
-    } else {
-      throw Exception(json['message'] ?? 'Login failed, please try again');
-    }
+    return json['loginResult']['token'];
   }
 
   Future<void> register(String name, String email, String password) async {
-    final response = await client.post(
-      Uri.parse('${ApiConstants.baseUrl}/register'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'name': name, 'email': email, 'password': password}),
+    await apiClient.post(
+      '/register',
+      body: {'name': name, 'email': email, 'password': password},
     );
-
-    final Map<String, dynamic> json = jsonDecode(response.body);
-
-    if (response.statusCode != 201) {
-      throw Exception(json['message'] ?? 'Registration failed');
-    }
   }
 }

@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateFormatter {
-  static String formatIndo(DateTime date) {
-    return DateFormat('MMMM d, yyyy', 'id_ID').format(date);
+  static String formatFull(BuildContext context, DateTime date) {
+    final locale = Localizations.localeOf(context).toString();
+
+    return DateFormat('MMMM d, yyyy', locale).format(date);
   }
 }

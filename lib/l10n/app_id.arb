@@ -1,0 +1,69 @@
+{
+  "@@locale": "id",
+  "appTitle": "Fleegram",
+
+  "loading": "Lagi diproses ya...",
+  "errorGeneric": "Ups, ada yang bermasalah",
+  "retry": "Coba lagi",
+  "cancel": "Batal",
+  "submit": "Kirim",
+  "save": "Simpan",
+
+  "loginTitle": "Masuk",
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "loginButton": "Masuk",
+  "loginFailed": "Email atau password salah. Coba lagi ya.",
+  "emptyEmailField": "Kolom Email harus diisi.",
+  "emptyPasswordField": "Password ga boleh kosong.",
+  "wrongEmailFormat": "Format Email yang kamu masukin ga valid. Coba periksa lagi ya.",
+  "passwordLength": "Masukin password minimal 8 karakter.",
+  "emailNotRegistered": "Email ini belum terdaftar. Coba daftarin dulu yuk!",
+  "emailAlreadyRegistered": "Email ini udah pernah terdaftar. Coba pakai email lain ya.",
+  "wrongPassword": "Yah, password yang kamu masukin masih salah. Coba lagi ya.",
+  "noAccount": "Belum punya akun?",
+  "goToRegister": "Daftar dulu",
+
+  "registerTitle": "Daftar Akun Baru",
+  "nameLabel": "Nama",
+  "registerButton": "Daftar",
+  "registerLoading": "Sedang membuat akun...",
+  "registerFailed": "Pendaftaran gagal. Coba lagi sebentar ya.",
+  "emailAlreadyUsed": "Email ini sudah dipakai. Coba email yang lain ya.",
+  "alreadyHaveAccount": "Sudah punya akun?",
+  "goToLogin": "Masuk aja",
+
+  "emptyNameField": "Kolom Nama harus diisi.",
+
+  "storyListTitle": "Cerita Terbaru",
+  "emptyStory": "Belum ada cerita nih.",
+  "loadMore": "Lagi ambil cerita lainnya...",
+
+  "storyDetailTitle": "Detail Cerita",
+  "locationLabel": "Lokasi",
+  "latitude": "Lintang",
+  "longitude": "Bujur",
+  "imageLoadError": "Gambarnya gagal dimuat",
+
+  "postStoryTitle": "Tambah Cerita",
+  "descriptionLabel": "Ceritain sedikit di sini",
+  "pickImage": "Pilih gambar",
+  "cropImage": "Crop gambar",
+  "noImage": "Belum ada gambar",
+  "takePhoto": "Ambil foto",
+  "camera": "Kamera",
+  "gallery": "Galeri",
+  "uploadButton": "Unggah",
+  "uploading": "Sedang mengunggah...",
+  "uploadSuccess": "Hore! Ceritamu berhasil diunggah.",
+  "uploadFailed": "Yah, ceritanya gagal diunggah. Coba lagi ya.",
+  "imageAndDescriptionRequired": "Jangan lupa pilih gambar dan isi ceritanya ya.",
+
+  "logout": "Keluar",
+  "logoutConfirm": "Kamu yakin mau keluar dari akunmu?",
+  "sessionExpired": "Sesi kamu sudah habis. Yuk login lagi.",
+
+  "errorNetwork": "Kamu lagi nggak terhubung ke internet. Coba cek koneksi kamu, lalu ulangi lagi ya.",
+
+  "dateFormatFull": "d MMMM y"
+}

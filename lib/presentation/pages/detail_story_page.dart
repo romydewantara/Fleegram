@@ -1,5 +1,6 @@
 import 'package:fleegram/core/utils/date_formatter.dart';
 import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:flutter/material.dart';
 
 class DetailStoryPage extends StatelessWidget {
@@ -10,7 +11,9 @@ class DetailStoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Story Detail')),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.storyDetailTitle),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -43,7 +46,7 @@ class DetailStoryPage extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   Text(
-                    DateFormatter.formatIndo(story.createdAt),
+                    DateFormatter.formatFull(context, story.createdAt),
                     style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
                   ),
                   const SizedBox(height: 16),

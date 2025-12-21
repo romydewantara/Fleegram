@@ -17,7 +17,6 @@ class StoryCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
             AspectRatio(
               aspectRatio: 1,
               child: Image.network(
@@ -40,7 +39,6 @@ class StoryCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Name
                   Text(
                     story.name,
                     style: const TextStyle(
@@ -50,7 +48,6 @@ class StoryCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
 
-                  // Description (preview)
                   Text(
                     story.description,
                     maxLines: 2,

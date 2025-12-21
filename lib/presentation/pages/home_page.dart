@@ -1,3 +1,4 @@
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:fleegram/presentation/widgets/story_card.dart';
@@ -41,19 +42,19 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: const Text('Logout'),
-        content: const Text('Yakin ingin logout?'),
+        title: Text(AppLocalizations.of(context)!.logout),
+        content: Text(AppLocalizations.of(context)!.logoutConfirm),
         actions: [
           TextButton(
             onPressed: () => context.pop(),
-            child: const Text('Batal'),
+            child: Text(AppLocalizations.of(context)!.cancel),
           ),
           TextButton(
             onPressed: () async {
               await context.read<AuthProvider>().logout();
               if (mounted) context.go('/login');
             },
-            child: const Text('Logout'),
+            child: Text(AppLocalizations.of(context)!.logout),
           ),
         ],
       ),

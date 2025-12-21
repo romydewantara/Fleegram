@@ -1,3 +1,5 @@
+import 'package:fleegram/core/network/api_exception.dart';
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,8 +35,25 @@ class _LoginPageState extends State<LoginPage> {
       _passwordController.text,
     );
 
-    if (authProvider.error == null && mounted) {
+    if (authProvider.errorCode == null && mounted) {
       context.go('/');
+    }
+  }
+
+  String _localizedError(BuildContext context, ApiErrorCode? code) {
+    final l10n = AppLocalizations.of(context)!;
+
+    switch (code) {
+      case ApiErrorCode.userNotFound:
+        return l10n.emailNotRegistered;
+      case ApiErrorCode.invalidPassword:
+        return l10n.wrongPassword;
+      case ApiErrorCode.mustValidEmail:
+        return l10n.wrongEmailFormat;
+      case ApiErrorCode.errorNetwork:
+        return l10n.errorNetwork;
+      default:
+        return l10n.errorGeneric;
     }
   }
 
@@ -42,8 +61,23 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final code = authProvider.errorCode;
+      if (code == null) return;
+
+      final message = _localizedError(context, code);
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(message), behavior: SnackBarBehavior.floating),
+        );
+
+      authProvider.clearError();
+    });
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.loginTitle)),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -54,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 const Icon(Icons.lock_outline, size: 72),
                 const SizedBox(height: 16),
-                const Text(
-                  'Masuk ke Fleegram',
+                Text(
+                  AppLocalizations.of(context)!.loginTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -64,16 +98,16 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.emailLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Email tidak boleh kosong';
+                      return AppLocalizations.of(context)!.emptyEmailField;
                     }
                     if (!value.contains('@')) {
-                      return 'Format email tidak valid';
+                      return AppLocalizations.of(context)!.wrongEmailFormat;
                     }
                     return null;
                   },
@@ -83,28 +117,21 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.passwordLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if (value == null || value.length < 8) {
-                      return 'Password minimal 8 karakter';
+                    if (value == null || value.isEmpty) {
+                      return AppLocalizations.of(context)!.emptyPasswordField;
+                    }
+                    if (value.length < 8) {
+                      return AppLocalizations.of(context)!.passwordLength;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 24),
-
-                if (authProvider.error != null)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Text(
-                      authProvider.error!,
-                      style: const TextStyle(color: Colors.red),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
 
                 ElevatedButton(
                   onPressed: authProvider.isLoading ? null : _onLogin,
@@ -117,13 +144,13 @@ class _LoginPageState extends State<LoginPage> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text('Login'),
+                      : Text(AppLocalizations.of(context)!.loginButton),
                 ),
                 const SizedBox(height: 12),
 
                 TextButton(
                   onPressed: () => context.push('/register'),
-                  child: const Text('Belum punya akun? Daftar'),
+                  child: Text(AppLocalizations.of(context)!.goToRegister),
                 ),
               ],
             ),

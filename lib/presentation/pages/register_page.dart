@@ -1,3 +1,5 @@
+import 'package:fleegram/core/network/api_exception.dart';
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,8 +38,23 @@ class _RegisterPageState extends State<RegisterPage> {
       _passwordController.text,
     );
 
-    if (authProvider.error == null && mounted) {
+    if (authProvider.errorCode == null && mounted) {
       context.go('/login');
+    }
+  }
+
+  String _localizedError(BuildContext context, ApiErrorCode? code) {
+    final l10n = AppLocalizations.of(context)!;
+
+    switch (code) {
+      case ApiErrorCode.emailAlreadyTaken:
+        return l10n.emailAlreadyRegistered;
+      case ApiErrorCode.mustValidEmail:
+        return l10n.wrongEmailFormat;
+      case ApiErrorCode.errorNetwork:
+        return l10n.errorNetwork;
+      default:
+        return l10n.errorGeneric;
     }
   }
 
@@ -45,8 +62,23 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final code = authProvider.errorCode;
+      if (code == null) return;
+
+      final message = _localizedError(context, code);
+
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(
+          SnackBar(content: Text(message), behavior: SnackBarBehavior.floating),
+        );
+
+      authProvider.clearError();
+    });
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.registerTitle)),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -57,8 +89,8 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const Icon(Icons.person_add_alt_1, size: 72),
                 const SizedBox(height: 16),
-                const Text(
-                  'Daftar Akun Baru',
+                Text(
+                  AppLocalizations.of(context)!.registerTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -66,16 +98,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nama',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.nameLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Nama tidak boleh kosong';
-                    }
-                    if (value.length < 3) {
-                      return 'Nama minimal 3 karakter';
+                      return AppLocalizations.of(context)!.emptyNameField;
                     }
                     return null;
                   },
@@ -85,16 +114,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.emailLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Email tidak boleh kosong';
+                      return AppLocalizations.of(context)!.emptyEmailField;
                     }
                     if (!value.contains('@')) {
-                      return 'Format email tidak valid';
+                      return AppLocalizations.of(context)!.wrongEmailFormat;
                     }
                     return null;
                   },
@@ -104,28 +133,18 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.passwordLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
-                    if (value == null || value.length < 6) {
-                      return 'Password minimal 6 karakter';
+                    if (value == null || value.length < 8) {
+                      return AppLocalizations.of(context)!.passwordLength;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 24),
-
-                if (authProvider.error != null)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Text(
-                      authProvider.error!,
-                      style: const TextStyle(color: Colors.red),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
 
                 ElevatedButton(
                   onPressed: authProvider.isLoading ? null : _onRegister,
@@ -138,13 +157,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: Colors.white,
                           ),
                         )
-                      : const Text('Register'),
+                      : Text(AppLocalizations.of(context)!.registerButton),
                 ),
                 const SizedBox(height: 12),
 
                 TextButton(
                   onPressed: () => context.go('/login'),
-                  child: const Text('Sudah punya akun? Login'),
+                  child: Text(AppLocalizations.of(context)!.goToLogin),
                 ),
               ],
             ),

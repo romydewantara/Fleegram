@@ -1,0 +1,60 @@
+{
+  "@@locale": "en",
+  "appTitle": "Fleegram",
+
+  "loading": "Hang tight...",
+  "errorGeneric": "Oops, Something went wrong",
+  "retry": "Try again",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "save": "Save",
+
+  "loginTitle": "Login",
+  "emailLabel": "Email",
+  "passwordLabel": "Password",
+  "loginButton": "Login",
+  "loginLoading": "Signing you in...",
+  "loginFailed": "Email or password is incorrect. Please try again.",
+  "emptyEmailField": "Email field cannot be empty.",
+  "emptyPasswordField": "Password field cannot be empty.",
+  "wrongEmailFormat": "Email format is not valid, please check it again please.",
+  "emailNotRegistered": "This email isn't registered yet. Try a different one.",
+  "wrongPassword": "That password doesn’t look right. Try another one.",
+  "noAccount": "Don’t have an account?",
+  "goToRegister": "Sign up",
+
+  "registerTitle": "Create Account",
+  "nameLabel": "Name",
+  "registerButton": "Register",
+  "registerLoading": "Creating your account...",
+  "registerFailed": "Registration failed. Please try again.",
+  "emailAlreadyUsed": "This email is already in use. Try another one.",
+  "alreadyHaveAccount": "Already have an account?",
+  "goToLogin": "Login",
+
+  "storyListTitle": "Stories",
+  "emptyStory": "No stories available",
+  "loadMore": "Loading more stories...",
+
+  "storyDetailTitle": "Story Detail",
+  "locationLabel": "Location",
+  "latitude": "Latitude",
+  "longitude": "Longitude",
+  "imageLoadError": "Image failed to load",
+
+  "postStoryTitle": "Add Story",
+  "descriptionLabel": "Tell your story here",
+  "pickImage": "Choose image",
+  "takePhoto": "Take photo",
+  "uploadButton": "Upload",
+  "uploading": "Uploading...",
+  "uploadSuccess": "Yay! Your story has been uploaded 🎉",
+  "uploadFailed": "Oops, failed to upload your story. Please try again.",
+  "imageAndDescriptionRequired": "Please add an image and write something first.",
+
+  "logout": "Confirm Logout",
+  "logoutConfirm": "Are you sure you want to log out?",
+  "sessionExpired": "Your session has expired. Please log in again.",
+
+  "dateFormatFull": "MMMM d, y"
+}

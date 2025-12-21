@@ -1,3 +1,4 @@
+import 'package:fleegram/core/network/api_exception.dart';
 import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:fleegram/data/repositories/auth_repository.dart';
 import 'package:flutter/material.dart';
@@ -8,21 +9,23 @@ class AuthProvider extends ChangeNotifier {
   AuthProvider(this.authRepository);
 
   bool _isLoading = false;
-  String? _errorMessage;
+  ApiErrorCode? _errorCode;
 
   bool get isLoading => _isLoading;
-  String? get error => _errorMessage;
+  ApiErrorCode? get errorCode => _errorCode;
 
   Future<void> login(String email, String password) async {
     _setLoading(true);
-    _clearError();
+    clearError();
 
     try {
       final token = await authRepository.login(email, password);
 
       await SessionManager.saveToken(token);
+    } on ApiException catch (e) {
+      _errorCode = e.code;
     } catch (e) {
-      _errorMessage = e.toString();
+      _errorCode = ApiErrorCode.errorNetwork;
     } finally {
       _setLoading(false);
     }
@@ -30,12 +33,14 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> register(String name, String email, String password) async {
     _setLoading(true);
-    _clearError();
+    clearError();
 
     try {
       await authRepository.register(name, email, password);
+    } on ApiException catch (e) {
+      _errorCode = e.code;
     } catch (e) {
-      _errorMessage = e.toString();
+      _errorCode = ApiErrorCode.errorNetwork;
     } finally {
       _setLoading(false);
     }
@@ -51,7 +56,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _clearError() {
-    _errorMessage = null;
+  void clearError() {
+    _errorCode = null;
   }
 }
