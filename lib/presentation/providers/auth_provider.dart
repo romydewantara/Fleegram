@@ -19,9 +19,10 @@ class AuthProvider extends ChangeNotifier {
     clearError();
 
     try {
-      final token = await authRepository.login(email, password);
+      final result = await authRepository.login(email, password);
 
-      await SessionManager.saveToken(token);
+      await SessionManager.saveToken(result.token);
+      await SessionManager.saveUser(name: result.name, email: email);
     } on ApiException catch (e) {
       _errorCode = e.code;
     } catch (e) {

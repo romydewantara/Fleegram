@@ -59,10 +59,24 @@
   "uploadFailed": "Yah, ceritanya gagal diunggah. Coba lagi ya.",
   "imageAndDescriptionRequired": "Jangan lupa pilih gambar dan isi ceritanya ya.",
 
+  "settingTitle": "Pengaturan",
+  "preferences": "Preferensi",
+  "theme": "Tema",
+  "themeLight": "Terang",
+  "themeDark": "Gelap",
+  "themeSystem": "Sistem",
+  "language": "Bahasa",
+  "languageId": "Indonesian",
+  "languageEn": "English",
+  "account": "Akun",
+
   "logout": "Konfirmasi Keluar",
   "logoutButton": "Keluar",
   "logoutConfirm": "Kamu yakin mau keluar dari akunmu?",
   "sessionExpired": "Sesi kamu sudah habis. Yuk login lagi.",
+
+  "userInformation": "Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.",
+  "prefInformation": "Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.",
 
   "errorNetwork": "Kamu lagi nggak terhubung ke internet. Coba cek koneksi kamu, lalu ulangi lagi ya.",
 

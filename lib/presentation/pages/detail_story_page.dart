@@ -10,14 +10,60 @@ class DetailStoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.storyDetailTitle),
+        centerTitle: true,
+        title: Column(
+          children: [
+            Text(
+              AppLocalizations.of(context)!.storyDetailTitle,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 2),
+            Text(story.name, style: theme.textTheme.bodySmall),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CircleAvatar(
+                    radius: 18,
+                    backgroundImage: AssetImage('assets/images/ic_profile.png'),
+                  ),
+                  const SizedBox(width: 12),
+
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        story.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        DateFormatter.formatFull(context, story.createdAt),
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+
             Image.network(
               story.photoUrl,
               fit: BoxFit.contain,
@@ -32,41 +78,10 @@ class DetailStoryPage extends StatelessWidget {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    story.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-
-                  Text(
-                    DateFormatter.formatFull(context, story.createdAt),
-                    style: TextStyle(color: Colors.grey.shade600, fontSize: 12),
-                  ),
-                  const SizedBox(height: 16),
-
-                  Text(story.description, style: const TextStyle(fontSize: 14)),
-
-                  if (story.lat != null && story.lon != null) ...[
-                    const SizedBox(height: 24),
-                    Row(
-                      children: [
-                        const Icon(Icons.location_on, size: 18),
-                        const SizedBox(width: 8),
-                        Text(
-                          'Lat: ${story.lat}, Lon: ${story.lon}',
-                          style: const TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    ),
-                  ],
-                ],
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
+              child: Text(
+                story.description,
+                style: const TextStyle(fontSize: 14),
               ),
             ),
           ],

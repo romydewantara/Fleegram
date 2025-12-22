@@ -168,6 +168,36 @@ class AppLocalizationsId extends AppLocalizations {
       'Jangan lupa pilih gambar dan isi ceritanya ya.';
 
   @override
+  String get settingTitle => 'Pengaturan';
+
+  @override
+  String get preferences => 'Preferensi';
+
+  @override
+  String get theme => 'Tema';
+
+  @override
+  String get themeLight => 'Terang';
+
+  @override
+  String get themeDark => 'Gelap';
+
+  @override
+  String get themeSystem => 'Sistem';
+
+  @override
+  String get language => 'Bahasa';
+
+  @override
+  String get languageId => 'Indonesian';
+
+  @override
+  String get languageEn => 'English';
+
+  @override
+  String get account => 'Akun';
+
+  @override
   String get logout => 'Konfirmasi Keluar';
 
   @override
@@ -178,6 +208,14 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get sessionExpired => 'Sesi kamu sudah habis. Yuk login lagi.';
+
+  @override
+  String get userInformation =>
+      'Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.';
+
+  @override
+  String get prefInformation =>
+      'Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.';
 
   @override
   String get errorNetwork =>

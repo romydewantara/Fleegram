@@ -15,13 +15,11 @@ class StoryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // HEADER
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Avatar
                 CircleAvatar(
                   radius: 20,
                   backgroundImage: const AssetImage(
@@ -30,7 +28,6 @@ class StoryCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
 
-                // Username + description
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

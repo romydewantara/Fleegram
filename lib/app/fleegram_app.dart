@@ -1,11 +1,13 @@
-import 'package:fleegram/app/app_theme.dart';
+import 'package:fleegram/app/theme/app_theme.dart';
 import 'package:fleegram/core/network/api_client.dart';
 import 'package:fleegram/core/network/multipart_client.dart';
 import 'package:fleegram/data/repositories/auth_repository.dart';
 import 'package:fleegram/data/repositories/story_repository.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
+import 'package:fleegram/presentation/providers/locale_provider.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
+import 'package:fleegram/presentation/providers/theme_provider.dart';
 import 'package:fleegram/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -20,6 +22,8 @@ class Fleegram extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()..load()),
+        ChangeNotifierProvider(create: (_) => LocaleProvider()..load()),
         Provider<ApiClient>(create: (_) => ApiClient()),
         Provider<MultipartClient>(create: (_) => MultipartClient()),
         Provider<AuthRepository>(
@@ -38,19 +42,24 @@ class Fleegram extends StatelessWidget {
           create: (context) => StoryProvider(context.read<StoryRepository>()),
         ),
       ],
-      child: MaterialApp.router(
-        title: 'Fleegram',
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [Locale('id'), Locale('en')],
-        routerConfig: router,
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        themeMode: ThemeMode.system,
+      child: Consumer2<ThemeProvider, LocaleProvider>(
+        builder: (_, theme, locale, _) {
+          return MaterialApp.router(
+            title: 'Fleegram',
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            locale: locale.locale,
+            supportedLocales: const [Locale('id'), Locale('en')],
+            routerConfig: router,
+            theme: AppTheme.light,
+            darkTheme: AppTheme.dark,
+            themeMode: theme.themeMode,
+          );
+        },
       ),
     );
   }

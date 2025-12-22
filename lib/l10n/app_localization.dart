@@ -404,6 +404,66 @@ abstract class AppLocalizations {
   /// **'Jangan lupa pilih gambar dan isi ceritanya ya.'**
   String get imageAndDescriptionRequired;
 
+  /// No description provided for @settingTitle.
+  ///
+  /// In id, this message translates to:
+  /// **'Pengaturan'**
+  String get settingTitle;
+
+  /// No description provided for @preferences.
+  ///
+  /// In id, this message translates to:
+  /// **'Preferensi'**
+  String get preferences;
+
+  /// No description provided for @theme.
+  ///
+  /// In id, this message translates to:
+  /// **'Tema'**
+  String get theme;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In id, this message translates to:
+  /// **'Terang'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In id, this message translates to:
+  /// **'Gelap'**
+  String get themeDark;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In id, this message translates to:
+  /// **'Sistem'**
+  String get themeSystem;
+
+  /// No description provided for @language.
+  ///
+  /// In id, this message translates to:
+  /// **'Bahasa'**
+  String get language;
+
+  /// No description provided for @languageId.
+  ///
+  /// In id, this message translates to:
+  /// **'Indonesian'**
+  String get languageId;
+
+  /// No description provided for @languageEn.
+  ///
+  /// In id, this message translates to:
+  /// **'English'**
+  String get languageEn;
+
+  /// No description provided for @account.
+  ///
+  /// In id, this message translates to:
+  /// **'Akun'**
+  String get account;
+
   /// No description provided for @logout.
   ///
   /// In id, this message translates to:
@@ -427,6 +487,18 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Sesi kamu sudah habis. Yuk login lagi.'**
   String get sessionExpired;
+
+  /// No description provided for @userInformation.
+  ///
+  /// In id, this message translates to:
+  /// **'Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.'**
+  String get userInformation;
+
+  /// No description provided for @prefInformation.
+  ///
+  /// In id, this message translates to:
+  /// **'Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.'**
+  String get prefInformation;
 
   /// No description provided for @errorNetwork.
   ///

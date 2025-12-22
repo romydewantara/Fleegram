@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const _primaryColor = Color(0xFF01579B);
-const _secondaryColor = Color(0xFF54C5F8);
-const _backgroundColor = Color(0xFFF9FBFD);
-const _surfaceColor = Colors.white;
-const _errorColor = Color(0xFFD32F2F);
-const _textPrimary = Color(0xFF0D1B2A);
-const _textSecondary = Color(0xFF6B7280);
+const _primaryColor = Colors.white;
+const _secondaryColor = Colors.white70;
+const _backgroundColor = Colors.black;
+const _surfaceColor = Color(0xFF121212);
+const _errorColor = Colors.redAccent;
+const _textPrimary = Colors.white;
+const _textSecondary = Colors.white70;
 
-ThemeData lightTheme = ThemeData(
+ThemeData darkTheme = ThemeData(
   useMaterial3: true,
-  brightness: Brightness.light,
+  brightness: Brightness.dark,
+  iconTheme: const IconThemeData(color: Colors.white),
 
-  dividerColor: Colors.black.withValues(alpha: 0.08),
+  dividerColor: Colors.white.withValues(alpha: 0.08),
 
-  colorScheme: const ColorScheme.light(
+  colorScheme: const ColorScheme.dark(
     primary: _primaryColor,
     secondary: _secondaryColor,
     surface: _surfaceColor,
     error: _errorColor,
-    onPrimary: Colors.white,
-    onSecondary: Colors.white,
+    onPrimary: Colors.black,
+    onSecondary: Colors.black,
     onSurface: _textPrimary,
-    onError: Colors.white,
+    onError: Colors.black,
   ),
 
   scaffoldBackgroundColor: _backgroundColor,
@@ -35,7 +36,7 @@ ThemeData lightTheme = ThemeData(
     centerTitle: false,
   ),
 
-  textTheme: GoogleFonts.poppinsTextTheme(
+  textTheme: GoogleFonts.manropeTextTheme(
     const TextTheme(
       bodySmall: TextStyle(color: _textSecondary),
       bodyMedium: TextStyle(color: _textPrimary),
@@ -62,13 +63,13 @@ ThemeData lightTheme = ThemeData(
 
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: _primaryColor,
-    foregroundColor: Colors.white,
+    foregroundColor: Colors.black,
   ),
 
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: _primaryColor,
-      foregroundColor: Colors.white,
+      foregroundColor: Colors.black,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       textStyle: const TextStyle(fontWeight: FontWeight.w600),
     ),
@@ -76,7 +77,7 @@ ThemeData lightTheme = ThemeData(
 
   cardTheme: CardThemeData(
     color: _surfaceColor,
-    elevation: 2,
+    elevation: 1,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
   ),
 );

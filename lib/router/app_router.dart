@@ -5,6 +5,7 @@ import 'package:fleegram/presentation/pages/home_page.dart';
 import 'package:fleegram/presentation/pages/login_page.dart';
 import 'package:fleegram/presentation/pages/post_story_page.dart';
 import 'package:fleegram/presentation/pages/register_page.dart';
+import 'package:fleegram/presentation/pages/settings_page.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -31,5 +32,6 @@ final router = GoRouter(
       },
     ),
     GoRoute(path: '/post', builder: (_, _) => const PostStoryPage()),
+    GoRoute(path: '/setting', builder: (_, _) => const SettingsPage()),
   ],
 );
