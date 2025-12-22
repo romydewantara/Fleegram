@@ -407,8 +407,14 @@ abstract class AppLocalizations {
   /// No description provided for @logout.
   ///
   /// In id, this message translates to:
-  /// **'Keluar'**
+  /// **'Konfirmasi Keluar'**
   String get logout;
+
+  /// No description provided for @logoutButton.
+  ///
+  /// In id, this message translates to:
+  /// **'Keluar'**
+  String get logoutButton;
 
   /// No description provided for @logoutConfirm.
   ///

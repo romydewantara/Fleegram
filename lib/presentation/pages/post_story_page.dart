@@ -100,7 +100,12 @@ class _PostStoryPageState extends State<PostStoryPage> {
               color: Colors.grey.shade200,
               child: _imageFile != null
                   ? Image.file(_imageFile!, fit: BoxFit.cover)
-                  : Center(child: Text(AppLocalizations.of(context)!.noImage)),
+                  : Center(
+                      child: Text(
+                        AppLocalizations.of(context)!.noImage,
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
             ),
             const SizedBox(height: 12),
 

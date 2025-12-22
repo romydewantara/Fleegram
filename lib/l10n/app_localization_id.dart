@@ -168,7 +168,10 @@ class AppLocalizationsId extends AppLocalizations {
       'Jangan lupa pilih gambar dan isi ceritanya ya.';
 
   @override
-  String get logout => 'Keluar';
+  String get logout => 'Konfirmasi Keluar';
+
+  @override
+  String get logoutButton => 'Keluar';
 
   @override
   String get logoutConfirm => 'Kamu yakin mau keluar dari akunmu?';

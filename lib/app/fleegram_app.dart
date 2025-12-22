@@ -1,3 +1,4 @@
+import 'package:fleegram/app/app_theme.dart';
 import 'package:fleegram/core/network/api_client.dart';
 import 'package:fleegram/core/network/multipart_client.dart';
 import 'package:fleegram/data/repositories/auth_repository.dart';
@@ -47,7 +48,9 @@ class Fleegram extends StatelessWidget {
         ],
         supportedLocales: const [Locale('id'), Locale('en')],
         routerConfig: router,
-        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
       ),
     );
   }

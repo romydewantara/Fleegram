@@ -4,6 +4,7 @@ import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:fleegram/presentation/widgets/story_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -54,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               await context.read<AuthProvider>().logout();
               if (mounted) context.go('/login');
             },
-            child: Text(AppLocalizations.of(context)!.logout),
+            child: Text(AppLocalizations.of(context)!.logoutButton),
           ),
         ],
       ),
@@ -67,7 +68,15 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Fleegram'),
+        title: Text(
+          'Fleegram',
+          style: GoogleFonts.satisfy(
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+            color: Theme.of(context).appBarTheme.foregroundColor,
+          ),
+        ),
+        centerTitle: true,
         actions: [
           IconButton(onPressed: _onLogout, icon: const Icon(Icons.logout)),
         ],
