@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String get loginTitle => 'Sign In';
+  String get loginTitle => 'Login';
 
   @override
   String get emailLabel => 'Email';
@@ -39,16 +39,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordLabel => 'Password';
 
   @override
-  String get loginButton => 'Sign In';
+  String get confirmPasswordLabel => 'Confirm Password';
+
+  @override
+  String get loginButton => 'Login';
 
   @override
   String get loginFailed => 'Incorrect email or password. Please try again.';
 
   @override
-  String get emptyEmailField => 'Email field cannot be empty.';
+  String get emptyEmailField => 'Email field must not be empty.';
 
   @override
-  String get emptyPasswordField => 'Password cannot be empty.';
+  String get emptyPasswordField => 'Password field must not be empty.';
+
+  @override
+  String get emptyConfirmPasswordField =>
+      'Confirm Password field must not be empty.';
 
   @override
   String get wrongEmailFormat =>
@@ -58,19 +65,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordLength => 'Password must be at least 8 characters.';
 
   @override
+  String get confirmPasswordNotMatch =>
+      'Confirm Password must match the Password.';
+
+  @override
   String get emailNotRegistered =>
-      'This email is not registered yet. Try signing up first!';
+      'This email is not registered yet. Please sign up first.';
 
   @override
   String get emailAlreadyRegistered =>
-      'This email is already registered. Please use another email.';
+      'This email has already been registered. Please use another email.';
 
   @override
   String get wrongPassword =>
-      'Oops, the password you entered is incorrect. Try again.';
+      'The password you entered is incorrect. Please try again.';
 
   @override
-  String get noAccount => 'Don\'t have an account?';
+  String get noAccount => 'Don’t have an account?';
 
   @override
   String get goToRegister => 'Sign up';
@@ -82,7 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nameLabel => 'Name';
 
   @override
-  String get registerButton => 'Sign Up';
+  String get registerButton => 'Register';
 
   @override
   String get registerLoading => 'Creating your account...';
@@ -92,26 +103,26 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerSuccess =>
-      'Yay! Your account has been created. Let’s sign in!';
+      'Yay! Your account has been successfully created. Please log in now!';
 
   @override
   String get emailAlreadyUsed =>
-      'This email is already in use. Try another one.';
+      'This email is already in use. Please try another one.';
 
   @override
   String get alreadyHaveAccount => 'Already have an account?';
 
   @override
-  String get goToLogin => 'Sign in';
+  String get goToLogin => 'Login';
 
   @override
-  String get emptyNameField => 'Name field cannot be empty.';
+  String get emptyNameField => 'Name field must not be empty.';
 
   @override
   String get storyListTitle => 'Latest Stories';
 
   @override
-  String get emptyStory => 'No stories yet.';
+  String get emptyStory => 'No stories available yet.';
 
   @override
   String get loadMore => 'Loading more stories...';
@@ -132,13 +143,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get imageLoadError => 'Failed to load image';
 
   @override
-  String get postStoryTitle => 'Add Story';
+  String get postStoryTitle => 'Add New Story';
 
   @override
   String get descriptionLabel => 'Tell your story here...';
 
   @override
-  String get pickImage => 'Select image';
+  String get pickImage => 'Choose image';
 
   @override
   String get cropImage => 'Crop image';
@@ -162,7 +173,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uploading => 'Uploading...';
 
   @override
-  String get uploadSuccess => 'Hooray! Your story has been uploaded.';
+  String get uploadSuccess =>
+      'Hooray! Your story has been successfully uploaded.';
 
   @override
   String get uploadFailed =>
@@ -170,7 +182,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get imageAndDescriptionRequired =>
-      'Please select an image and write a description.';
+      'Please select an image and fill in the story description.';
 
   @override
   String get settingTitle => 'Settings';
@@ -209,26 +221,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutButton => 'Logout';
 
   @override
-  String get logoutConfirm => 'Are you sure you want to log out?';
+  String get logoutConfirm =>
+      'Are you sure you want to log out from your account?';
 
   @override
-  String get sessionExpired =>
-      'Your session has expired. Please sign in again.';
+  String get sessionExpired => 'Your session has expired. Please log in again.';
 
   @override
   String get userInformation =>
-      'The name and email displayed here are read-only and cannot be edited. This feature helps developers easily identify user information such as the active email or account.';
+      'The name and email displayed here are read-only and cannot be changed. This feature is provided to help developers easily identify information such as the email or the currently used account.';
 
   @override
   String get prefInformation =>
-      'Here you can view and adjust app preferences, such as theme and language, to match your personal experience.';
+      'Here you can view and adjust application preferences, such as theme and language, to customize your experience.';
 
   @override
-  String get errorNetworkTitle => 'Connection Issue';
+  String get errorNetworkTitle => 'Oops, Connection Problem';
 
   @override
   String get errorNetwork =>
-      'You’re not connected to the internet. Please check your connection and try again.';
+      'You are not connected to the internet. Please check your connection and try again.';
 
   @override
   String get dateFormatFull => 'MMMM d, y';

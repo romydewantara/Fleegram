@@ -158,6 +158,12 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get passwordLabel;
 
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In id, this message translates to:
+  /// **'Konfirmasi Password'**
+  String get confirmPasswordLabel;
+
   /// No description provided for @loginButton.
   ///
   /// In id, this message translates to:
@@ -173,7 +179,7 @@ abstract class AppLocalizations {
   /// No description provided for @emptyEmailField.
   ///
   /// In id, this message translates to:
-  /// **'Kolom Email harus diisi.'**
+  /// **'Kolom email harus diisi.'**
   String get emptyEmailField;
 
   /// No description provided for @emptyPasswordField.
@@ -182,10 +188,16 @@ abstract class AppLocalizations {
   /// **'Password ga boleh kosong.'**
   String get emptyPasswordField;
 
+  /// No description provided for @emptyConfirmPasswordField.
+  ///
+  /// In id, this message translates to:
+  /// **'Konfirmasi Password ga boleh kosong.'**
+  String get emptyConfirmPasswordField;
+
   /// No description provided for @wrongEmailFormat.
   ///
   /// In id, this message translates to:
-  /// **'Format Email yang kamu masukin ga valid. Coba periksa lagi ya.'**
+  /// **'Format email yang kamu masukin ga valid. Coba periksa lagi ya.'**
   String get wrongEmailFormat;
 
   /// No description provided for @passwordLength.
@@ -193,6 +205,12 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Masukin password minimal 8 karakter.'**
   String get passwordLength;
+
+  /// No description provided for @confirmPasswordNotMatch.
+  ///
+  /// In id, this message translates to:
+  /// **'Konfirmasi Password harus sama dengan Password.'**
+  String get confirmPasswordNotMatch;
 
   /// No description provided for @emailNotRegistered.
   ///

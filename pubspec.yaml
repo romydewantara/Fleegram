@@ -36,4 +36,4 @@ flutter:
     - assets/images/ic_profile.png
     - assets/lottie/banner.json
     - assets/lottie/credential.json
-    - assets/lottie/empty_data.json
+    - assets/lottie/error_network.json

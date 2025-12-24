@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                       Text(
                         l10n.loginTitle,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           labelText: l10n.emailLabel,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -147,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: !_isPasswordVisible,
                         decoration: InputDecoration(
                           labelText: l10n.passwordLabel,
-                          border: OutlineInputBorder(),
+                          border: const OutlineInputBorder(),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _isPasswordVisible

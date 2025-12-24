@@ -68,13 +68,15 @@ class DetailStoryPage extends StatelessWidget {
                             ),
                           ),
                           IconTheme(
-                            data: IconThemeData(size: 14),
+                            data: const IconThemeData(size: 14),
                             child: Align(
                               alignment: Alignment.center,
                               heightFactor: 1,
                               child: Icon(
                                 Icons.public_rounded,
-                                color: Colors.black.withValues(alpha: 0.5),
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.5),
                               ),
                             ),
                           ),
@@ -93,7 +95,9 @@ class DetailStoryPage extends StatelessWidget {
                 fit: BoxFit.contain,
                 width: double.infinity,
                 errorBuilder: (_, _, _) {
-                  return const Center(child: Icon(Icons.broken_image, size: 64));
+                  return const Center(
+                    child: Icon(Icons.broken_image, size: 64),
+                  );
                 },
                 loadingBuilder: (context, child, progress) {
                   if (progress == null) return child;

@@ -104,9 +104,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
-              'assets/lottie/empty_data.json',
+              'assets/lottie/error_network.json',
               width: 200,
-              repeat: false,
+              repeat: true,
             ),
             const SizedBox(height: 24),
 

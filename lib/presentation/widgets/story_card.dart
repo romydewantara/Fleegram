@@ -70,23 +70,24 @@ class StoryCard extends StatelessWidget {
                 aspectRatio: 1,
                 child: Hero(
                   tag: 'story-${story.photoUrl}',
-                  flightShuttleBuilder: (
-                      flightContext,
-                      animation,
-                      flightDirection,
-                      fromHeroContext,
-                      toHeroContext,
+                  flightShuttleBuilder:
+                      (
+                        flightContext,
+                        animation,
+                        flightDirection,
+                        fromHeroContext,
+                        toHeroContext,
                       ) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: toHeroContext.widget,
-                    );
-                  },
+                        return FadeTransition(
+                          opacity: animation,
+                          child: toHeroContext.widget,
+                        );
+                      },
                   child: Image.network(
                     story.photoUrl,
                     width: double.infinity,
                     fit: BoxFit.cover,
-                    loadingBuilder: (context, child, progress) {
+                    loadingBuilder: (_, child, progress) {
                       if (progress == null) return child;
                       return const Center(child: CircularProgressIndicator());
                     },

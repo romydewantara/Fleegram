@@ -32,16 +32,19 @@ class AuthProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> register(String name, String email, String password) async {
+  Future<bool> register(String name, String email, String password) async {
     _setLoading(true);
     clearError();
 
     try {
       await authRepository.register(name, email, password);
+      return true;
     } on ApiException catch (e) {
       _errorCode = e.code;
+      return false;
     } catch (e) {
       _errorCode = ApiErrorCode.errorNetwork;
+      return false;
     } finally {
       _setLoading(false);
     }

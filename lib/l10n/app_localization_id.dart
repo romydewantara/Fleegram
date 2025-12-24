@@ -39,23 +39,34 @@ class AppLocalizationsId extends AppLocalizations {
   String get passwordLabel => 'Password';
 
   @override
+  String get confirmPasswordLabel => 'Konfirmasi Password';
+
+  @override
   String get loginButton => 'Masuk';
 
   @override
   String get loginFailed => 'Email atau password salah. Coba lagi ya.';
 
   @override
-  String get emptyEmailField => 'Kolom Email harus diisi.';
+  String get emptyEmailField => 'Kolom email harus diisi.';
 
   @override
   String get emptyPasswordField => 'Password ga boleh kosong.';
 
   @override
+  String get emptyConfirmPasswordField =>
+      'Konfirmasi Password ga boleh kosong.';
+
+  @override
   String get wrongEmailFormat =>
-      'Format Email yang kamu masukin ga valid. Coba periksa lagi ya.';
+      'Format email yang kamu masukin ga valid. Coba periksa lagi ya.';
 
   @override
   String get passwordLength => 'Masukin password minimal 8 karakter.';
+
+  @override
+  String get confirmPasswordNotMatch =>
+      'Konfirmasi Password harus sama dengan Password.';
 
   @override
   String get emailNotRegistered =>

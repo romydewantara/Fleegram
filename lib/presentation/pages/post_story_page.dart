@@ -140,7 +140,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
               maxLines: 3,
               decoration: InputDecoration(
                 labelText: l10n.descriptionLabel,
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 24),

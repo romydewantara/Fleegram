@@ -19,16 +19,44 @@ class _RegisterPageState extends State<RegisterPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   bool _isPasswordVisible = false;
+  bool _isConfirmPasswordVisible = false;
+
+  AuthProvider? _authProvider;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _authProvider = context.read<AuthProvider>();
+      _authProvider!.addListener(_authListener);
+    });
+  }
+
+  void _authListener() {
+    if (!mounted) return;
+
+    final code = _authProvider!.errorCode;
+    if (code == null) return;
+
+    final message = _localizedError(context, code);
+
+    SnackbarHelper.show(context, message, type: SnackbarType.error);
+
+    _authProvider!.clearError();
+  }
 
   @override
   void dispose() {
     _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
@@ -37,13 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
     final authProvider = context.read<AuthProvider>();
 
-    await authProvider.register(
+    final success = await authProvider.register(
       _nameController.text.trim(),
       _emailController.text.trim(),
       _passwordController.text,
     );
 
-    if (authProvider.errorCode == null && mounted) {
+    if (success && mounted) {
       context.go(
         '/login',
         extra: AppLocalizations.of(context)!.registerSuccess,
@@ -70,17 +98,6 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
     final l10n = AppLocalizations.of(context)!;
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final code = authProvider.errorCode;
-      if (code == null) return;
-
-      final message = _localizedError(context, code);
-
-      SnackbarHelper.show(context, message, type: SnackbarType.error);
-
-      authProvider.clearError();
-    });
 
     return Scaffold(
       body: Center(
@@ -161,6 +178,38 @@ class _RegisterPageState extends State<RegisterPage> {
                   validator: (value) {
                     if (value == null || value.length < 8) {
                       return l10n.passwordLength;
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: 16),
+                TextFormField(
+                  controller: _confirmPasswordController,
+                  obscureText: !_isConfirmPasswordVisible,
+                  decoration: InputDecoration(
+                    labelText: l10n.confirmPasswordLabel,
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isConfirmPasswordVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isConfirmPasswordVisible =
+                              !_isConfirmPasswordVisible;
+                        });
+                      },
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return l10n.emptyConfirmPasswordField;
+                    }
+                    if (value != _passwordController.text) {
+                      return l10n.confirmPasswordNotMatch;
                     }
                     return null;
                   },
