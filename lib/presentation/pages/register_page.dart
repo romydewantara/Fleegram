@@ -1,8 +1,11 @@
 import 'package:fleegram/core/network/api_exception.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
+import 'package:fleegram/presentation/utils/snackbar_helper.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -18,6 +21,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  bool _isPasswordVisible = false;
 
   @override
   void dispose() {
@@ -39,7 +44,10 @@ class _RegisterPageState extends State<RegisterPage> {
     );
 
     if (authProvider.errorCode == null && mounted) {
-      context.go('/login');
+      context.go(
+        '/login',
+        extra: AppLocalizations.of(context)!.registerSuccess,
+      );
     }
   }
 
@@ -61,6 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
+    final l10n = AppLocalizations.of(context)!;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final code = authProvider.errorCode;
@@ -68,17 +77,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
       final message = _localizedError(context, code);
 
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(message), behavior: SnackBarBehavior.floating),
-        );
+      SnackbarHelper.show(context, message, type: SnackbarType.error);
 
       authProvider.clearError();
     });
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.registerTitle)),
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -87,66 +91,86 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Icon(Icons.person_add_alt_1, size: 72),
+                Lottie.asset(
+                  'assets/lottie/credential.json',
+                  width: 200,
+                  repeat: true,
+                ),
+
                 const SizedBox(height: 16),
                 Text(
-                  AppLocalizations.of(context)!.registerTitle,
+                  l10n.registerTitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 32),
 
+                const SizedBox(height: 32),
                 TextFormField(
                   controller: _nameController,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.nameLabel,
+                    labelText: l10n.nameLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.emptyNameField;
+                      return l10n.emptyNameField;
                     }
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
 
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.emailLabel,
+                    labelText: l10n.emailLabel,
                     border: OutlineInputBorder(),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.emptyEmailField;
+                      return l10n.emptyEmailField;
                     }
                     if (!value.contains('@')) {
-                      return AppLocalizations.of(context)!.wrongEmailFormat;
+                      return l10n.wrongEmailFormat;
                     }
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
 
+                const SizedBox(height: 16),
                 TextFormField(
                   controller: _passwordController,
-                  obscureText: true,
+                  obscureText: !_isPasswordVisible,
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.passwordLabel,
+                    labelText: l10n.passwordLabel,
                     border: OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.length < 8) {
-                      return AppLocalizations.of(context)!.passwordLength;
+                      return l10n.passwordLength;
                     }
                     return null;
                   },
                 ),
-                const SizedBox(height: 24),
 
+                const SizedBox(height: 24),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56),
+                  ),
                   onPressed: authProvider.isLoading ? null : _onRegister,
                   child: authProvider.isLoading
                       ? const SizedBox(
@@ -157,13 +181,29 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: Colors.white,
                           ),
                         )
-                      : Text(AppLocalizations.of(context)!.registerButton),
+                      : Text(l10n.registerButton),
                 ),
-                const SizedBox(height: 12),
 
-                TextButton(
-                  onPressed: () => context.go('/login'),
-                  child: Text(AppLocalizations.of(context)!.goToLogin),
+                const SizedBox(height: 18),
+                RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    children: [
+                      TextSpan(text: l10n.alreadyHaveAccount),
+                      const WidgetSpan(child: SizedBox(width: 4)),
+                      TextSpan(
+                        text: l10n.goToLogin,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue,
+                          decoration: TextDecoration.none,
+                        ),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => context.go('/login'),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -1,7 +1,10 @@
 import 'package:fleegram/core/network/api_exception.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
+import 'package:fleegram/presentation/utils/snackbar_helper.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +20,9 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  bool _isPasswordVisible = false;
+  bool _hasShownRegisterSuccess = false;
 
   @override
   void dispose() {
@@ -58,8 +64,25 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (_hasShownRegisterSuccess) return;
+
+    final message = GoRouterState.of(context).extra as String?;
+    if (message == null) return;
+
+    _hasShownRegisterSuccess = true;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SnackbarHelper.show(context, message, type: SnackbarType.success);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
+    final l10n = AppLocalizations.of(context)!;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final code = authProvider.errorCode;
@@ -67,93 +90,133 @@ class _LoginPageState extends State<LoginPage> {
 
       final message = _localizedError(context, code);
 
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(
-          SnackBar(content: Text(message), behavior: SnackBarBehavior.floating),
-        );
+      SnackbarHelper.show(context, message, type: SnackbarType.error);
 
       authProvider.clearError();
     });
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.loginTitle)),
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Icon(Icons.lock_outline, size: 72),
-                const SizedBox(height: 16),
-                Text(
-                  AppLocalizations.of(context)!.loginTitle,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 32),
+          child: Column(
+            children: [
+              Lottie.asset(
+                'assets/lottie/banner.json',
+                width: double.infinity,
+                repeat: true,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const SizedBox(height: 16),
+                      Text(
+                        l10n.loginTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
 
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.emailLabel,
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.emptyEmailField;
-                    }
-                    if (!value.contains('@')) {
-                      return AppLocalizations.of(context)!.wrongEmailFormat;
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
+                      const SizedBox(height: 32),
+                      TextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: l10n.emailLabel,
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return l10n.emptyEmailField;
+                          }
+                          if (!value.contains('@')) {
+                            return l10n.wrongEmailFormat;
+                          }
+                          return null;
+                        },
+                      ),
 
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context)!.passwordLabel,
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return AppLocalizations.of(context)!.emptyPasswordField;
-                    }
-                    if (value.length < 8) {
-                      return AppLocalizations.of(context)!.passwordLength;
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 24),
-
-                ElevatedButton(
-                  onPressed: authProvider.isLoading ? null : _onLogin,
-                  child: authProvider.isLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: !_isPasswordVisible,
+                        decoration: InputDecoration(
+                          labelText: l10n.passwordLabel,
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Theme.of(context).iconTheme.color,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
                           ),
-                        )
-                      : Text(AppLocalizations.of(context)!.loginButton),
-                ),
-                const SizedBox(height: 12),
+                        ),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return l10n.emptyPasswordField;
+                          }
+                          if (value.length < 8) {
+                            return l10n.passwordLength;
+                          }
+                          return null;
+                        },
+                      ),
 
-                TextButton(
-                  onPressed: () => context.push('/register'),
-                  child: Text(AppLocalizations.of(context)!.goToRegister),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size.fromHeight(56),
+                        ),
+                        onPressed: authProvider.isLoading ? null : _onLogin,
+                        child: authProvider.isLoading
+                            ? const SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Text(l10n.loginButton),
+                      ),
+
+                      const SizedBox(height: 18),
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          children: [
+                            TextSpan(text: l10n.noAccount),
+                            const WidgetSpan(child: SizedBox(width: 4)),
+                            TextSpan(
+                              text: l10n.goToRegister,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue,
+                                decoration: TextDecoration.none,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => context.push('/register'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
+import 'package:fleegram/presentation/utils/snackbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -27,6 +28,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
   }
 
   Future<void> _pickImage(ImageSource source) async {
+    final l10n = AppLocalizations.of(context)!;
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: source, imageQuality: 70);
 
@@ -35,11 +37,8 @@ class _PostStoryPageState extends State<PostStoryPage> {
     final cropped = await ImageCropper().cropImage(
       sourcePath: pickedFile.path,
       uiSettings: [
-        AndroidUiSettings(
-          toolbarTitle: AppLocalizations.of(context)!.cropImage,
-          lockAspectRatio: true,
-        ),
-        IOSUiSettings(title: AppLocalizations.of(context)!.cropImage),
+        AndroidUiSettings(toolbarTitle: l10n.cropImage, lockAspectRatio: true),
+        IOSUiSettings(title: l10n.cropImage),
       ],
     );
 
@@ -51,36 +50,45 @@ class _PostStoryPageState extends State<PostStoryPage> {
   }
 
   Future<void> _uploadStory() async {
-    if (_imageFile == null || _descriptionController.text.trim().isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            AppLocalizations.of(context)!.imageAndDescriptionRequired,
-          ),
-        ),
+    final l10n = AppLocalizations.of(context)!;
+    final description = _descriptionController.text.trim();
+
+    if (_imageFile == null || description.isEmpty) {
+      SnackbarHelper.show(
+        context,
+        l10n.imageAndDescriptionRequired,
+        type: SnackbarType.info,
       );
       return;
     }
 
     final storyProvider = context.read<StoryProvider>();
-    final messenger = ScaffoldMessenger.of(context);
 
     setState(() => _isUploading = true);
 
     try {
       await storyProvider.uploadStory(
         imageFile: _imageFile!,
-        description: _descriptionController.text.trim(),
+        description: description,
       );
 
       await storyProvider.fetchInitialStories();
 
       if (!mounted) return;
+
+      SnackbarHelper.show(
+        context,
+        l10n.uploadSuccess,
+        type: SnackbarType.success,
+      );
+
       context.go('/');
     } catch (e) {
-      messenger.showSnackBar(SnackBar(content: Text(e.toString())));
+      if (!mounted) return;
+
+      SnackbarHelper.show(context, l10n.errorNetwork, type: SnackbarType.error);
     } finally {
-      if (!mounted) {
+      if (mounted) {
         setState(() => _isUploading = false);
       }
     }
@@ -88,8 +96,9 @@ class _PostStoryPageState extends State<PostStoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.postStoryTitle)),
+      appBar: AppBar(title: Text(l10n.postStoryTitle)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -102,7 +111,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                   ? Image.file(_imageFile!, fit: BoxFit.cover)
                   : Center(
                       child: Text(
-                        AppLocalizations.of(context)!.noImage,
+                        l10n.noImage,
                         style: TextStyle(color: Colors.black),
                       ),
                     ),
@@ -115,12 +124,12 @@ class _PostStoryPageState extends State<PostStoryPage> {
                 OutlinedButton.icon(
                   onPressed: () => _pickImage(ImageSource.camera),
                   icon: const Icon(Icons.camera_alt),
-                  label: Text(AppLocalizations.of(context)!.camera),
+                  label: Text(l10n.camera),
                 ),
                 OutlinedButton.icon(
                   onPressed: () => _pickImage(ImageSource.gallery),
                   icon: const Icon(Icons.photo),
-                  label: Text(AppLocalizations.of(context)!.gallery),
+                  label: Text(l10n.gallery),
                 ),
               ],
             ),
@@ -130,13 +139,16 @@ class _PostStoryPageState extends State<PostStoryPage> {
               controller: _descriptionController,
               maxLines: 3,
               decoration: InputDecoration(
-                labelText: AppLocalizations.of(context)!.descriptionLabel,
+                labelText: l10n.descriptionLabel,
                 border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 24),
 
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(56),
+              ),
               onPressed: _isUploading ? null : _uploadStory,
               child: _isUploading
                   ? const SizedBox(
@@ -147,7 +159,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                         color: Colors.white,
                       ),
                     )
-                  : Text(AppLocalizations.of(context)!.uploadButton),
+                  : Text(l10n.uploadButton),
             ),
           ],
         ),

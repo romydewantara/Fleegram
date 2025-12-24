@@ -2,41 +2,42 @@
   "@@locale": "en",
   "appTitle": "Fleegram",
 
-  "loading": "Processing...",
+  "loading": "Processing, please wait...",
   "errorGeneric": "Oops, something went wrong",
   "retry": "Try again",
   "cancel": "Cancel",
   "submit": "Submit",
   "save": "Save",
 
-  "loginTitle": "Login",
+  "loginTitle": "Sign In",
   "emailLabel": "Email",
   "passwordLabel": "Password",
-  "loginButton": "Login",
+  "loginButton": "Sign In",
   "loginFailed": "Incorrect email or password. Please try again.",
-  "emptyEmailField": "Email field must not be empty.",
-  "emptyPasswordField": "Password must not be empty.",
-  "wrongEmailFormat": "The email format is invalid. Please check again.",
+  "emptyEmailField": "Email field cannot be empty.",
+  "emptyPasswordField": "Password cannot be empty.",
+  "wrongEmailFormat": "The email format is invalid. Please check and try again.",
   "passwordLength": "Password must be at least 8 characters.",
-  "emailNotRegistered": "This email is not registered yet. Please sign up first.",
+  "emailNotRegistered": "This email is not registered yet. Try signing up first!",
   "emailAlreadyRegistered": "This email is already registered. Please use another email.",
-  "wrongPassword": "The password you entered is incorrect. Please try again.",
+  "wrongPassword": "Oops, the password you entered is incorrect. Try again.",
   "noAccount": "Don't have an account?",
   "goToRegister": "Sign up",
 
   "registerTitle": "Create New Account",
   "nameLabel": "Name",
-  "registerButton": "Register",
-  "registerLoading": "Creating account...",
+  "registerButton": "Sign Up",
+  "registerLoading": "Creating your account...",
   "registerFailed": "Registration failed. Please try again shortly.",
-  "emailAlreadyUsed": "This email is already in use. Please try another one.",
+  "registerSuccess": "Yay! Your account has been created. Let’s sign in!",
+  "emailAlreadyUsed": "This email is already in use. Try another one.",
   "alreadyHaveAccount": "Already have an account?",
-  "goToLogin": "Login",
+  "goToLogin": "Sign in",
 
-  "emptyNameField": "Name field must not be empty.",
+  "emptyNameField": "Name field cannot be empty.",
 
   "storyListTitle": "Latest Stories",
-  "emptyStory": "No stories available yet.",
+  "emptyStory": "No stories yet.",
   "loadMore": "Loading more stories...",
 
   "storyDetailTitle": "Story Details",
@@ -46,7 +47,7 @@
   "imageLoadError": "Failed to load image",
 
   "postStoryTitle": "Add Story",
-  "descriptionLabel": "Tell your story here",
+  "descriptionLabel": "Tell your story here...",
   "pickImage": "Select image",
   "cropImage": "Crop image",
   "noImage": "No image selected",
@@ -55,8 +56,8 @@
   "gallery": "Gallery",
   "uploadButton": "Upload",
   "uploading": "Uploading...",
-  "uploadSuccess": "Hooray! Your story has been uploaded successfully.",
-  "uploadFailed": "Oops, failed to upload the story. Please try again.",
+  "uploadSuccess": "Hooray! Your story has been uploaded.",
+  "uploadFailed": "Oops, failed to upload your story. Please try again.",
   "imageAndDescriptionRequired": "Please select an image and write a description.",
 
   "settingTitle": "Settings",
@@ -70,15 +71,19 @@
   "languageEn": "English",
   "account": "Account",
 
-  "logout": "Logout Confirmation",
+  "logout": "Confirm Logout",
   "logoutButton": "Logout",
   "logoutConfirm": "Are you sure you want to log out?",
-  "sessionExpired": "Your session has expired. Please log in again.",
+  "sessionExpired": "Your session has expired. Please sign in again.",
 
-  "userInformation": "The name shown here is for viewing only and cannot be edited. This feature helps reviewers easily identify information such as the email or the account in use.",
-  "prefInformation": "Here you can view and adjust your app preferences, such as the current theme and language, so your app experience matches your preference.",
+  "userInformation": "The name and email displayed here are read-only and cannot be edited. This feature helps developers easily identify user information such as the active email or account.",
+  "prefInformation": "Here you can view and adjust app preferences, such as theme and language, to match your personal experience.",
 
-  "errorNetwork": "You are not connected to the internet. Please check your connection and try again.",
+  "errorNetworkTitle": "Connection Issue",
+  "errorNetwork": "You’re not connected to the internet. Please check your connection and try again.",
 
-  "dateFormatFull": "MMMM d, y"
+  "dateFormatFull": "MMMM d, y",
+
+  "copyright": "© 2025 Fleegram • by Romy D",
+  "version": "v1.0.0 – 2512200831"
 }

@@ -29,6 +29,7 @@
   "registerButton": "Daftar",
   "registerLoading": "Sedang membuat akun...",
   "registerFailed": "Pendaftaran gagal. Coba lagi sebentar ya.",
+  "registerSuccess": "Yeay! Akunmu berhasil dibuat. Yuk, login sekarang!",
   "emailAlreadyUsed": "Email ini sudah dipakai. Coba email yang lain ya.",
   "alreadyHaveAccount": "Sudah punya akun?",
   "goToLogin": "Masuk aja",
@@ -46,7 +47,7 @@
   "imageLoadError": "Gambarnya gagal dimuat",
 
   "postStoryTitle": "Tambah Cerita",
-  "descriptionLabel": "Ceritain sedikit di sini",
+  "descriptionLabel": "Ceritain sedikit di sini...",
   "pickImage": "Pilih gambar",
   "cropImage": "Crop gambar",
   "noImage": "Belum ada gambar",
@@ -78,7 +79,11 @@
   "userInformation": "Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.",
   "prefInformation": "Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.",
 
+  "errorNetworkTitle": "Ups, Koneksi Bermasalah",
   "errorNetwork": "Kamu lagi nggak terhubung ke internet. Coba cek koneksi kamu, lalu ulangi lagi ya.",
 
-  "dateFormatFull": "d MMMM y"
+  "dateFormatFull": "d MMMM y",
+
+  "copyright": "© 2025 Fleegram • oleh Romy D",
+  "version": "v1.0.0 – 2512200831"
 }

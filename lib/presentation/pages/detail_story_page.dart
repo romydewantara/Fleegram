@@ -52,11 +52,33 @@ class DetailStoryPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 2),
-                      Text(
-                        DateFormatter.formatFull(context, story.createdAt),
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          fontSize: 12,
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            DateFormatter.formatFull(context, story.createdAt),
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            ' • ',
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              fontSize: 12,
+                            ),
+                          ),
+                          IconTheme(
+                            data: IconThemeData(size: 14),
+                            child: Align(
+                              alignment: Alignment.center,
+                              heightFactor: 1,
+                              child: Icon(
+                                Icons.public_rounded,
+                                color: Colors.black.withValues(alpha: 0.5),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -64,17 +86,20 @@ class DetailStoryPage extends StatelessWidget {
               ),
             ),
 
-            Image.network(
-              story.photoUrl,
-              fit: BoxFit.contain,
-              width: double.infinity,
-              errorBuilder: (_, _, _) {
-                return const Center(child: Icon(Icons.broken_image, size: 64));
-              },
-              loadingBuilder: (context, child, progress) {
-                if (progress == null) return child;
-                return const Center(child: CircularProgressIndicator());
-              },
+            Hero(
+              tag: 'story-${story.photoUrl}',
+              child: Image.network(
+                story.photoUrl,
+                fit: BoxFit.contain,
+                width: double.infinity,
+                errorBuilder: (_, _, _) {
+                  return const Center(child: Icon(Icons.broken_image, size: 64));
+                },
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
             ),
 
             Padding(

@@ -16,22 +16,21 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   void _onLogout() {
+    final l10n = AppLocalizations.of(context)!;
+
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text(AppLocalizations.of(context)!.logout),
-        content: Text(AppLocalizations.of(context)!.logoutConfirm),
+        title: Text(l10n.logout),
+        content: Text(l10n.logoutConfirm),
         actions: [
-          TextButton(
-            onPressed: () => context.pop(),
-            child: Text(AppLocalizations.of(context)!.cancel),
-          ),
+          TextButton(onPressed: () => context.pop(), child: Text(l10n.cancel)),
           TextButton(
             onPressed: () async {
               await context.read<AuthProvider>().logout();
               if (mounted) context.go('/login');
             },
-            child: Text(AppLocalizations.of(context)!.logoutButton),
+            child: Text(l10n.logoutButton),
           ),
         ],
       ),
@@ -41,21 +40,75 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final themeProvider = context.watch<ThemeProvider>();
     final localeProvider = context.watch<LocaleProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.settingTitle)),
-      body: ListView(
+      appBar: AppBar(title: Text(l10n.settingTitle)),
+      body: Column(
         children: [
+          Expanded(
+            child: ListView(
+              children: [
+                _sectionTitle(l10n.account),
+                _profileSection(theme, l10n),
+                _sectionTitle(l10n.preferences),
+                _preferencesSection(themeProvider, localeProvider, l10n),
+                _sectionCard(
+                  backgroundColor: theme.colorScheme.error,
+                  foregroundColor: theme.colorScheme.onError,
+                  child: _logoutTile(
+                    title: l10n.logoutButton,
+                    onTap: _onLogout,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
           Padding(
-            padding: const EdgeInsets.all(12),
-            child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              children: [
+                Text(
+                  l10n.copyright,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontSize: 12,
+                  ),
+                ),
+                Text(
+                  l10n.version,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontSize: 8,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _profileSection(ThemeData theme, AppLocalizations l10n) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Column(
+        children: [
+          Card(
+            elevation: 1.5,
+            surfaceTintColor: theme.colorScheme.surface,
+            shadowColor: theme.colorScheme.shadow.withValues(alpha: 0.2),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: theme.colorScheme.surface,
-                borderRadius: BorderRadius.circular(16),
-              ),
               child: Row(
                 children: [
                   const CircleAvatar(
@@ -83,13 +136,25 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
           ),
+          const SizedBox(height: 4),
+          _sectionInfoText(l10n.userInformation),
+        ],
+      ),
+    );
+  }
 
-          _sectionTitle(context, AppLocalizations.of(context)!.preferences),
-
+  Widget _preferencesSection(
+    ThemeProvider themeProvider,
+    LocaleProvider localeProvider,
+    AppLocalizations l10n,
+  ) {
+    final theme = Theme.of(context);
+    return _settingsGroup(
+      child: Column(
+        children: [
           _settingsTile(
-            context,
             icon: Icons.dark_mode_outlined,
-            title: AppLocalizations.of(context)!.theme,
+            title: l10n.theme,
             trailing: DropdownButton<ThemeMode>(
               value: themeProvider.themeMode,
               underline: const SizedBox(),
@@ -101,62 +166,74 @@ class _SettingsPageState extends State<SettingsPage> {
               items: [
                 DropdownMenuItem(
                   value: ThemeMode.system,
-                  child: Text(AppLocalizations.of(context)!.themeSystem),
+                  child: Text(l10n.themeSystem),
                 ),
                 DropdownMenuItem(
                   value: ThemeMode.light,
-                  child: Text(AppLocalizations.of(context)!.themeLight),
+                  child: Text(l10n.themeLight),
                 ),
                 DropdownMenuItem(
                   value: ThemeMode.dark,
-                  child: Text(AppLocalizations.of(context)!.themeDark),
+                  child: Text(l10n.themeDark),
                 ),
               ],
             ),
           ),
-
+          Divider(
+            height: 1,
+            thickness: 0.5,
+            color: theme.dividerColor.withValues(alpha: 0.4),
+          ),
           _settingsTile(
-            context,
             icon: Icons.language,
-            title: AppLocalizations.of(context)!.language,
+            title: l10n.language,
             trailing: DropdownButton<Locale>(
               value: localeProvider.locale,
+              underline: const SizedBox(),
               onChanged: (locale) {
                 if (locale != null) {
                   context.read<LocaleProvider>().setLocale(locale);
                 }
               },
-              items: [
-                DropdownMenuItem(
-                  value: Locale('id'),
-                  child: Text(AppLocalizations.of(context)!.languageId),
-                ),
-                DropdownMenuItem(
-                  value: Locale('en'),
-                  child: Text(AppLocalizations.of(context)!.languageEn),
-                ),
+              items: const [
+                DropdownMenuItem(value: Locale('id'), child: Text('Indonesia')),
+                DropdownMenuItem(value: Locale('en'), child: Text('English')),
               ],
-              underline: const SizedBox(),
             ),
-          ),
-
-          _sectionTitle(context, AppLocalizations.of(context)!.account),
-
-          _settingsTile(
-            context,
-            icon: Icons.logout,
-            title: AppLocalizations.of(context)!.logoutButton,
-            isDanger: true,
-            onTap: _onLogout,
           ),
         ],
       ),
     );
   }
 
-  Widget _sectionTitle(BuildContext context, String text) {
+  Widget _settingsGroup({required Widget child}) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+      padding: const EdgeInsets.fromLTRB(8, 8, 12, 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Card(
+            elevation: 4,
+            surfaceTintColor: theme.colorScheme.surface,
+            shadowColor: theme.colorScheme.shadow.withValues(alpha: 0.15),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: child,
+          ),
+          const SizedBox(height: 4),
+          _sectionInfoText(l10n.prefInformation),
+        ],
+      ),
+    );
+  }
+
+  Widget _sectionTitle(String text) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(28, 20, 28, 0),
       child: Text(
         text,
         style: Theme.of(
@@ -166,8 +243,14 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _settingsTile(
-    BuildContext context, {
+  Widget _sectionInfoText(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(text, style: const TextStyle(fontSize: 11)),
+    );
+  }
+
+  Widget _settingsTile({
     required IconData icon,
     required String title,
     Widget? trailing,
@@ -187,6 +270,57 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       trailing: trailing,
       onTap: onTap,
+    );
+  }
+
+  Widget _logoutTile({required String title, VoidCallback? onTap}) {
+    final theme = Theme.of(context);
+
+    return ListTile(
+      title: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: theme.textTheme.bodyMedium?.copyWith(
+          fontWeight: FontWeight.w600,
+          color: Colors.white,
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
+
+  Widget _sectionCard({
+    required Widget child,
+    Color? backgroundColor,
+    Color? foregroundColor,
+  }) {
+    final theme = Theme.of(context);
+
+    final bgColor = backgroundColor ?? theme.colorScheme.surface;
+    final fgColor = foregroundColor ?? theme.colorScheme.onSurface;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 8, 12, 16),
+      child: Card(
+        elevation: 1.5,
+        color: bgColor,
+        shadowColor: theme.colorScheme.shadow.withValues(alpha: 0.15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Theme(
+          data: theme.copyWith(
+            textTheme: theme.textTheme.apply(
+              bodyColor: fgColor,
+              displayColor: fgColor,
+            ),
+            iconTheme: theme.iconTheme.copyWith(color: fgColor),
+            listTileTheme: theme.listTileTheme.copyWith(
+              iconColor: fgColor,
+              textColor: fgColor,
+            ),
+          ),
+          child: child,
+        ),
+      ),
     );
   }
 }

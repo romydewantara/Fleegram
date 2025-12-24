@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Fleegram';
 
   @override
-  String get loading => 'Processing...';
+  String get loading => 'Processing, please wait...';
 
   @override
   String get errorGeneric => 'Oops, something went wrong';
@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get save => 'Save';
 
   @override
-  String get loginTitle => 'Login';
+  String get loginTitle => 'Sign In';
 
   @override
   String get emailLabel => 'Email';
@@ -39,27 +39,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String get passwordLabel => 'Password';
 
   @override
-  String get loginButton => 'Login';
+  String get loginButton => 'Sign In';
 
   @override
   String get loginFailed => 'Incorrect email or password. Please try again.';
 
   @override
-  String get emptyEmailField => 'Email field must not be empty.';
+  String get emptyEmailField => 'Email field cannot be empty.';
 
   @override
-  String get emptyPasswordField => 'Password must not be empty.';
+  String get emptyPasswordField => 'Password cannot be empty.';
 
   @override
   String get wrongEmailFormat =>
-      'The email format is invalid. Please check again.';
+      'The email format is invalid. Please check and try again.';
 
   @override
   String get passwordLength => 'Password must be at least 8 characters.';
 
   @override
   String get emailNotRegistered =>
-      'This email is not registered yet. Please sign up first.';
+      'This email is not registered yet. Try signing up first!';
 
   @override
   String get emailAlreadyRegistered =>
@@ -67,7 +67,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get wrongPassword =>
-      'The password you entered is incorrect. Please try again.';
+      'Oops, the password you entered is incorrect. Try again.';
 
   @override
   String get noAccount => 'Don\'t have an account?';
@@ -82,32 +82,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nameLabel => 'Name';
 
   @override
-  String get registerButton => 'Register';
+  String get registerButton => 'Sign Up';
 
   @override
-  String get registerLoading => 'Creating account...';
+  String get registerLoading => 'Creating your account...';
 
   @override
   String get registerFailed => 'Registration failed. Please try again shortly.';
 
   @override
+  String get registerSuccess =>
+      'Yay! Your account has been created. Let’s sign in!';
+
+  @override
   String get emailAlreadyUsed =>
-      'This email is already in use. Please try another one.';
+      'This email is already in use. Try another one.';
 
   @override
   String get alreadyHaveAccount => 'Already have an account?';
 
   @override
-  String get goToLogin => 'Login';
+  String get goToLogin => 'Sign in';
 
   @override
-  String get emptyNameField => 'Name field must not be empty.';
+  String get emptyNameField => 'Name field cannot be empty.';
 
   @override
   String get storyListTitle => 'Latest Stories';
 
   @override
-  String get emptyStory => 'No stories available yet.';
+  String get emptyStory => 'No stories yet.';
 
   @override
   String get loadMore => 'Loading more stories...';
@@ -131,7 +135,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get postStoryTitle => 'Add Story';
 
   @override
-  String get descriptionLabel => 'Tell your story here';
+  String get descriptionLabel => 'Tell your story here...';
 
   @override
   String get pickImage => 'Select image';
@@ -158,12 +162,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uploading => 'Uploading...';
 
   @override
-  String get uploadSuccess =>
-      'Hooray! Your story has been uploaded successfully.';
+  String get uploadSuccess => 'Hooray! Your story has been uploaded.';
 
   @override
   String get uploadFailed =>
-      'Oops, failed to upload the story. Please try again.';
+      'Oops, failed to upload your story. Please try again.';
 
   @override
   String get imageAndDescriptionRequired =>
@@ -200,7 +203,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get account => 'Account';
 
   @override
-  String get logout => 'Logout Confirmation';
+  String get logout => 'Confirm Logout';
 
   @override
   String get logoutButton => 'Logout';
@@ -209,20 +212,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String get logoutConfirm => 'Are you sure you want to log out?';
 
   @override
-  String get sessionExpired => 'Your session has expired. Please log in again.';
+  String get sessionExpired =>
+      'Your session has expired. Please sign in again.';
 
   @override
   String get userInformation =>
-      'The name shown here is for viewing only and cannot be edited. This feature helps reviewers easily identify information such as the email or the account in use.';
+      'The name and email displayed here are read-only and cannot be edited. This feature helps developers easily identify user information such as the active email or account.';
 
   @override
   String get prefInformation =>
-      'Here you can view and adjust your app preferences, such as the current theme and language, so your app experience matches your preference.';
+      'Here you can view and adjust app preferences, such as theme and language, to match your personal experience.';
+
+  @override
+  String get errorNetworkTitle => 'Connection Issue';
 
   @override
   String get errorNetwork =>
-      'You are not connected to the internet. Please check your connection and try again.';
+      'You’re not connected to the internet. Please check your connection and try again.';
 
   @override
   String get dateFormatFull => 'MMMM d, y';
+
+  @override
+  String get copyright => '© 2025 Fleegram • by Romy D';
+
+  @override
+  String get version => 'v1.0.0 – 2512200831';
 }

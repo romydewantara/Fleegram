@@ -91,6 +91,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get registerFailed => 'Pendaftaran gagal. Coba lagi sebentar ya.';
 
   @override
+  String get registerSuccess =>
+      'Yeay! Akunmu berhasil dibuat. Yuk, login sekarang!';
+
+  @override
   String get emailAlreadyUsed =>
       'Email ini sudah dipakai. Coba email yang lain ya.';
 
@@ -131,7 +135,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get postStoryTitle => 'Tambah Cerita';
 
   @override
-  String get descriptionLabel => 'Ceritain sedikit di sini';
+  String get descriptionLabel => 'Ceritain sedikit di sini...';
 
   @override
   String get pickImage => 'Pilih gambar';
@@ -218,9 +222,18 @@ class AppLocalizationsId extends AppLocalizations {
       'Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.';
 
   @override
+  String get errorNetworkTitle => 'Ups, Koneksi Bermasalah';
+
+  @override
   String get errorNetwork =>
       'Kamu lagi nggak terhubung ke internet. Coba cek koneksi kamu, lalu ulangi lagi ya.';
 
   @override
   String get dateFormatFull => 'd MMMM y';
+
+  @override
+  String get copyright => '© 2025 Fleegram • oleh Romy D';
+
+  @override
+  String get version => 'v1.0.0 – 2512200831';
 }

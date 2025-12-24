@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'package:fleegram/core/network/network_exception.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/data/repositories/story_repository.dart';
 import 'package:flutter/material.dart';
+
+enum StoryError { network, unknown }
 
 class StoryProvider extends ChangeNotifier {
   final StoryRepository repository;
@@ -12,7 +15,7 @@ class StoryProvider extends ChangeNotifier {
   final List<Story> _stories = [];
   bool _isLoading = false;
   bool _hasMore = true;
-  String? _errorMessage;
+  StoryError? _errorMessage;
 
   int _page = 1;
   static const int _size = 10;
@@ -20,7 +23,7 @@ class StoryProvider extends ChangeNotifier {
   List<Story> get stories => _stories;
   bool get isLoading => _isLoading;
   bool get hasMore => _hasMore;
-  String? get errorMessage => _errorMessage;
+  StoryError? get errorMessage => _errorMessage;
 
   Future<void> fetchInitialStories() async {
     _stories.clear();
@@ -49,9 +52,12 @@ class StoryProvider extends ChangeNotifier {
 
       _stories.addAll(newStories);
       _page++;
-    } catch (_) {
+    } on NetworkException {
       _hasMore = false;
-      _errorMessage = 'error fetch stories';
+      _errorMessage = StoryError.network;
+    } catch (e) {
+      _hasMore = false;
+      _errorMessage = StoryError.unknown;
     }
 
     _isLoading = false;
@@ -71,8 +77,11 @@ class StoryProvider extends ChangeNotifier {
         imageFile: imageFile,
         description: description,
       );
+    } on NetworkException catch (_) {
+      _errorMessage = StoryError.network;
+      rethrow;
     } catch (e) {
-      _errorMessage = e.toString();
+      _errorMessage = StoryError.unknown;
       rethrow;
     } finally {
       _isLoading = false;

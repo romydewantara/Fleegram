@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:fleegram/core/constants/api_constants.dart';
+import 'package:fleegram/core/network/network_exception.dart';
 import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,13 +18,19 @@ class ApiClient {
     Map<String, dynamic>? body,
     bool withAuth = false,
   }) async {
-    final response = await _client.post(
-      Uri.parse('${ApiConstants.baseUrl}$path'),
-      headers: _headers(withAuth),
-      body: body != null ? jsonEncode(body) : null,
-    );
+    try {
+      final response = await _client.post(
+        Uri.parse('${ApiConstants.baseUrl}$path'),
+        headers: _headers(withAuth),
+        body: body != null ? jsonEncode(body) : null,
+      );
 
-    return _handleResponse(response);
+      return _handleResponse(response);
+    } on SocketException {
+      throw const NetworkException();
+    } on http.ClientException {
+      throw const NetworkException();
+    }
   }
 
   Future<Map<String, dynamic>> get(
@@ -30,13 +38,19 @@ class ApiClient {
     Map<String, dynamic>? query,
     bool withAuth = false,
   }) async {
-    final uri = Uri.parse(
-      '${ApiConstants.baseUrl}$path',
-    ).replace(queryParameters: query);
+    try {
+      final uri = Uri.parse(
+        '${ApiConstants.baseUrl}$path',
+      ).replace(queryParameters: query);
 
-    final response = await _client.get(uri, headers: _headers(withAuth));
+      final response = await _client.get(uri, headers: _headers(withAuth));
 
-    return _handleResponse(response);
+      return _handleResponse(response);
+    } on SocketException {
+      throw const NetworkException();
+    } on http.ClientException {
+      throw const NetworkException();
+    }
   }
 
   Map<String, String> _headers(bool withAuth) {

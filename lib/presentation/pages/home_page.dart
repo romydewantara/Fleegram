@@ -1,9 +1,12 @@
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
+import 'package:fleegram/presentation/widgets/add_story_icon.dart';
 import 'package:fleegram/presentation/widgets/asymmetric_burger_icon.dart';
 import 'package:fleegram/presentation/widgets/story_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -53,6 +56,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         centerTitle: true,
+        leading: AddStoryIcon(onPressed: () => context.push('/post')),
         actions: [
           IconButton(
             onPressed: () => context.push('/setting'),
@@ -60,32 +64,78 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.push('/post'),
-        child: const Icon(Icons.add),
-      ),
       body: RefreshIndicator(
         onRefresh: provider.fetchInitialStories,
-        child: ListView.builder(
-          controller: _scrollController,
-          itemCount: provider.stories.length + 1,
-          itemBuilder: (context, index) {
-            if (index == provider.stories.length) {
-              if (provider.isLoading) {
-                return const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              }
-              return const SizedBox.shrink();
-            }
+        child: provider.errorMessage != null && provider.stories.isEmpty
+            ? _errorView(provider.errorMessage!, provider.fetchInitialStories)
+            : ListView.builder(
+                controller: _scrollController,
+                itemCount: provider.stories.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == provider.stories.length) {
+                    if (provider.isLoading) {
+                      return const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  }
 
-            final story = provider.stories[index];
-            return StoryCard(
-              story: story,
-              onTap: () => context.push('/detail', extra: story),
-            );
-          },
+                  final story = provider.stories[index];
+                  return StoryCard(
+                    story: story,
+                    onTap: () => context.push('/detail', extra: story),
+                  );
+                },
+              ),
+      ),
+    );
+  }
+
+  Widget _errorView(StoryError message, VoidCallback onRetry) {
+    final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Lottie.asset(
+              'assets/lottie/empty_data.json',
+              width: 200,
+              repeat: false,
+            ),
+            const SizedBox(height: 24),
+
+            Text(
+              l10n.errorNetworkTitle,
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+
+            Text(
+              message == StoryError.network
+                  ? l10n.errorNetwork
+                  : l10n.errorGeneric,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+
+            FilledButton.icon(
+              onPressed: onRetry,
+              icon: const Icon(Icons.refresh),
+              label: Text(l10n.retry),
+            ),
+          ],
         ),
       ),
     );

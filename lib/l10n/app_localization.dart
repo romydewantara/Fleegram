@@ -254,6 +254,12 @@ abstract class AppLocalizations {
   /// **'Pendaftaran gagal. Coba lagi sebentar ya.'**
   String get registerFailed;
 
+  /// No description provided for @registerSuccess.
+  ///
+  /// In id, this message translates to:
+  /// **'Yeay! Akunmu berhasil dibuat. Yuk, login sekarang!'**
+  String get registerSuccess;
+
   /// No description provided for @emailAlreadyUsed.
   ///
   /// In id, this message translates to:
@@ -335,7 +341,7 @@ abstract class AppLocalizations {
   /// No description provided for @descriptionLabel.
   ///
   /// In id, this message translates to:
-  /// **'Ceritain sedikit di sini'**
+  /// **'Ceritain sedikit di sini...'**
   String get descriptionLabel;
 
   /// No description provided for @pickImage.
@@ -500,6 +506,12 @@ abstract class AppLocalizations {
   /// **'Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.'**
   String get prefInformation;
 
+  /// No description provided for @errorNetworkTitle.
+  ///
+  /// In id, this message translates to:
+  /// **'Ups, Koneksi Bermasalah'**
+  String get errorNetworkTitle;
+
   /// No description provided for @errorNetwork.
   ///
   /// In id, this message translates to:
@@ -511,6 +523,18 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'d MMMM y'**
   String get dateFormatFull;
+
+  /// No description provided for @copyright.
+  ///
+  /// In id, this message translates to:
+  /// **'© 2025 Fleegram • oleh Romy D'**
+  String get copyright;
+
+  /// No description provided for @version.
+  ///
+  /// In id, this message translates to:
+  /// **'v1.0.0 – 2512200831'**
+  String get version;
 }
 
 class _AppLocalizationsDelegate
