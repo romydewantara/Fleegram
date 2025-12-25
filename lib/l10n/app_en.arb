@@ -18,7 +18,7 @@
   "emptyEmailField": "Email field must not be empty.",
   "emptyPasswordField": "Password field must not be empty.",
   "emptyConfirmPasswordField": "Confirm Password field must not be empty.",
-  "wrongEmailFormat": "The email format is invalid. Please check and try again.",
+  "wrongEmailFormat": "The email format is invalid.",
   "passwordLength": "Password must be at least 8 characters.",
   "confirmPasswordNotMatch": "Confirm Password must match the Password.",
   "emailNotRegistered": "This email is not registered yet. Please sign up first.",
@@ -32,6 +32,7 @@
   "registerButton": "Register",
   "registerLoading": "Creating your account...",
   "registerFailed": "Registration failed. Please try again shortly.",
+  "registerWrongEmailFormat": "The email format is invalid. Please check and try again.",
   "registerSuccess": "Yay! Your account has been successfully created. Please log in now!",
 
   "emailAlreadyUsed": "This email is already in use. Please try another one.",

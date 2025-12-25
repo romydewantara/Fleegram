@@ -185,19 +185,19 @@ abstract class AppLocalizations {
   /// No description provided for @emptyPasswordField.
   ///
   /// In id, this message translates to:
-  /// **'Password ga boleh kosong.'**
+  /// **'Password nggak boleh kosong.'**
   String get emptyPasswordField;
 
   /// No description provided for @emptyConfirmPasswordField.
   ///
   /// In id, this message translates to:
-  /// **'Konfirmasi Password ga boleh kosong.'**
+  /// **'Konfirmasi Password nggak boleh kosong.'**
   String get emptyConfirmPasswordField;
 
   /// No description provided for @wrongEmailFormat.
   ///
   /// In id, this message translates to:
-  /// **'Format email yang kamu masukin ga valid. Coba periksa lagi ya.'**
+  /// **'Format email yang kamu masukin belum valid.'**
   String get wrongEmailFormat;
 
   /// No description provided for @passwordLength.
@@ -271,6 +271,12 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Pendaftaran gagal. Coba lagi sebentar ya.'**
   String get registerFailed;
+
+  /// No description provided for @registerWrongEmailFormat.
+  ///
+  /// In id, this message translates to:
+  /// **'Format email yang kamu masukin nggak valid. Coba periksa lagi ya.'**
+  String get registerWrongEmailFormat;
 
   /// No description provided for @registerSuccess.
   ///
@@ -551,7 +557,7 @@ abstract class AppLocalizations {
   /// No description provided for @userInformation.
   ///
   /// In id, this message translates to:
-  /// **'Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.'**
+  /// **'Nama dan email yang ditampilkan di sini hanya read-only dan nggak bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.'**
   String get userInformation;
 
   /// No description provided for @prefInformation.

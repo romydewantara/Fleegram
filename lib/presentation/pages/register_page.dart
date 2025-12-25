@@ -63,6 +63,8 @@ class _RegisterPageState extends State<RegisterPage> {
   Future<void> _onRegister() async {
     if (!_formKey.currentState!.validate()) return;
 
+    FocusScope.of(context).unfocus();
+
     final authProvider = context.read<AuthProvider>();
 
     final success = await authProvider.register(
@@ -86,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
       case ApiErrorCode.emailAlreadyTaken:
         return l10n.emailAlreadyRegistered;
       case ApiErrorCode.mustValidEmail:
-        return l10n.wrongEmailFormat;
+        return l10n.registerWrongEmailFormat;
       case ApiErrorCode.errorNetwork:
         return l10n.errorNetwork;
       default:
@@ -99,162 +101,166 @@ class _RegisterPageState extends State<RegisterPage> {
     final authProvider = context.watch<AuthProvider>();
     final l10n = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Lottie.asset(
-                  'assets/lottie/credential.json',
-                  width: 200,
-                  repeat: true,
-                ),
-
-                const SizedBox(height: 16),
-                Text(
-                  l10n.registerTitle,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-
-                const SizedBox(height: 32),
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: l10n.nameLabel,
-                    border: OutlineInputBorder(),
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Lottie.asset(
+                    'assets/lottie/credential.json',
+                    width: 200,
+                    repeat: true,
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return l10n.emptyNameField;
-                    }
-                    return null;
-                  },
-                ),
 
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    labelText: l10n.emailLabel,
-                    border: OutlineInputBorder(),
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.registerTitle,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return l10n.emptyEmailField;
-                    }
-                    if (!value.contains('@')) {
-                      return l10n.wrongEmailFormat;
-                    }
-                    return null;
-                  },
-                ),
 
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: !_isPasswordVisible,
-                  decoration: InputDecoration(
-                    labelText: l10n.passwordLabel,
-                    border: OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
+                  const SizedBox(height: 32),
+                  TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      labelText: l10n.nameLabel,
+                      border: OutlineInputBorder(),
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return l10n.emptyNameField;
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.length < 8) {
-                      return l10n.passwordLength;
-                    }
-                    return null;
-                  },
-                ),
 
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _confirmPasswordController,
-                  obscureText: !_isConfirmPasswordVisible,
-                  decoration: InputDecoration(
-                    labelText: l10n.confirmPasswordLabel,
-                    border: const OutlineInputBorder(),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isConfirmPasswordVisible
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isConfirmPasswordVisible =
-                              !_isConfirmPasswordVisible;
-                        });
-                      },
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: l10n.emailLabel,
+                      border: OutlineInputBorder(),
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return l10n.emptyEmailField;
+                      }
+                      if (!value.contains('@')) {
+                        return l10n.wrongEmailFormat;
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return l10n.emptyConfirmPasswordField;
-                    }
-                    if (value != _passwordController.text) {
-                      return l10n.confirmPasswordNotMatch;
-                    }
-                    return null;
-                  },
-                ),
 
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size.fromHeight(56),
-                  ),
-                  onPressed: authProvider.isLoading ? null : _onRegister,
-                  child: authProvider.isLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
-                          ),
-                        )
-                      : Text(l10n.registerButton),
-                ),
-
-                const SizedBox(height: 18),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    children: [
-                      TextSpan(text: l10n.alreadyHaveAccount),
-                      const WidgetSpan(child: SizedBox(width: 4)),
-                      TextSpan(
-                        text: l10n.goToLogin,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          decoration: TextDecoration.none,
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _passwordController,
+                    obscureText: !_isPasswordVisible,
+                    decoration: InputDecoration(
+                      labelText: l10n.passwordLabel,
+                      border: OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPasswordVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                         ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () => context.go('/login'),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
                       ),
-                    ],
+                    ),
+                    validator: (value) {
+                      if (value == null || value.length < 8) {
+                        return l10n.passwordLength;
+                      }
+                      return null;
+                    },
                   ),
-                ),
-              ],
+
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _confirmPasswordController,
+                    obscureText: !_isConfirmPasswordVisible,
+                    decoration: InputDecoration(
+                      labelText: l10n.confirmPasswordLabel,
+                      border: const OutlineInputBorder(),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isConfirmPasswordVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isConfirmPasswordVisible =
+                                !_isConfirmPasswordVisible;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return l10n.emptyConfirmPasswordField;
+                      }
+                      if (value != _passwordController.text) {
+                        return l10n.confirmPasswordNotMatch;
+                      }
+                      return null;
+                    },
+                  ),
+
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(56),
+                    ),
+                    onPressed: authProvider.isLoading ? null : _onRegister,
+                    child: authProvider.isLoading
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white,
+                            ),
+                          )
+                        : Text(l10n.registerButton),
+                  ),
+
+                  const SizedBox(height: 18),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      children: [
+                        TextSpan(text: l10n.alreadyHaveAccount),
+                        const WidgetSpan(child: SizedBox(width: 4)),
+                        TextSpan(
+                          text: l10n.goToLogin,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue,
+                            decoration: TextDecoration.none,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () => context.go('/login'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

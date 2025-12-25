@@ -16,9 +16,9 @@
   "loginButton": "Masuk",
   "loginFailed": "Email atau password salah. Coba lagi ya.",
   "emptyEmailField": "Kolom email harus diisi.",
-  "emptyPasswordField": "Password ga boleh kosong.",
-  "emptyConfirmPasswordField": "Konfirmasi Password ga boleh kosong.",
-  "wrongEmailFormat": "Format email yang kamu masukin ga valid. Coba periksa lagi ya.",
+  "emptyPasswordField": "Password nggak boleh kosong.",
+  "emptyConfirmPasswordField": "Konfirmasi Password nggak boleh kosong.",
+  "wrongEmailFormat": "Format email yang kamu masukin belum valid.",
   "passwordLength": "Masukin password minimal 8 karakter.",
   "confirmPasswordNotMatch": "Konfirmasi Password harus sama dengan Password.",
   "emailNotRegistered": "Email ini belum terdaftar. Coba daftarin dulu yuk!",
@@ -32,6 +32,7 @@
   "registerButton": "Daftar",
   "registerLoading": "Sedang membuat akun...",
   "registerFailed": "Pendaftaran gagal. Coba lagi sebentar ya.",
+  "registerWrongEmailFormat": "Format email yang kamu masukin nggak valid. Coba periksa lagi ya.",
   "registerSuccess": "Yeay! Akunmu berhasil dibuat. Yuk, login sekarang!",
 
   "emailAlreadyUsed": "Email ini sudah dipakai. Coba email yang lain ya.",
@@ -87,7 +88,7 @@
   "logoutConfirm": "Kamu yakin mau keluar dari akunmu?",
   "sessionExpired": "Sesi kamu sudah habis. Yuk login lagi.",
 
-  "userInformation": "Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.",
+  "userInformation": "Nama dan email yang ditampilkan di sini hanya read-only dan nggak bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.",
   "prefInformation": "Di sini kamu bisa melihat dan mengubah preferensi aplikasi, misalnya tema dan bahasa yang sedang digunakan, supaya pengalaman pakai aplikasinya sesuai keinginanmu.",
 
   "errorNetworkTitle": "Ups, Koneksi Bermasalah",

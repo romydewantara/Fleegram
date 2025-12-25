@@ -51,15 +51,14 @@ class AppLocalizationsId extends AppLocalizations {
   String get emptyEmailField => 'Kolom email harus diisi.';
 
   @override
-  String get emptyPasswordField => 'Password ga boleh kosong.';
+  String get emptyPasswordField => 'Password nggak boleh kosong.';
 
   @override
   String get emptyConfirmPasswordField =>
-      'Konfirmasi Password ga boleh kosong.';
+      'Konfirmasi Password nggak boleh kosong.';
 
   @override
-  String get wrongEmailFormat =>
-      'Format email yang kamu masukin ga valid. Coba periksa lagi ya.';
+  String get wrongEmailFormat => 'Format email yang kamu masukin belum valid.';
 
   @override
   String get passwordLength => 'Masukin password minimal 8 karakter.';
@@ -100,6 +99,10 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get registerFailed => 'Pendaftaran gagal. Coba lagi sebentar ya.';
+
+  @override
+  String get registerWrongEmailFormat =>
+      'Format email yang kamu masukin nggak valid. Coba periksa lagi ya.';
 
   @override
   String get registerSuccess =>
@@ -252,7 +255,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get userInformation =>
-      'Nama dan email yang ditampilkan di sini hanya read-only dan ga bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.';
+      'Nama dan email yang ditampilkan di sini hanya read-only dan nggak bisa diubah. Fitur ini dibuat agar developer lebih mudah mengenali informasi seperti email atau akun yang sedang dipakai.';
 
   @override
   String get prefInformation =>

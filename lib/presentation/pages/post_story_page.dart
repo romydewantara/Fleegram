@@ -122,14 +122,8 @@ class _PostStoryPageState extends State<PostStoryPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final keyboardOpen = MediaQuery.of(context).viewInsets.bottom > 0;
-      if (!keyboardOpen && _descFocusNode.hasFocus) {
-        _descFocusNode.unfocus();
-      }
-    });
-
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () => FocusScope.of(context).unfocus(),
       child: Stack(
         children: [
@@ -250,7 +244,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
               child: AbsorbPointer(
                 absorbing: true,
                 child: Container(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   child: Center(
                     child: CircularProgressIndicator(
                       strokeWidth: 2.5,

@@ -58,8 +58,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Confirm Password field must not be empty.';
 
   @override
-  String get wrongEmailFormat =>
-      'The email format is invalid. Please check and try again.';
+  String get wrongEmailFormat => 'The email format is invalid.';
 
   @override
   String get passwordLength => 'Password must be at least 8 characters.';
@@ -100,6 +99,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get registerFailed => 'Registration failed. Please try again shortly.';
+
+  @override
+  String get registerWrongEmailFormat =>
+      'The email format is invalid. Please check and try again.';
 
   @override
   String get registerSuccess =>
