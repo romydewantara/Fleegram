@@ -350,6 +350,42 @@ abstract class AppLocalizations {
   /// **'Gambarnya gagal dimuat'**
   String get imageLoadError;
 
+  /// No description provided for @timeJustNow.
+  ///
+  /// In id, this message translates to:
+  /// **'Baru saja'**
+  String get timeJustNow;
+
+  /// No description provided for @timeMinutes.
+  ///
+  /// In id, this message translates to:
+  /// **'{count}m'**
+  String timeMinutes(Object count);
+
+  /// No description provided for @timeHours.
+  ///
+  /// In id, this message translates to:
+  /// **'{count}j'**
+  String timeHours(Object count);
+
+  /// No description provided for @timeYesterday.
+  ///
+  /// In id, this message translates to:
+  /// **'Kemarin'**
+  String get timeYesterday;
+
+  /// No description provided for @timeDays.
+  ///
+  /// In id, this message translates to:
+  /// **'{count}h'**
+  String timeDays(Object count);
+
+  /// No description provided for @timeWeeks.
+  ///
+  /// In id, this message translates to:
+  /// **'{count}mg'**
+  String timeWeeks(Object count);
+
   /// No description provided for @postStoryTitle.
   ///
   /// In id, this message translates to:

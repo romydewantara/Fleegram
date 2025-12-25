@@ -50,6 +50,13 @@
   "longitude": "Bujur",
   "imageLoadError": "Gambarnya gagal dimuat",
 
+  "timeJustNow": "Baru saja",
+  "timeMinutes": "{count}m",
+  "timeHours": "{count}j",
+  "timeYesterday": "Kemarin",
+  "timeDays": "{count}h",
+  "timeWeeks": "{count}mg",
+
   "postStoryTitle": "Tambah Cerita",
   "descriptionLabel": "Ceritain sedikit di sini...",
   "pickImage": "Pilih gambar",

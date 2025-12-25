@@ -143,6 +143,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get imageLoadError => 'Failed to load image';
 
   @override
+  String get timeJustNow => 'Just now';
+
+  @override
+  String timeMinutes(Object count) {
+    return '${count}m';
+  }
+
+  @override
+  String timeHours(Object count) {
+    return '${count}h';
+  }
+
+  @override
+  String get timeYesterday => 'Yesterday';
+
+  @override
+  String timeDays(Object count) {
+    return '${count}d';
+  }
+
+  @override
+  String timeWeeks(Object count) {
+    return '${count}w';
+  }
+
+  @override
   String get postStoryTitle => 'Add New Story';
 
   @override

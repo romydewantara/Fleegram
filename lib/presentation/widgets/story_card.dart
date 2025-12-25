@@ -1,6 +1,28 @@
 import 'package:fleegram/core/utils/time_ago.dart';
 import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:flutter/material.dart';
+
+extension TimeAgoLocalization on TimeAgoResult {
+  String localized(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    switch (type) {
+      case TimeAgoType.justNow:
+        return l10n.timeJustNow;
+      case TimeAgoType.minutes:
+        return l10n.timeMinutes(value!);
+      case TimeAgoType.hours:
+        return l10n.timeHours(value!);
+      case TimeAgoType.yesterday:
+        return l10n.timeYesterday;
+      case TimeAgoType.days:
+        return l10n.timeDays(value!);
+      case TimeAgoType.weeks:
+        return l10n.timeWeeks(value!);
+    }
+  }
+}
 
 class StoryCard extends StatelessWidget {
   final Story story;
@@ -43,7 +65,7 @@ class StoryCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           Text(
-                            '• ${TimeAgo.format(story.createdAt)}',
+                            '• ${TimeAgo.calculate(story.createdAt).localized(context)}',
                             style: Theme.of(
                               context,
                             ).textTheme.bodySmall?.copyWith(fontSize: 12),

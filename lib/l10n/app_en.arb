@@ -50,6 +50,13 @@
   "longitude": "Longitude",
   "imageLoadError": "Failed to load image",
 
+  "timeJustNow": "Just now",
+  "timeMinutes": "{count}m",
+  "timeHours": "{count}h",
+  "timeYesterday": "Yesterday",
+  "timeDays": "{count}d",
+  "timeWeeks": "{count}w",
+
   "postStoryTitle": "Add New Story",
   "descriptionLabel": "Tell your story here...",
   "pickImage": "Choose image",

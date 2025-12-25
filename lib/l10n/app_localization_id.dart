@@ -143,6 +143,32 @@ class AppLocalizationsId extends AppLocalizations {
   String get imageLoadError => 'Gambarnya gagal dimuat';
 
   @override
+  String get timeJustNow => 'Baru saja';
+
+  @override
+  String timeMinutes(Object count) {
+    return '${count}m';
+  }
+
+  @override
+  String timeHours(Object count) {
+    return '${count}j';
+  }
+
+  @override
+  String get timeYesterday => 'Kemarin';
+
+  @override
+  String timeDays(Object count) {
+    return '${count}h';
+  }
+
+  @override
+  String timeWeeks(Object count) {
+    return '${count}mg';
+  }
+
+  @override
   String get postStoryTitle => 'Tambah Cerita';
 
   @override
