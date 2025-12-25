@@ -23,20 +23,27 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    final storyProvider = context.read<StoryProvider>();
-    storyProvider.fetchInitialStories();
-
-    _scrollController.addListener(() {
-      final provider = context.read<StoryProvider>();
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 200) {
-        provider.fetchNextStories();
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<StoryProvider>().fetchInitialStories();
     });
+
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+
+    final provider = context.read<StoryProvider>();
+
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      provider.fetchNextStories();
+    }
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     super.dispose();
   }
