@@ -286,7 +286,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                 leading: const Icon(Icons.photo_library_outlined),
                 title: Text(l10n.gallery),
                 onTap: () {
-                  Navigator.pop(context);
+                  context.pop();
                   _pickImage(ImageSource.gallery);
                 },
               ),
@@ -294,7 +294,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                 leading: const Icon(Icons.camera_alt_outlined),
                 title: Text(l10n.camera),
                 onTap: () {
-                  Navigator.pop(context);
+                  context.pop();
                   _pickImage(ImageSource.camera);
                 },
               ),
