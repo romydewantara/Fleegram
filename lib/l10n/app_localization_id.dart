@@ -169,7 +169,7 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get postStoryTitle => 'Tambah Cerita';
+  String get postStoryTitle => 'Cerita Baru';
 
   @override
   String get descriptionLabel => 'Ceritain sedikit di sini...';

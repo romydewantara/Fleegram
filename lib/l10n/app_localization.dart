@@ -389,7 +389,7 @@ abstract class AppLocalizations {
   /// No description provided for @postStoryTitle.
   ///
   /// In id, this message translates to:
-  /// **'Tambah Cerita'**
+  /// **'Cerita Baru'**
   String get postStoryTitle;
 
   /// No description provided for @descriptionLabel.

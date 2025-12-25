@@ -57,7 +57,7 @@
   "timeDays": "{count}d",
   "timeWeeks": "{count}w",
 
-  "postStoryTitle": "Add New Story",
+  "postStoryTitle": "New Story",
   "descriptionLabel": "Tell your story here...",
   "pickImage": "Choose image",
   "cropImage": "Crop image",
