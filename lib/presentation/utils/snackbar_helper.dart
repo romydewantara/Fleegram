@@ -7,6 +7,8 @@ class SnackbarHelper {
     BuildContext context,
     String message, {
     SnackbarType type = SnackbarType.info,
+    double marginVertical = 16,
+    double marginHorizontal = 16,
   }) {
     late IconData icon;
     late Color color;
@@ -29,6 +31,11 @@ class SnackbarHelper {
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.symmetric(
+            vertical: marginVertical,
+            horizontal: marginHorizontal,
+          ),
           content: Row(
             children: [
               Icon(icon, color: color),
@@ -36,7 +43,6 @@ class SnackbarHelper {
               Expanded(child: Text(message)),
             ],
           ),
-          behavior: SnackBarBehavior.floating,
         ),
       );
   }

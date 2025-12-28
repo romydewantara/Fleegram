@@ -62,7 +62,9 @@
   "descriptionLabel": "Tell your story here...",
   "pickImage": "Choose image",
   "cropImage": "Crop image",
-  "noImage": "No image selected",
+  "noImage": "Tap to add an image",
+  "selectSource": "Select Image Source",
+  "sourceOption": "Choose an image from your gallery or take a new photo with the camera.",
   "takePhoto": "Take photo",
   "camera": "Camera",
   "gallery": "Gallery",
@@ -96,6 +98,7 @@
 
   "dateFormatFull": "MMMM d, y",
 
-  "copyright": "© 2025 Fleegram • by Romy D",
+  "copyright": "© 2025 Fleegram",
+  "developedBy": "Developed by Romy",
   "version": "v1.0.0 – 2512200831"
 }

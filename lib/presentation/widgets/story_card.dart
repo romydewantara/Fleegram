@@ -125,7 +125,7 @@ class StoryCard extends StatelessWidget {
           ),
 
           Padding(
-            padding: EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(top: 8),
             child: Divider(
               thickness: 0.2,
               color: Theme.of(context).colorScheme.outline,

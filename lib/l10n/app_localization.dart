@@ -419,8 +419,20 @@ abstract class AppLocalizations {
   /// No description provided for @noImage.
   ///
   /// In id, this message translates to:
-  /// **'Belum ada gambar'**
+  /// **'Tap disini buat nambahin gambar'**
   String get noImage;
+
+  /// No description provided for @selectSource.
+  ///
+  /// In id, this message translates to:
+  /// **'Mau ambil dari mana nih?'**
+  String get selectSource;
+
+  /// No description provided for @sourceOption.
+  ///
+  /// In id, this message translates to:
+  /// **'Pakai foto dari galeri atau ambil baru pakai kamera tinggal pilih aja ya.'**
+  String get sourceOption;
 
   /// No description provided for @takePhoto.
   ///
@@ -581,14 +593,20 @@ abstract class AppLocalizations {
   /// No description provided for @dateFormatFull.
   ///
   /// In id, this message translates to:
-  /// **'d MMMM y'**
+  /// **'d MMMM, y'**
   String get dateFormatFull;
 
   /// No description provided for @copyright.
   ///
   /// In id, this message translates to:
-  /// **'© 2025 Fleegram • oleh Romy D'**
+  /// **'© 2025 Fleegram'**
   String get copyright;
+
+  /// No description provided for @developedBy.
+  ///
+  /// In id, this message translates to:
+  /// **'Developed by Romy'**
+  String get developedBy;
 
   /// No description provided for @version.
   ///

@@ -11,6 +11,14 @@ class DetailStoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
+    final locale = Localizations.localeOf(context).toString();
+
+    final formattedDate = DateFormatter.formatFull(
+      date: story.createdAt,
+      locale: locale,
+      pattern: l10n.dateFormatFull,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -18,8 +26,8 @@ class DetailStoryPage extends StatelessWidget {
         title: Column(
           children: [
             Text(
-              AppLocalizations.of(context)!.storyDetailTitle,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+              l10n.storyDetailTitle,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 2),
             Text(story.name, style: theme.textTheme.bodySmall),
@@ -56,7 +64,7 @@ class DetailStoryPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            DateFormatter.formatFull(context, story.createdAt),
+                            formattedDate,
                             style: theme.textTheme.bodySmall?.copyWith(
                               fontSize: 12,
                             ),

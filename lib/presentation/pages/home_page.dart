@@ -5,7 +5,6 @@ import 'package:fleegram/presentation/widgets/asymmetric_burger_icon.dart';
 import 'package:fleegram/presentation/widgets/story_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -56,14 +55,20 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(
           'Fleegram',
-          style: GoogleFonts.satisfy(
+          style: TextStyle(
+            fontFamily: 'Satisfy',
             fontSize: 28,
-            fontWeight: FontWeight.w700,
+            fontWeight: FontWeight.bold,
             color: Theme.of(context).appBarTheme.foregroundColor,
           ),
         ),
         centerTitle: true,
-        leading: AddStoryIcon(onPressed: () => context.push('/post')),
+        leading: AddStoryIcon(
+          onPressed: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            context.push('/post');
+          },
+        ),
         actions: [
           IconButton(
             onPressed: () => context.push('/setting'),

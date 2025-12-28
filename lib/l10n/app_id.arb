@@ -62,7 +62,9 @@
   "descriptionLabel": "Ceritain sedikit di sini...",
   "pickImage": "Pilih gambar",
   "cropImage": "Crop gambar",
-  "noImage": "Belum ada gambar",
+  "noImage": "Tap disini buat nambahin gambar",
+  "selectSource": "Mau ambil dari mana nih?",
+  "sourceOption": "Pakai foto dari galeri atau ambil baru pakai kamera tinggal pilih aja ya.",
   "takePhoto": "Ambil foto",
   "camera": "Kamera",
   "gallery": "Galeri",
@@ -94,8 +96,9 @@
   "errorNetworkTitle": "Ups, Koneksi Bermasalah",
   "errorNetwork": "Kamu lagi nggak terhubung ke internet. Coba cek koneksi kamu, lalu ulangi lagi ya.",
 
-  "dateFormatFull": "d MMMM y",
+  "dateFormatFull": "d MMMM, y",
 
-  "copyright": "© 2025 Fleegram • oleh Romy D",
+  "copyright": "© 2025 Fleegram",
+  "developedBy": "Developed by Romy",
   "version": "v1.0.0 – 2512200831"
 }

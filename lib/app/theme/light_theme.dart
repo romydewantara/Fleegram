@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 const _primaryColor = Color(0xFF01579B);
 const _secondaryColor = Color(0xFF54C5F8);
+const _tertiaryColor = Color(0xFFA2D9FF);
 const _backgroundColor = Color(0xFFF9FBFD);
 const _surfaceColor = Colors.white;
 const _errorColor = Color(0xFFD32F2F);
@@ -12,56 +12,71 @@ const _textSecondary = Color(0xFF6B7280);
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   brightness: Brightness.light,
-  iconTheme: const IconThemeData(color: Colors.black),
+  iconTheme: IconThemeData(color: _primaryColor),
 
   dividerColor: Colors.black.withValues(alpha: 0.08),
 
-  colorScheme: const ColorScheme.light(
+  colorScheme: ColorScheme.light(
     primary: _primaryColor,
     secondary: _secondaryColor,
+    tertiary: _tertiaryColor,
     surface: _surfaceColor,
     error: _errorColor,
     onPrimary: Colors.white,
-    onSecondary: Colors.white,
+    onSecondary: Colors.black,
     onSurface: _textPrimary,
+    onSurfaceVariant: _textSecondary,
     onError: Colors.white,
   ),
 
   scaffoldBackgroundColor: _backgroundColor,
 
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     backgroundColor: _surfaceColor,
     elevation: 0,
     foregroundColor: _textPrimary,
     centerTitle: false,
   ),
 
-  textTheme: GoogleFonts.poppinsTextTheme(
-    const TextTheme(
-      bodySmall: TextStyle(color: _textSecondary),
-      bodyMedium: TextStyle(color: _textPrimary),
-      bodyLarge: TextStyle(color: _textPrimary),
+  textTheme: TextTheme(
+    bodySmall: TextStyle(fontFamily: 'Manrope', color: _textSecondary),
+    bodyMedium: TextStyle(fontFamily: 'Manrope', color: _textPrimary),
+    bodyLarge: TextStyle(fontFamily: 'Manrope', color: _textPrimary),
 
-      titleSmall: TextStyle(fontWeight: FontWeight.w600, color: _textPrimary),
-      titleMedium: TextStyle(fontWeight: FontWeight.w600, color: _textPrimary),
-      titleLarge: TextStyle(fontWeight: FontWeight.w700, color: _textPrimary),
+    titleSmall: TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.w600,
+      color: _textPrimary,
+    ),
+    titleMedium: TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.w600,
+      color: _textPrimary,
+    ),
+    titleLarge: TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
+    ),
 
-      headlineSmall: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: _textPrimary,
-      ),
-      headlineMedium: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: _textPrimary,
-      ),
-      headlineLarge: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: _textPrimary,
-      ),
+    headlineSmall: TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
+    ),
+    headlineMedium: TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
+    ),
+    headlineLarge: TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
     ),
   ),
 
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: _primaryColor,
     foregroundColor: Colors.white,
   ),
@@ -71,7 +86,7 @@ ThemeData lightTheme = ThemeData(
       backgroundColor: _primaryColor,
       foregroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      textStyle: const TextStyle(fontWeight: FontWeight.w600),
+      textStyle: TextStyle(fontWeight: FontWeight.w600),
     ),
   ),
 

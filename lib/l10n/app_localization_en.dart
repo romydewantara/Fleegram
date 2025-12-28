@@ -184,7 +184,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cropImage => 'Crop image';
 
   @override
-  String get noImage => 'No image selected';
+  String get noImage => 'Tap to add an image';
+
+  @override
+  String get selectSource => 'Select Image Source';
+
+  @override
+  String get sourceOption =>
+      'Choose an image from your gallery or take a new photo with the camera.';
 
   @override
   String get takePhoto => 'Take photo';
@@ -275,7 +282,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dateFormatFull => 'MMMM d, y';
 
   @override
-  String get copyright => '© 2025 Fleegram • by Romy D';
+  String get copyright => '© 2025 Fleegram';
+
+  @override
+  String get developedBy => 'Developed by Romy';
 
   @override
   String get version => 'v1.0.0 – 2512200831';

@@ -184,7 +184,14 @@ class AppLocalizationsId extends AppLocalizations {
   String get cropImage => 'Crop gambar';
 
   @override
-  String get noImage => 'Belum ada gambar';
+  String get noImage => 'Tap disini buat nambahin gambar';
+
+  @override
+  String get selectSource => 'Mau ambil dari mana nih?';
+
+  @override
+  String get sourceOption =>
+      'Pakai foto dari galeri atau ambil baru pakai kamera tinggal pilih aja ya.';
 
   @override
   String get takePhoto => 'Ambil foto';
@@ -269,10 +276,13 @@ class AppLocalizationsId extends AppLocalizations {
       'Kamu lagi nggak terhubung ke internet. Coba cek koneksi kamu, lalu ulangi lagi ya.';
 
   @override
-  String get dateFormatFull => 'd MMMM y';
+  String get dateFormatFull => 'd MMMM, y';
 
   @override
-  String get copyright => '© 2025 Fleegram • oleh Romy D';
+  String get copyright => '© 2025 Fleegram';
+
+  @override
+  String get developedBy => 'Developed by Romy';
 
   @override
   String get version => 'v1.0.0 – 2512200831';

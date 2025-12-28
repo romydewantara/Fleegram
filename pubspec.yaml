@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   go_router: ^17.0.1
-  google_fonts: ^6.3.3
   http: ^1.6.0
   image_picker: ^1.2.1
   image_cropper: ^11.0.0
@@ -33,7 +32,25 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
+    - assets/images/dicoding_logo.png
+    - assets/images/ic_add_image.png
+    - assets/images/ic_camera.png
+    - assets/images/ic_gallery.png
     - assets/images/ic_profile.png
     - assets/lottie/banner.json
     - assets/lottie/credential.json
     - assets/lottie/error_network.json
+    - assets/lottie/splash.json
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-Regular.ttf
+        - asset: assets/fonts/Manrope-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Manrope-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Manrope-Bold.ttf
+          weight: 700
+    - family: Satisfy
+      fonts:
+        - asset: assets/fonts/Satisfy-Regular.ttf

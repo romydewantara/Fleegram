@@ -84,6 +84,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
         context,
         l10n.imageAndDescriptionRequired,
         type: SnackbarType.info,
+        marginVertical: 90,
       );
       return;
     }
@@ -110,7 +111,12 @@ class _PostStoryPageState extends State<PostStoryPage> {
       context.go('/');
     } catch (_) {
       if (!mounted) return;
-      SnackbarHelper.show(context, l10n.errorNetwork, type: SnackbarType.error);
+      SnackbarHelper.show(
+        context,
+        l10n.errorNetwork,
+        type: SnackbarType.error,
+        marginVertical: 90,
+      );
     } finally {
       if (mounted) {
         setState(() => _isUploading = false);
@@ -121,6 +127,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final theme = Theme.of(context);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -128,115 +135,110 @@ class _PostStoryPageState extends State<PostStoryPage> {
       child: Stack(
         children: [
           Scaffold(
-            appBar: AppBar(title: Text(l10n.postStoryTitle), centerTitle: true),
-            bottomNavigationBar: SafeArea(
-              minimum: const EdgeInsets.all(16),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(56),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                onPressed: _isUploading ? null : _uploadStory,
-                child: _isUploading
-                    ? const SizedBox(
-                        height: 22,
-                        width: 22,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : Text(
-                        l10n.uploadButton,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-              ),
+            appBar: AppBar(
+              title: Text(l10n.postStoryTitle),
+              centerTitle: false,
             ),
             body: SafeArea(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      padding: const EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          GestureDetector(
-                            onTap: _showImageSourceSheet,
-                            child: Container(
-                              height: 280,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade200,
-                                borderRadius: BorderRadius.circular(16),
-                                image: _imageFile != null
-                                    ? DecorationImage(
-                                        image: FileImage(_imageFile!),
-                                        fit: BoxFit.cover,
-                                      )
-                                    : null,
-                              ),
-                              child: _imageFile == null
-                                  ? Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(
-                                          Icons.add_photo_alternate_rounded,
-                                          size: 48,
-                                          color: Colors.grey,
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          l10n.noImage,
-                                          style: const TextStyle(
-                                            color: Colors.grey,
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  : Align(
-                                      alignment: Alignment.topRight,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(12),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.black54,
-                                          child: const Icon(
-                                            Icons.edit,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                            ),
-                          ),
-
-                          const SizedBox(height: 24),
-                          TextField(
-                            controller: _descriptionController,
-                            focusNode: _descFocusNode,
-                            maxLines: 5,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                            decoration: InputDecoration(
-                              hintText: l10n.descriptionLabel,
-                              hintStyle: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(
-                                    color: Theme.of(context).hintColor,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GestureDetector(
+                      onTap: () => _showImageSourceSheet(l10n, theme),
+                      child: Container(
+                        height: 280,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(16),
+                          image: _imageFile != null
+                              ? DecorationImage(
+                                  image: FileImage(_imageFile!),
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
+                        ),
+                        child: _imageFile == null
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/images/ic_add_image.png',
+                                    width: 98,
+                                    height: 98,
                                   ),
-                              border: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              focusedBorder: InputBorder.none,
-                              contentPadding: EdgeInsets.zero,
-                            ),
-                          ),
-                        ],
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    l10n.noImage,
+                                    style: const TextStyle(color: Colors.grey),
+                                  ),
+                                ],
+                              )
+                            : Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12),
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.black54,
+                                    child: const Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 24),
+                    TextField(
+                      controller: _descriptionController,
+                      focusNode: _descFocusNode,
+                      maxLines: 5,
+                      style: theme.textTheme.bodyLarge,
+                      decoration: InputDecoration(
+                        hintText: l10n.descriptionLabel,
+                        hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                          color: theme.hintColor,
+                        ),
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                    ),
+                    const SizedBox(height: 80),
+                  ],
+                ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 16,
+            left: 16,
+            right: 16,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(56),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: _isUploading ? null : _uploadStory,
+              child: _isUploading
+                  ? const SizedBox(
+                      height: 22,
+                      width: 22,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        color: Colors.white,
+                      ),
+                    )
+                  : Text(
+                      l10n.uploadButton,
+                      style: const TextStyle(fontSize: 16),
+                    ),
             ),
           ),
           if (_isPickingImage)
@@ -248,7 +250,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                   child: Center(
                     child: CircularProgressIndicator(
                       strokeWidth: 2.5,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: theme.colorScheme.primary,
                     ),
                   ),
                 ),
@@ -259,9 +261,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
     );
   }
 
-  void _showImageSourceSheet() {
-    final l10n = AppLocalizations.of(context)!;
-
+  void _showImageSourceSheet(AppLocalizations l10n, ThemeData theme) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -277,32 +277,120 @@ class _PostStoryPageState extends State<PostStoryPage> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade400,
+                  color: theme.dividerColor,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
               const SizedBox(height: 20),
-              ListTile(
-                leading: const Icon(Icons.photo_library_outlined),
-                title: Text(l10n.gallery),
-                onTap: () {
-                  context.pop();
-                  _pickImage(ImageSource.gallery);
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: Column(
+                  children: [
+                    Text(
+                      l10n.selectSource,
+                      style: theme.textTheme.headlineMedium!.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.sourceOption,
+                      style: theme.textTheme.bodyMedium!.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
-              ListTile(
-                leading: const Icon(Icons.camera_alt_outlined),
-                title: Text(l10n.camera),
-                onTap: () {
-                  context.pop();
-                  _pickImage(ImageSource.camera);
-                },
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _buildOptionCard(
+                      leading: Image.asset(
+                        'assets/images/ic_camera.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                      title: l10n.camera,
+                      onTap: () {
+                        context.pop();
+                        _pickImage(ImageSource.camera);
+                      },
+                    ),
+                    _buildOptionCard(
+                      leading: Image.asset(
+                        'assets/images/ic_gallery.png',
+                        width: 40,
+                        height: 40,
+                      ),
+                      title: l10n.gallery,
+                      onTap: () {
+                        context.pop();
+                        _pickImage(ImageSource.gallery);
+                      },
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 12),
             ],
           ),
         );
       },
+    );
+  }
+
+  Widget _buildOptionCard({
+    required Widget leading,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Theme.of(context).brightness == Brightness.dark
+                    ? Colors.blueGrey.shade700
+                    : Theme.of(context).colorScheme.secondary,
+                Theme.of(context).brightness == Brightness.dark
+                    ? Colors.blueGrey.shade900
+                    : Theme.of(context).colorScheme.primary,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              leading,
+              const SizedBox(height: 8),
+              Text(
+                title,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

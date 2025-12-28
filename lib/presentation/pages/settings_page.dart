@@ -80,6 +80,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 Text(
+                  l10n.developedBy,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontSize: 12,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
                   l10n.version,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.labelSmall?.copyWith(

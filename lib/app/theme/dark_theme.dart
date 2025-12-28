@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 const _primaryColor = Colors.white;
 const _secondaryColor = Colors.white70;
+const _tertiaryColor = Colors.blueGrey;
 const _backgroundColor = Colors.black;
 const _surfaceColor = Color(0xFF121212);
 const _errorColor = Colors.redAccent;
@@ -16,14 +16,16 @@ ThemeData darkTheme = ThemeData(
 
   dividerColor: Colors.white.withValues(alpha: 0.08),
 
-  colorScheme: const ColorScheme.dark(
+  colorScheme: ColorScheme.dark(
     primary: _primaryColor,
     secondary: _secondaryColor,
+    tertiary: _tertiaryColor,
     surface: _surfaceColor,
     error: _errorColor,
     onPrimary: Colors.black,
     onSecondary: Colors.black,
     onSurface: _textPrimary,
+    onSurfaceVariant: _textSecondary,
     onError: Colors.black,
   ),
 
@@ -36,28 +38,41 @@ ThemeData darkTheme = ThemeData(
     centerTitle: false,
   ),
 
-  textTheme: GoogleFonts.manropeTextTheme(
-    const TextTheme(
-      bodySmall: TextStyle(color: _textSecondary),
-      bodyMedium: TextStyle(color: _textPrimary),
-      bodyLarge: TextStyle(color: _textPrimary),
+  textTheme: TextTheme(
+    bodySmall: const TextStyle(fontFamily: 'Manrope', color: _textSecondary),
+    bodyMedium: const TextStyle(fontFamily: 'Manrope', color: _textPrimary),
+    bodyLarge: const TextStyle(fontFamily: 'Manrope', color: _textPrimary),
 
-      titleSmall: TextStyle(fontWeight: FontWeight.w600, color: _textPrimary),
-      titleMedium: TextStyle(fontWeight: FontWeight.w600, color: _textPrimary),
-      titleLarge: TextStyle(fontWeight: FontWeight.w700, color: _textPrimary),
+    titleSmall: const TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.w600,
+      color: _textPrimary,
+    ),
+    titleMedium: const TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.w600,
+      color: _textPrimary,
+    ),
+    titleLarge: const TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
+    ),
 
-      headlineSmall: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: _textPrimary,
-      ),
-      headlineMedium: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: _textPrimary,
-      ),
-      headlineLarge: TextStyle(
-        fontWeight: FontWeight.bold,
-        color: _textPrimary,
-      ),
+    headlineSmall: const TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
+    ),
+    headlineMedium: const TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
+    ),
+    headlineLarge: const TextStyle(
+      fontFamily: 'Manrope',
+      fontWeight: FontWeight.bold,
+      color: _textPrimary,
     ),
   ),
 
