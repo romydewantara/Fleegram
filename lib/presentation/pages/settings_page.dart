@@ -1,3 +1,4 @@
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
@@ -122,7 +123,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
                   const CircleAvatar(
                     radius: 28,
-                    backgroundImage: AssetImage('assets/images/ic_profile.png'),
+                    backgroundImage: AssetImage(AppAssets.icProfile),
                   ),
                   const SizedBox(width: 16),
                   Expanded(

@@ -1,3 +1,4 @@
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/utils/date_formatter.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
@@ -45,7 +46,7 @@ class DetailStoryPage extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage('assets/images/ic_profile.png'),
+                    backgroundImage: AssetImage(AppAssets.icProfile),
                   ),
                   const SizedBox(width: 12),
 

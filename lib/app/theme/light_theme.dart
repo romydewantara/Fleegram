@@ -14,7 +14,7 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   iconTheme: IconThemeData(color: _primaryColor),
 
-  dividerColor: Colors.black.withValues(alpha: 0.08),
+  dividerColor: Colors.black.withValues(alpha: .4),
 
   colorScheme: ColorScheme.light(
     primary: _primaryColor,

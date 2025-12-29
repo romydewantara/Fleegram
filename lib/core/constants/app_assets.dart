@@ -1,0 +1,9 @@
+class AppAssets {
+  AppAssets._();
+
+  static const String dicodingLogo = 'assets/images/dicoding_logo.png';
+  static const String icCamera = 'assets/images/ic_camera.png';
+  static const String icGallery = 'assets/images/ic_gallery.png';
+  static const String icAddImage = 'assets/images/ic_add_image.png';
+  static const String icProfile = 'assets/images/ic_profile.png';
+}

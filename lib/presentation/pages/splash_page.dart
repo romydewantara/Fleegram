@@ -1,4 +1,5 @@
 import 'package:fleegram/core/app_state.dart';
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -86,7 +87,7 @@ class _SplashPageState extends State<SplashPage>
                   style: TextStyle(color: Colors.white70, fontSize: 12),
                 ),
                 const SizedBox(height: 4),
-                Image.asset('assets/images/dicoding_logo.png', width: 60),
+                Image.asset(AppAssets.dicodingLogo, width: 60),
               ],
             ),
           ),

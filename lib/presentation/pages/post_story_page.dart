@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:fleegram/presentation/utils/snackbar_helper.dart';
+import 'package:fleegram/presentation/widgets/story_image_picker.dart';
+import 'package:fleegram/presentation/widgets/story_image_source_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -84,7 +86,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
         context,
         l10n.imageAndDescriptionRequired,
         type: SnackbarType.info,
-        marginVertical: 90,
+        marginVertical: 80,
       );
       return;
     }
@@ -145,51 +147,16 @@ class _PostStoryPageState extends State<PostStoryPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () => _showImageSourceSheet(l10n, theme),
-                      child: Container(
-                        height: 280,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(16),
-                          image: _imageFile != null
-                              ? DecorationImage(
-                                  image: FileImage(_imageFile!),
-                                  fit: BoxFit.cover,
-                                )
-                              : null,
-                        ),
-                        child: _imageFile == null
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/ic_add_image.png',
-                                    width: 98,
-                                    height: 98,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    l10n.noImage,
-                                    style: const TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              )
-                            : Align(
-                                alignment: Alignment.topRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12),
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.black54,
-                                    child: const Icon(
-                                      Icons.edit,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                      ),
+                    StoryImagePicker(
+                      imageFile: _imageFile,
+                      onTap: () {
+                        StoryImageSourceBottomSheet.show(
+                          context: context,
+                          l10n: l10n,
+                          theme: theme,
+                          onPick: _pickImage,
+                        );
+                      },
                     ),
                     const SizedBox(height: 24),
                     TextField(
@@ -257,139 +224,6 @@ class _PostStoryPageState extends State<PostStoryPage> {
               ),
             ),
         ],
-      ),
-    );
-  }
-
-  void _showImageSourceSheet(AppLocalizations l10n, ThemeData theme) {
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (_) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 12),
-              Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: theme.dividerColor,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      l10n.selectSource,
-                      style: theme.textTheme.headlineMedium!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: theme.colorScheme.onSurface,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      l10n.sourceOption,
-                      style: theme.textTheme.bodyMedium!.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildOptionCard(
-                      leading: Image.asset(
-                        'assets/images/ic_camera.png',
-                        width: 40,
-                        height: 40,
-                      ),
-                      title: l10n.camera,
-                      onTap: () {
-                        context.pop();
-                        _pickImage(ImageSource.camera);
-                      },
-                    ),
-                    _buildOptionCard(
-                      leading: Image.asset(
-                        'assets/images/ic_gallery.png',
-                        width: 40,
-                        height: 40,
-                      ),
-                      title: l10n.gallery,
-                      onTap: () {
-                        context.pop();
-                        _pickImage(ImageSource.gallery);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 12),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildOptionCard({
-    required Widget leading,
-    required String title,
-    required VoidCallback onTap,
-  }) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 8),
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).brightness == Brightness.dark
-                    ? Colors.blueGrey.shade700
-                    : Theme.of(context).colorScheme.secondary,
-                Theme.of(context).brightness == Brightness.dark
-                    ? Colors.blueGrey.shade900
-                    : Theme.of(context).colorScheme.primary,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              leading,
-              const SizedBox(height: 8),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

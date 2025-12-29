@@ -14,7 +14,7 @@ ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   iconTheme: const IconThemeData(color: Colors.white),
 
-  dividerColor: Colors.white.withValues(alpha: 0.08),
+  dividerColor: Colors.white.withValues(alpha: .4),
 
   colorScheme: ColorScheme.dark(
     primary: _primaryColor,

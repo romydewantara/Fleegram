@@ -1,3 +1,4 @@
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/utils/time_ago.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
@@ -44,9 +45,7 @@ class StoryCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundImage: const AssetImage(
-                    'assets/images/ic_profile.png',
-                  ),
+                  backgroundImage: const AssetImage(AppAssets.icProfile),
                 ),
                 const SizedBox(width: 12),
 
