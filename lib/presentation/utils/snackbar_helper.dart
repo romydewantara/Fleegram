@@ -3,6 +3,13 @@ import 'package:flutter/material.dart';
 enum SnackbarType { success, error, info }
 
 class SnackbarHelper {
+  static SnackbarType? _currentType;
+  static ScaffoldMessengerState? _messenger;
+
+  static void attach(ScaffoldMessengerState messenger) {
+    _messenger = messenger;
+  }
+
   static void show(
     BuildContext context,
     String message, {
@@ -27,7 +34,11 @@ class SnackbarHelper {
         color = Colors.blue;
     }
 
-    ScaffoldMessenger.of(context)
+    final messenger = ScaffoldMessenger.of(context);
+    _messenger ??= messenger;
+    _currentType = type;
+
+    messenger
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
@@ -45,5 +56,11 @@ class SnackbarHelper {
           ),
         ),
       );
+  }
+
+  static void clearIfNotSuccess() {
+    if (_currentType != SnackbarType.success) {
+      _messenger?.clearSnackBars();
+    }
   }
 }

@@ -28,6 +28,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
 
   @override
   void dispose() {
+    SnackbarHelper.clearIfNotSuccess();
     _descFocusNode.dispose();
     _descriptionController.dispose();
     super.dispose();
