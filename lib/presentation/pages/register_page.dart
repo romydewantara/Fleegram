@@ -1,3 +1,4 @@
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/network/api_exception.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
@@ -114,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Lottie.asset(
-                    'assets/lottie/credential.json',
+                    AppAssets.lottieCredential,
                     width: 200,
                     repeat: true,
                   ),

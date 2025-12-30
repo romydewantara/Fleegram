@@ -2,6 +2,7 @@ import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/utils/date_formatter.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
+import 'package:fleegram/presentation/widgets/story_map_card.dart';
 import 'package:flutter/material.dart';
 
 class DetailStoryPage extends StatelessWidget {
@@ -122,6 +123,9 @@ class DetailStoryPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 14),
               ),
             ),
+
+            if (story.lat != null && story.lon != null)
+              StoryMapCard(name: story.name, lat: story.lat!, lon: story.lon!),
           ],
         ),
       ),

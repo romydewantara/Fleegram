@@ -67,6 +67,8 @@ class StoryProvider extends ChangeNotifier {
   Future<void> uploadStory({
     required File imageFile,
     required String description,
+    double? lat,
+    double? lon,
   }) async {
     _isLoading = true;
     _errorMessage = null;
@@ -76,6 +78,8 @@ class StoryProvider extends ChangeNotifier {
       await repository.uploadStory(
         imageFile: imageFile,
         description: description,
+        lat: lat,
+        lon: lon,
       );
     } on NetworkException catch (_) {
       _errorMessage = StoryError.network;

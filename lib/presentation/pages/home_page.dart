@@ -1,3 +1,4 @@
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:fleegram/presentation/widgets/add_story_icon.dart';
@@ -116,7 +117,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Lottie.asset(
-              'assets/lottie/error_network.json',
+              AppAssets.lottieErrorNetwork,
               width: 200,
               repeat: true,
             ),

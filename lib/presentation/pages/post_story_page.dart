@@ -104,6 +104,8 @@ class _PostStoryPageState extends State<PostStoryPage> {
       await storyProvider.uploadStory(
         imageFile: _imageFile!,
         description: description,
+        lat: _selectedLatLng?.latitude,
+        lon: _selectedLatLng?.longitude,
       );
 
       await storyProvider.fetchInitialStories();

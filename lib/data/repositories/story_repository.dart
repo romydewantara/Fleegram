@@ -27,11 +27,20 @@ class StoryRepository {
   Future<void> uploadStory({
     required File imageFile,
     required String description,
+    double? lat,
+    double? lon,
   }) async {
+    final fields = <String, String>{'description': description};
+
+    if (lat != null && lon != null) {
+      fields['lat'] = lat.toString();
+      fields['lon'] = lon.toString();
+    }
+
     await multipartClient.postImage(
       path: '/stories',
       imageFile: imageFile,
-      fields: {'description': description},
+      fields: fields,
     );
   }
 }

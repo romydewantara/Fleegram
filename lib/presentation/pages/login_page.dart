@@ -1,3 +1,4 @@
+import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/network/api_exception.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               children: [
                 Lottie.asset(
-                  'assets/lottie/banner.json',
+                  AppAssets.lottieBanner,
                   width: double.infinity,
                   repeat: true,
                 ),

@@ -47,7 +47,7 @@ class _SplashPageState extends State<SplashPage>
         children: [
           Positioned.fill(
             child: Lottie.asset(
-              'assets/lottie/splash.json',
+              AppAssets.lottieSplash,
               controller: _controller,
               fit: BoxFit.cover,
               repeat: false,

@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapPickerProvider extends ChangeNotifier {
   LatLng currentLatLng;
   String address = '';
+  String city = '';
 
   GoogleMapController? controller;
 
@@ -32,6 +33,9 @@ class MapPickerProvider extends ChangeNotifier {
 
     if (placemarks.isNotEmpty) {
       final p = placemarks.first;
+      city = p.subAdministrativeArea?.isNotEmpty == true
+          ? p.subAdministrativeArea!
+          : p.locality ?? '';
       address = '${p.street}, ${p.subLocality}, ${p.locality}, ${p.country}';
       notifyListeners();
     }
