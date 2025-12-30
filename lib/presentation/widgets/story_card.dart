@@ -90,7 +90,7 @@ class StoryCard extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Hero(
-                  tag: 'story-${story.photoUrl}',
+                  tag: 'story-${story.id}',
                   flightShuttleBuilder:
                       (
                         flightContext,

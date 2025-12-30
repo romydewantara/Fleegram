@@ -18,6 +18,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get errorGeneric => 'Ups, ada yang bermasalah';
 
   @override
+  String get open => 'Buka';
+
+  @override
   String get retry => 'Coba lagi';
 
   @override
@@ -237,6 +240,32 @@ class AppLocalizationsId extends AppLocalizations {
   String get errorLocationUnknown => 'Tidak dapat mengambil lokasi saat ini';
 
   @override
+  String get mapPreview => 'Tampilan Peta';
+
+  @override
+  String get markerSelected => 'Ceritamu nanti bakal tampil disini';
+
+  @override
+  String get useLocation => 'Pakai Lokasi yang Ini';
+
+  @override
+  String get enableLocation => 'Aktifin lokasi';
+
+  @override
+  String get infoLocationService =>
+      'Layanan lokasimu masih nonaktif. Buka Pengaturan dan nyalain GPS-nya buat pakai fitur ini.';
+
+  @override
+  String get locationDenied => 'Akses lokasi ditolak';
+
+  @override
+  String get locationPermanentlyDenied =>
+      'Izin lokasi mati permanen, harus diaktifin manual di pengaturan.';
+
+  @override
+  String get locationFailed => 'Yah! Gagal dapetin lokasi sekarang';
+
+  @override
   String get settingTitle => 'Pengaturan';
 
   @override
@@ -303,5 +332,5 @@ class AppLocalizationsId extends AppLocalizations {
   String get developedBy => 'Developed by Romy';
 
   @override
-  String get version => 'v1.0.0 – 2512200831';
+  String get version => 'v1.1.0 – 2512312339';
 }

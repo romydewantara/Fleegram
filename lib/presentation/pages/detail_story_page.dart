@@ -98,7 +98,7 @@ class DetailStoryPage extends StatelessWidget {
             ),
 
             Hero(
-              tag: 'story-${story.photoUrl}',
+              tag: 'story-${story.id}',
               child: Image.network(
                 story.photoUrl,
                 fit: BoxFit.contain,

@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Ups, ada yang bermasalah'**
   String get errorGeneric;
 
+  /// No description provided for @open.
+  ///
+  /// In id, this message translates to:
+  /// **'Buka'**
+  String get open;
+
   /// No description provided for @retry.
   ///
   /// In id, this message translates to:
@@ -512,6 +518,54 @@ abstract class AppLocalizations {
   /// **'Tidak dapat mengambil lokasi saat ini'**
   String get errorLocationUnknown;
 
+  /// No description provided for @mapPreview.
+  ///
+  /// In id, this message translates to:
+  /// **'Tampilan Peta'**
+  String get mapPreview;
+
+  /// No description provided for @markerSelected.
+  ///
+  /// In id, this message translates to:
+  /// **'Ceritamu nanti bakal tampil disini'**
+  String get markerSelected;
+
+  /// No description provided for @useLocation.
+  ///
+  /// In id, this message translates to:
+  /// **'Pakai Lokasi yang Ini'**
+  String get useLocation;
+
+  /// No description provided for @enableLocation.
+  ///
+  /// In id, this message translates to:
+  /// **'Aktifin lokasi'**
+  String get enableLocation;
+
+  /// No description provided for @infoLocationService.
+  ///
+  /// In id, this message translates to:
+  /// **'Layanan lokasimu masih nonaktif. Buka Pengaturan dan nyalain GPS-nya buat pakai fitur ini.'**
+  String get infoLocationService;
+
+  /// No description provided for @locationDenied.
+  ///
+  /// In id, this message translates to:
+  /// **'Akses lokasi ditolak'**
+  String get locationDenied;
+
+  /// No description provided for @locationPermanentlyDenied.
+  ///
+  /// In id, this message translates to:
+  /// **'Izin lokasi mati permanen, harus diaktifin manual di pengaturan.'**
+  String get locationPermanentlyDenied;
+
+  /// No description provided for @locationFailed.
+  ///
+  /// In id, this message translates to:
+  /// **'Yah! Gagal dapetin lokasi sekarang'**
+  String get locationFailed;
+
   /// No description provided for @settingTitle.
   ///
   /// In id, this message translates to:
@@ -641,7 +695,7 @@ abstract class AppLocalizations {
   /// No description provided for @version.
   ///
   /// In id, this message translates to:
-  /// **'v1.0.0 – 2512200831'**
+  /// **'v1.1.0 – 2512312339'**
   String get version;
 }
 

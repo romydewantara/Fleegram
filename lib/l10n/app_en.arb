@@ -4,6 +4,7 @@
 
   "loading": "Processing, please wait...",
   "errorGeneric": "Oops, something went wrong",
+  "open": "Go",
   "retry": "Try again",
   "cancel": "Cancel",
   "submit": "Submit",
@@ -80,6 +81,15 @@
   "locationPermissionDeniedForever": "Location permission is permanently denied. Enable it from settings.",
   "errorLocationUnknown": "Unable to retrieve current location",
 
+  "mapPreview": "Map preview",
+  "markerSelected": "Your story will show up here",
+  "useLocation": "Use this Location",
+  "enableLocation": "Enable location",
+  "infoLocationService": "Location service is disabled. Please enable GPS in Settings to use this feature.",
+  "locationDenied": "Location permission denied",
+  "locationPermanentlyDenied": "Location permission permanently denied. Enable it from settings.",
+  "locationFailed": "Failed to get current location",
+
   "settingTitle": "Settings",
   "preferences": "Preferences",
   "theme": "Theme",
@@ -106,5 +116,5 @@
 
   "copyright": "© 2025 Fleegram",
   "developedBy": "Developed by Romy",
-  "version": "v1.0.0 – 2512200831"
+  "version": "v1.1.0 – 2512312339"
 }

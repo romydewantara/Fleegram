@@ -6,10 +6,6 @@ class SnackbarHelper {
   static SnackbarType? _currentType;
   static ScaffoldMessengerState? _messenger;
 
-  static void attach(ScaffoldMessengerState messenger) {
-    _messenger = messenger;
-  }
-
   static void show(
     BuildContext context,
     String message, {

@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorGeneric => 'Oops, something went wrong';
 
   @override
+  String get open => 'Go';
+
+  @override
   String get retry => 'Try again';
 
   @override
@@ -238,6 +241,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorLocationUnknown => 'Unable to retrieve current location';
 
   @override
+  String get mapPreview => 'Map preview';
+
+  @override
+  String get markerSelected => 'Your story will show up here';
+
+  @override
+  String get useLocation => 'Use this Location';
+
+  @override
+  String get enableLocation => 'Enable location';
+
+  @override
+  String get infoLocationService =>
+      'Location service is disabled. Please enable GPS in Settings to use this feature.';
+
+  @override
+  String get locationDenied => 'Location permission denied';
+
+  @override
+  String get locationPermanentlyDenied =>
+      'Location permission permanently denied. Enable it from settings.';
+
+  @override
+  String get locationFailed => 'Failed to get current location';
+
+  @override
   String get settingTitle => 'Settings';
 
   @override
@@ -305,5 +334,5 @@ class AppLocalizationsEn extends AppLocalizations {
   String get developedBy => 'Developed by Romy';
 
   @override
-  String get version => 'v1.0.0 – 2512200831';
+  String get version => 'v1.1.0 – 2512312339';
 }

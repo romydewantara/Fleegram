@@ -4,6 +4,7 @@
 
   "loading": "Lagi diproses ya...",
   "errorGeneric": "Ups, ada yang bermasalah",
+  "open": "Buka",
   "retry": "Coba lagi",
   "cancel": "Batal",
   "submit": "Kirim",
@@ -80,6 +81,15 @@
   "locationPermissionDeniedForever": "Izin lokasi ditolak permanen. Aktifkan melalui pengaturan.",
   "errorLocationUnknown": "Tidak dapat mengambil lokasi saat ini",
 
+  "mapPreview": "Tampilan Peta",
+  "markerSelected": "Ceritamu nanti bakal tampil disini",
+  "useLocation": "Pakai Lokasi yang Ini",
+  "enableLocation": "Aktifin lokasi",
+  "infoLocationService": "Layanan lokasimu masih nonaktif. Buka Pengaturan dan nyalain GPS-nya buat pakai fitur ini.",
+  "locationDenied": "Akses lokasi ditolak",
+  "locationPermanentlyDenied": "Izin lokasi mati permanen, harus diaktifin manual di pengaturan.",
+  "locationFailed": "Yah! Gagal dapetin lokasi sekarang",
+
   "settingTitle": "Pengaturan",
   "preferences": "Preferensi",
   "theme": "Tema",
@@ -106,5 +116,5 @@
 
   "copyright": "© 2025 Fleegram",
   "developedBy": "Developed by Romy",
-  "version": "v1.0.0 – 2512200831"
+  "version": "v1.1.0 – 2512312339"
 }
