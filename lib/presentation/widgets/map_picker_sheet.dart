@@ -1,12 +1,13 @@
 import 'package:fleegram/l10n/app_localization.dart';
+import 'package:fleegram/presentation/providers/map_picker_provider.dart';
 import 'package:fleegram/presentation/utils/snackbar_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 
-class MapPickerSheet extends StatefulWidget {
+class MapPickerSheet extends StatelessWidget {
   final LatLng? initialLatLng;
   final Function(LatLng, String) onLocationPicked;
 
@@ -17,30 +18,25 @@ class MapPickerSheet extends StatefulWidget {
   });
 
   @override
-  State<MapPickerSheet> createState() => _MapPickerSheetState();
+  Widget build(BuildContext context) {
+    final start = initialLatLng ?? const LatLng(-6.268847, 106.777884);
+
+    return ChangeNotifierProvider(
+      create: (_) => MapPickerProvider(start)..resolveAddress(start),
+      child: _View(onLocationPicked: onLocationPicked),
+    );
+  }
 }
 
-class _MapPickerSheetState extends State<MapPickerSheet> {
-  late LatLng _currentLatLng;
-  String _address = '';
-  GoogleMapController? _controller;
+class _View extends StatelessWidget {
+  final Function(LatLng, String) onLocationPicked;
 
-  LatLng? _cameraLatLng;
-  bool _isMovingCamera = false;
-
-  bool _isResolvingCurrentLocation = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentLatLng =
-        widget.initialLatLng ?? const LatLng(-6.268847, 106.777884);
-    _resolveAddress(_currentLatLng);
-  }
+  const _View({required this.onLocationPicked});
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final provider = context.watch<MapPickerProvider>();
 
     return SafeArea(
       child: SizedBox(
@@ -73,9 +69,9 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
                   ),
                   IconButton(
                     icon: const Icon(Icons.my_location),
-                    onPressed: _isResolvingCurrentLocation
+                    onPressed: provider.isResolvingCurrentLocation
                         ? null
-                        : _moveToCurrentLocation,
+                        : () => _moveToCurrentLocation(context, provider),
                   ),
                 ],
               ),
@@ -86,43 +82,44 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
                 children: [
                   GoogleMap(
                     initialCameraPosition: CameraPosition(
-                      target: _currentLatLng,
+                      target: provider.currentLatLng,
                       zoom: 15,
                     ),
-                    onMapCreated: (c) => _controller = c,
+                    onMapCreated: (c) => provider.controller = c,
                     markers: {
                       Marker(
                         markerId: const MarkerId('picked'),
-                        position: _currentLatLng,
+                        position: provider.currentLatLng,
                         draggable: true,
-                        infoWindow: InfoWindow(title: _address),
+                        infoWindow: InfoWindow(title: provider.address),
                         onDragEnd: (pos) {
-                          setState(() => _currentLatLng = pos);
-                          _resolveAddress(pos);
+                          provider.setLatLng(pos);
+                          provider.resolveAddress(pos);
                         },
                       ),
                     },
                     onTap: (pos) {
-                      setState(() => _currentLatLng = pos);
-                      _resolveAddress(pos);
-                      _controller?.animateCamera(CameraUpdate.newLatLng(pos));
+                      provider.setLatLng(pos);
+                      provider.resolveAddress(pos);
+                      provider.controller?.animateCamera(
+                        CameraUpdate.newLatLng(pos),
+                      );
                     },
                     onCameraMove: (position) {
-                      _isMovingCamera = true;
-                      _cameraLatLng = position.target;
-                      setState(() {
-                        _currentLatLng = position.target;
-                      });
+                      provider.isMovingCamera = true;
+                      provider.cameraLatLng = position.target;
+                      provider.currentLatLng = position.target;
                     },
                     onCameraIdle: () {
-                      if (_isMovingCamera && _cameraLatLng != null) {
-                        _resolveAddress(_cameraLatLng!);
+                      if (provider.isMovingCamera &&
+                          provider.cameraLatLng != null) {
+                        provider.resolveAddress(provider.cameraLatLng!);
                       }
-                      _isMovingCamera = false;
+                      provider.isMovingCamera = false;
                     },
                   ),
 
-                  if (_isResolvingCurrentLocation)
+                  if (provider.isResolvingCurrentLocation)
                     Positioned.fill(
                       child: AbsorbPointer(
                         child: Container(
@@ -141,7 +138,7 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
               padding: const EdgeInsets.all(16),
               child: ElevatedButton(
                 onPressed: () {
-                  widget.onLocationPicked(_currentLatLng, _address);
+                  onLocationPicked(provider.currentLatLng, provider.address);
                   context.pop();
                 },
                 child: Text(l10n.useLocation),
@@ -153,14 +150,21 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
     );
   }
 
-  Future<void> _moveToCurrentLocation() async {
+  Future<void> _moveToCurrentLocation(
+    BuildContext context,
+    MapPickerProvider p,
+  ) async {
     final l10n = AppLocalizations.of(context)!;
+
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-    if (!serviceEnabled) {
-      if (!mounted) return;
+    if (!context.mounted) return;
 
-      final shouldOpen = await _askToEnableGps();
+    if (!serviceEnabled) {
+      final shouldOpen = await _askToEnableGps(context);
+
+      if (!context.mounted) return;
+
       if (shouldOpen) {
         await Geolocator.openLocationSettings();
       }
@@ -173,9 +177,9 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
       permission = await Geolocator.requestPermission();
     }
 
-    if (permission == LocationPermission.denied) {
-      if (!mounted) return;
+    if (!context.mounted) return;
 
+    if (permission == LocationPermission.denied) {
       SnackbarHelper.show(
         context,
         l10n.locationDenied,
@@ -186,37 +190,31 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      if (!mounted) return;
-
       SnackbarHelper.show(
         context,
         l10n.locationPermanentlyDenied,
         type: SnackbarType.error,
         marginVertical: 80,
       );
-
       await Geolocator.openAppSettings();
       return;
     }
 
-    if (!mounted) return;
-    setState(() => _isResolvingCurrentLocation = true);
+    p.setResolving(true);
 
     try {
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
 
-      if (!mounted) return;
-
       final latLng = LatLng(position.latitude, position.longitude);
 
-      await _controller?.animateCamera(CameraUpdate.newLatLng(latLng));
+      await p.controller?.animateCamera(CameraUpdate.newLatLng(latLng));
 
-      setState(() => _currentLatLng = latLng);
-      await _resolveAddress(latLng);
+      p.setLatLng(latLng);
+      await p.resolveAddress(latLng);
     } catch (_) {
-      if (!mounted) return;
+      if (!context.mounted) return;
 
       SnackbarHelper.show(
         context,
@@ -225,13 +223,11 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
         marginVertical: 80,
       );
     } finally {
-      if (mounted) {
-        setState(() => _isResolvingCurrentLocation = false);
-      }
+      p.setResolving(false);
     }
   }
 
-  Future<bool> _askToEnableGps() async {
+  Future<bool> _askToEnableGps(BuildContext context) async {
     final l10n = AppLocalizations.of(context)!;
 
     final result = await showDialog<bool>(
@@ -247,27 +243,5 @@ class _MapPickerSheetState extends State<MapPickerSheet> {
     );
 
     return result ?? false;
-  }
-
-  Future<void> _resolveAddress(LatLng latLng) async {
-    final placemarks = await placemarkFromCoordinates(
-      latLng.latitude,
-      latLng.longitude,
-    );
-
-    if (!mounted) return;
-
-    if (placemarks.isNotEmpty) {
-      final p = placemarks.first;
-      setState(() {
-        _address = '${p.street}, ${p.subLocality}, ${p.locality}, ${p.country}';
-      });
-    }
-  }
-
-  @override
-  void dispose() {
-    _controller?.dispose();
-    super.dispose();
   }
 }
