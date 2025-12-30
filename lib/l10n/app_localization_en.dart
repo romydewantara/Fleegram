@@ -221,6 +221,23 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please select an image and fill in the story description.';
 
   @override
+  String get addLocation => 'Add Location';
+
+  @override
+  String get locationServiceDisabled => 'Enable GPS to use location features';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission is required to display your position';
+
+  @override
+  String get locationPermissionDeniedForever =>
+      'Location permission is permanently denied. Enable it from settings.';
+
+  @override
+  String get errorLocationUnknown => 'Unable to retrieve current location';
+
+  @override
   String get settingTitle => 'Settings';
 
   @override

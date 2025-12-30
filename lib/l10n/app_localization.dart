@@ -482,6 +482,36 @@ abstract class AppLocalizations {
   /// **'Jangan lupa pilih gambar dan isi ceritanya ya.'**
   String get imageAndDescriptionRequired;
 
+  /// No description provided for @addLocation.
+  ///
+  /// In id, this message translates to:
+  /// **'Tambahin Lokasi'**
+  String get addLocation;
+
+  /// No description provided for @locationServiceDisabled.
+  ///
+  /// In id, this message translates to:
+  /// **'Aktifkan GPS untuk menggunakan fitur lokasi'**
+  String get locationServiceDisabled;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In id, this message translates to:
+  /// **'Izin lokasi diperlukan untuk menampilkan posisi'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationPermissionDeniedForever.
+  ///
+  /// In id, this message translates to:
+  /// **'Izin lokasi ditolak permanen. Aktifkan melalui pengaturan.'**
+  String get locationPermissionDeniedForever;
+
+  /// No description provided for @errorLocationUnknown.
+  ///
+  /// In id, this message translates to:
+  /// **'Tidak dapat mengambil lokasi saat ini'**
+  String get errorLocationUnknown;
+
   /// No description provided for @settingTitle.
   ///
   /// In id, this message translates to:

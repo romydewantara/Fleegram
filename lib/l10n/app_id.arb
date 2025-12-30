@@ -74,6 +74,12 @@
   "uploadFailed": "Yah, ceritanya gagal diunggah. Coba lagi ya.",
   "imageAndDescriptionRequired": "Jangan lupa pilih gambar dan isi ceritanya ya.",
 
+  "addLocation": "Tambahin Lokasi",
+  "locationServiceDisabled": "Aktifkan GPS untuk menggunakan fitur lokasi",
+  "locationPermissionDenied": "Izin lokasi diperlukan untuk menampilkan posisi",
+  "locationPermissionDeniedForever": "Izin lokasi ditolak permanen. Aktifkan melalui pengaturan.",
+  "errorLocationUnknown": "Tidak dapat mengambil lokasi saat ini",
+
   "settingTitle": "Pengaturan",
   "preferences": "Preferensi",
   "theme": "Tema",

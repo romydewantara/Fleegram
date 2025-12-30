@@ -74,6 +74,12 @@
   "uploadFailed": "Oops, failed to upload your story. Please try again.",
   "imageAndDescriptionRequired": "Please select an image and fill in the story description.",
 
+  "addLocation": "Add Location",
+  "locationServiceDisabled": "Enable GPS to use location features",
+  "locationPermissionDenied": "Location permission is required to display your position",
+  "locationPermissionDeniedForever": "Location permission is permanently denied. Enable it from settings.",
+  "errorLocationUnknown": "Unable to retrieve current location",
+
   "settingTitle": "Settings",
   "preferences": "Preferences",
   "theme": "Theme",

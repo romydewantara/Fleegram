@@ -219,6 +219,24 @@ class AppLocalizationsId extends AppLocalizations {
       'Jangan lupa pilih gambar dan isi ceritanya ya.';
 
   @override
+  String get addLocation => 'Tambahin Lokasi';
+
+  @override
+  String get locationServiceDisabled =>
+      'Aktifkan GPS untuk menggunakan fitur lokasi';
+
+  @override
+  String get locationPermissionDenied =>
+      'Izin lokasi diperlukan untuk menampilkan posisi';
+
+  @override
+  String get locationPermissionDeniedForever =>
+      'Izin lokasi ditolak permanen. Aktifkan melalui pengaturan.';
+
+  @override
+  String get errorLocationUnknown => 'Tidak dapat mengambil lokasi saat ini';
+
+  @override
   String get settingTitle => 'Pengaturan';
 
   @override

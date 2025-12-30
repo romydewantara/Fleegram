@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:fleegram/presentation/utils/snackbar_helper.dart';
+import 'package:fleegram/presentation/widgets/map_picker_sheet.dart';
 import 'package:fleegram/presentation/widgets/story_image_picker.dart';
 import 'package:fleegram/presentation/widgets/story_image_source_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +25,11 @@ class _PostStoryPageState extends State<PostStoryPage> {
   final _descriptionController = TextEditingController();
 
   File? _imageFile;
+  LatLng? _selectedLatLng;
+  String? _selectedAddress;
   bool _isUploading = false;
   bool _isPickingImage = false;
+  bool _isPickingLocation = false;
 
   @override
   void dispose() {
@@ -171,12 +176,58 @@ class _PostStoryPageState extends State<PostStoryPage> {
                           color: theme.hintColor,
                         ),
                         border: InputBorder.none,
-                        enabledBorder: InputBorder.none,
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: theme.colorScheme.onSurfaceVariant,
+                            width: 1,
+                          ),
+                        ),
                         focusedBorder: InputBorder.none,
                         contentPadding: EdgeInsets.zero,
                       ),
                     ),
-                    const SizedBox(height: 80),
+                    const SizedBox(height: 2),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 0,
+                        ),
+                        onTap: _openMapSheet,
+                        leading: Icon(
+                          Icons.location_on_outlined,
+                          color: theme.colorScheme.onSurface,
+                        ),
+                        title: Text(
+                          _selectedAddress ?? l10n.addLocation,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.colorScheme.onSurface,
+                          ),
+                        ),
+                        trailing: _selectedAddress == null
+                            ? Icon(
+                                Icons.chevron_right,
+                                color: theme.colorScheme.onSurfaceVariant,
+                              )
+                            : IconButton(
+                                icon: Icon(
+                                  Icons.close,
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _selectedAddress = null;
+                                    _selectedLatLng = null;
+                                  });
+                                },
+                              ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -209,7 +260,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                     ),
             ),
           ),
-          if (_isPickingImage)
+          if (_isPickingImage || _isPickingLocation)
             Positioned.fill(
               child: AbsorbPointer(
                 absorbing: true,
@@ -227,5 +278,34 @@ class _PostStoryPageState extends State<PostStoryPage> {
         ],
       ),
     );
+  }
+
+  void _openMapSheet() {
+    setState(() {
+      _isPickingLocation = true;
+    });
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      enableDrag: false,
+      isDismissible: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => MapPickerSheet(
+        initialLatLng: _selectedLatLng,
+        onLocationPicked: (latLng, address) {
+          setState(() {
+            _selectedLatLng = latLng;
+            _selectedAddress = address;
+          });
+        },
+      ),
+    ).whenComplete(() {
+      if (mounted) {
+        setState(() => _isPickingLocation = false);
+      }
+    });
   }
 }
