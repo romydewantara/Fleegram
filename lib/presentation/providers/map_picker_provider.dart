@@ -12,8 +12,16 @@ class MapPickerProvider extends ChangeNotifier {
   LatLng? cameraLatLng;
   bool isMovingCamera = false;
   bool isResolvingCurrentLocation = false;
+  bool _initialized = false;
 
   MapPickerProvider(this.currentLatLng);
+
+  Future<void> init() async {
+    if (_initialized) return;
+    _initialized = true;
+
+    await resolveAddress(currentLatLng);
+  }
 
   void setLatLng(LatLng latLng) {
     currentLatLng = latLng;
@@ -39,5 +47,10 @@ class MapPickerProvider extends ChangeNotifier {
       address = '${p.street}, ${p.subLocality}, ${p.locality}, ${p.country}';
       notifyListeners();
     }
+  }
+
+  void disposeController() {
+    controller?.dispose();
+    controller = null;
   }
 }

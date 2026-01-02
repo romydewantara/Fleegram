@@ -23,107 +23,133 @@ class StoryMapCard extends StatelessWidget {
     final latLng = LatLng(lat, lon);
 
     return ChangeNotifierProvider(
-      create: (_) => MapPickerProvider(latLng)..resolveAddress(latLng),
+      create: (_) => MapPickerProvider(latLng),
       child: _StoryMapView(name: name),
     );
   }
 }
 
-class _StoryMapView extends StatelessWidget {
+class _StoryMapView extends StatefulWidget {
   final String name;
 
   const _StoryMapView({required this.name});
 
   @override
+  State<_StoryMapView> createState() => _StoryMapViewState();
+}
+
+class _StoryMapViewState extends State<_StoryMapView> {
+  late MapPickerProvider _provider;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MapPickerProvider>().init();
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _provider = context.read<MapPickerProvider>();
+  }
+
+  @override
+  void dispose() {
+    _provider.disposeController();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final latLng = context.select<MapPickerProvider, LatLng>(
+      (p) => p.currentLatLng,
+    );
+    final address = context.select<MapPickerProvider, String>((p) => p.address);
+    final city = context.select<MapPickerProvider, String>((p) => p.city);
     final provider = context.watch<MapPickerProvider>();
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-      child: Card(
-        elevation: 3,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: provider.currentLatLng,
-                  zoom: 15,
-                ),
-                onMapCreated: (c) => provider.controller = c,
-                markers: {
-                  Marker(
-                    markerId: const MarkerId('picked'),
-                    position: provider.currentLatLng,
-                    infoWindow: InfoWindow(
-                      title: name,
-                      snippet: provider.address.isEmpty
-                          ? 'Memuat alamat...'
-                          : provider.address,
-                    ),
+    final color = Theme.of(context).colorScheme.tertiary;
+
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 200,
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(target: latLng, zoom: 14),
+              onMapCreated: (c) => provider.controller = c,
+              markers: {
+                Marker(
+                  markerId: const MarkerId('picked'),
+                  position: latLng,
+                  infoWindow: InfoWindow(
+                    title: widget.name,
+                    snippet: address.isEmpty ? 'Memuat alamat...' : address,
                   ),
-                },
-                zoomControlsEnabled: false,
-                mapToolbarEnabled: false,
-                myLocationButtonEnabled: false,
-                compassEnabled: false,
-                scrollGesturesEnabled: false,
-                rotateGesturesEnabled: false,
-                tiltGesturesEnabled: false,
-                zoomGesturesEnabled: false,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: InkWell(
-                onTap: () async {
-                  final lat = provider.currentLatLng.latitude;
-                  final lon = provider.currentLatLng.longitude;
-
-                  final googleMapsUrl = Uri.parse(
-                    '${ApiConstants.mapsUrl}$lat,$lon',
-                  );
-
-                  if (await canLaunchUrl(googleMapsUrl)) {
-                    await launchUrl(
-                      googleMapsUrl,
-                      mode: LaunchMode.externalApplication,
-                    );
-                  } else {
-                    if (!context.mounted) return;
-                    SnackbarHelper.show(
-                      context,
-                      'Gagal membuka Google Maps',
-                      type: SnackbarType.error,
-                    );
-                  }
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.location_city_rounded, size: 18),
-                        const SizedBox(width: 6),
-                        Text(
-                          provider.city.isEmpty
-                              ? 'Kota tidak tersedia'
-                              : provider.city,
-                          style: const TextStyle(fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(width: 6),
-                    const Icon(Icons.arrow_forward_ios, size: 16),
-                  ],
                 ),
+              },
+              zoomControlsEnabled: false,
+              mapToolbarEnabled: false,
+              myLocationButtonEnabled: false,
+              compassEnabled: false,
+              scrollGesturesEnabled: false,
+              rotateGesturesEnabled: false,
+              tiltGesturesEnabled: false,
+              zoomGesturesEnabled: false,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: InkWell(
+              onTap: () async {
+                final googleMapsUrl = Uri.parse(
+                  '${ApiConstants.mapsUrl}'
+                  '${latLng.latitude},${latLng.longitude}',
+                );
+
+                if (await canLaunchUrl(googleMapsUrl)) {
+                  await launchUrl(
+                    googleMapsUrl,
+                    mode: LaunchMode.externalApplication,
+                  );
+                } else {
+                  if (!context.mounted) return;
+                  SnackbarHelper.show(
+                    context,
+                    'Gagal membuka Google Maps',
+                    type: SnackbarType.error,
+                  );
+                }
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.explore_rounded, size: 18, color: color),
+                      const SizedBox(width: 6),
+                      Text(
+                        city.isEmpty ? 'Kota tidak tersedia' : city,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: color,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 6),
+                  Icon(Icons.arrow_forward_ios, size: 16, color: color),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

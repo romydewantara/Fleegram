@@ -240,6 +240,21 @@ class AppLocalizationsId extends AppLocalizations {
   String get errorLocationUnknown => 'Tidak dapat mengambil lokasi saat ini';
 
   @override
+  String get readMore => ' Selengkapnya';
+
+  @override
+  String get readLess => ' Ringkas';
+
+  @override
+  String get loadAddress => 'Tidak dapat mengambil lokasi saat ini';
+
+  @override
+  String get failedToOpenMaps => 'Tidak dapat mengambil lokasi saat ini';
+
+  @override
+  String get cityNotAvailable => 'Tidak dapat mengambil lokasi saat ini';
+
+  @override
   String get mapPreview => 'Tampilan Peta';
 
   @override
@@ -326,7 +341,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get dateFormatFull => 'd MMMM, y';
 
   @override
-  String get copyright => '© 2025 Fleegram';
+  String get copyright => '© 2026 Fleegram';
 
   @override
   String get developedBy => 'Developed by Romy';

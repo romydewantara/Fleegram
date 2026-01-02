@@ -80,6 +80,11 @@
   "locationPermissionDenied": "Izin lokasi diperlukan untuk menampilkan posisi",
   "locationPermissionDeniedForever": "Izin lokasi ditolak permanen. Aktifkan melalui pengaturan.",
   "errorLocationUnknown": "Tidak dapat mengambil lokasi saat ini",
+  "readMore": " Selengkapnya",
+  "readLess": " Ringkas",
+  "loadAddress": "Tidak dapat mengambil lokasi saat ini",
+  "failedToOpenMaps": "Tidak dapat mengambil lokasi saat ini",
+  "cityNotAvailable": "Tidak dapat mengambil lokasi saat ini",
 
   "mapPreview": "Tampilan Peta",
   "markerSelected": "Ceritamu nanti bakal tampil disini",
@@ -114,7 +119,7 @@
 
   "dateFormatFull": "d MMMM, y",
 
-  "copyright": "© 2025 Fleegram",
+  "copyright": "© 2026 Fleegram",
   "developedBy": "Developed by Romy",
   "version": "v1.1.0 – 2512312339"
 }

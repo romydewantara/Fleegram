@@ -80,7 +80,10 @@ class _HomePageState extends State<HomePage> {
       body: RefreshIndicator(
         onRefresh: provider.fetchInitialStories,
         child: provider.errorMessage != null && provider.stories.isEmpty
-            ? _errorView(provider.errorMessage!, provider.fetchInitialStories)
+            ? ListView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                children: [_errorView(provider.errorMessage!)],
+              )
             : ListView.builder(
                 controller: _scrollController,
                 itemCount: provider.stories.length + 1,
@@ -106,7 +109,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _errorView(StoryError message, VoidCallback onRetry) {
+  Widget _errorView(StoryError message) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
 
@@ -142,12 +145,6 @@ class _HomePageState extends State<HomePage> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
-
-            FilledButton.icon(
-              onPressed: onRetry,
-              icon: const Icon(Icons.refresh),
-              label: Text(l10n.retry),
-            ),
           ],
         ),
       ),

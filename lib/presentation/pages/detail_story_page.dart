@@ -4,6 +4,7 @@ import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/widgets/story_map_card.dart';
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 
 class DetailStoryPage extends StatelessWidget {
   final Story story;
@@ -84,9 +85,9 @@ class DetailStoryPage extends StatelessWidget {
                               heightFactor: 1,
                               child: Icon(
                                 Icons.public_rounded,
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSurface.withValues(alpha: 0.5),
+                                color: theme.colorScheme.onSurface.withValues(
+                                  alpha: 0.5,
+                                ),
                               ),
                             ),
                           ),
@@ -118,17 +119,65 @@ class DetailStoryPage extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-              child: Text(
+              child: ReadMoreText(
                 story.description,
-                style: const TextStyle(fontSize: 14),
+                trimLines: 4,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: ' Selengkapnya',
+                trimExpandedText: ' Ringkas',
+                style: const TextStyle(fontSize: 13),
+                moreStyle: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blue,
+                ),
+                lessStyle: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blue,
+                ),
               ),
             ),
 
             if (story.lat != null && story.lon != null)
-              StoryMapCard(name: story.name, lat: story.lat!, lon: story.lon!),
+              _LazyMapSection(story: story),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _LazyMapSection extends StatefulWidget {
+  final Story story;
+  const _LazyMapSection({required this.story});
+
+  @override
+  State<_LazyMapSection> createState() => _LazyMapSectionState();
+}
+
+class _LazyMapSectionState extends State<_LazyMapSection> {
+  bool _showMap = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      if (mounted) setState(() => _showMap = true);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(12),
+      child: !_showMap
+          ? Center(child: CircularProgressIndicator())
+          : StoryMapCard(
+              name: widget.story.name,
+              lat: widget.story.lat!,
+              lon: widget.story.lon!,
+            ),
     );
   }
 }

@@ -518,6 +518,36 @@ abstract class AppLocalizations {
   /// **'Tidak dapat mengambil lokasi saat ini'**
   String get errorLocationUnknown;
 
+  /// No description provided for @readMore.
+  ///
+  /// In id, this message translates to:
+  /// **' Selengkapnya'**
+  String get readMore;
+
+  /// No description provided for @readLess.
+  ///
+  /// In id, this message translates to:
+  /// **' Ringkas'**
+  String get readLess;
+
+  /// No description provided for @loadAddress.
+  ///
+  /// In id, this message translates to:
+  /// **'Tidak dapat mengambil lokasi saat ini'**
+  String get loadAddress;
+
+  /// No description provided for @failedToOpenMaps.
+  ///
+  /// In id, this message translates to:
+  /// **'Tidak dapat mengambil lokasi saat ini'**
+  String get failedToOpenMaps;
+
+  /// No description provided for @cityNotAvailable.
+  ///
+  /// In id, this message translates to:
+  /// **'Tidak dapat mengambil lokasi saat ini'**
+  String get cityNotAvailable;
+
   /// No description provided for @mapPreview.
   ///
   /// In id, this message translates to:
@@ -683,7 +713,7 @@ abstract class AppLocalizations {
   /// No description provided for @copyright.
   ///
   /// In id, this message translates to:
-  /// **'© 2025 Fleegram'**
+  /// **'© 2026 Fleegram'**
   String get copyright;
 
   /// No description provided for @developedBy.

@@ -3,6 +3,7 @@ import 'package:fleegram/core/utils/time_ago.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
 
 extension TimeAgoLocalization on TimeAgoResult {
   String localized(BuildContext context) {
@@ -72,9 +73,23 @@ class StoryCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      ReadMoreText(
                         story.description,
+                        trimLines: 4,
+                        trimMode: TrimMode.Line,
+                        trimCollapsedText: ' Selengkapnya',
+                        trimExpandedText: ' Ringkas',
                         style: const TextStyle(fontSize: 13),
+                        moreStyle: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                        lessStyle: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
                       ),
                     ],
                   ),

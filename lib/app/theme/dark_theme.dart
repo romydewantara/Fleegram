@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const _primaryColor = Colors.white;
 const _secondaryColor = Colors.white70;
-const _tertiaryColor = Colors.blueGrey;
+const _tertiaryColor = Color(0xFF50A0F3);
 const _backgroundColor = Colors.black;
 const _surfaceColor = Color(0xFF121212);
 const _errorColor = Colors.redAccent;
