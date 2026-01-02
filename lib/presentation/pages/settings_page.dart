@@ -81,7 +81,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
                 Text(
-                  l10n.developedBy,
+                  '${l10n.developedBy} ${l10n.developerName}',
                   textAlign: TextAlign.center,
                   style: theme.textTheme.labelSmall?.copyWith(
                     color: theme.colorScheme.onSurfaceVariant,

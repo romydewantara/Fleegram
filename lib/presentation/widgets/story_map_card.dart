@@ -1,4 +1,5 @@
 import 'package:fleegram/core/constants/api_constants.dart';
+import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/map_picker_provider.dart';
 import 'package:fleegram/presentation/utils/snackbar_helper.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +72,7 @@ class _StoryMapViewState extends State<_StoryMapView> {
     final city = context.select<MapPickerProvider, String>((p) => p.city);
     final provider = context.watch<MapPickerProvider>();
 
+    final l10n = AppLocalizations.of(context)!;
     final color = Theme.of(context).colorScheme.tertiary;
 
     return Card(
@@ -90,7 +92,7 @@ class _StoryMapViewState extends State<_StoryMapView> {
                   position: latLng,
                   infoWindow: InfoWindow(
                     title: widget.name,
-                    snippet: address.isEmpty ? 'Memuat alamat...' : address,
+                    snippet: address.isEmpty ? l10n.loadAddress : address,
                   ),
                 ),
               },
@@ -122,7 +124,7 @@ class _StoryMapViewState extends State<_StoryMapView> {
                   if (!context.mounted) return;
                   SnackbarHelper.show(
                     context,
-                    'Gagal membuka Google Maps',
+                    l10n.failedToOpenMaps,
                     type: SnackbarType.error,
                   );
                 }
@@ -135,7 +137,7 @@ class _StoryMapViewState extends State<_StoryMapView> {
                       Icon(Icons.explore_rounded, size: 18, color: color),
                       const SizedBox(width: 6),
                       Text(
-                        city.isEmpty ? 'Kota tidak tersedia' : city,
+                        city.isEmpty ? l10n.cityNotAvailable : city,
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           color: color,

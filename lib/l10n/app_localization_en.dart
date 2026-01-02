@@ -241,19 +241,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorLocationUnknown => 'Unable to retrieve current location';
 
   @override
-  String get readMore => ' Selengkapnya';
+  String get readMore => ' more';
 
   @override
-  String get readLess => ' Ringkas';
+  String get readLess => ' less';
 
   @override
-  String get loadAddress => 'Tidak dapat mengambil lokasi saat ini';
+  String get loadAddress => 'Loading address...';
 
   @override
-  String get failedToOpenMaps => 'Tidak dapat mengambil lokasi saat ini';
+  String get failedToOpenMaps => 'Failed to open Google Maps';
 
   @override
-  String get cityNotAvailable => 'Tidak dapat mengambil lokasi saat ini';
+  String get cityNotAvailable => 'City not available';
 
   @override
   String get mapPreview => 'Map preview';
@@ -346,7 +346,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get copyright => '© 2026 Fleegram';
 
   @override
-  String get developedBy => 'Developed by Romy';
+  String get developedBy => 'Developed by';
+
+  @override
+  String get developerName => 'Romy';
 
   @override
   String get version => 'v1.1.0 – 2512312339';

@@ -80,6 +80,11 @@
   "locationPermissionDenied": "Location permission is required to display your position",
   "locationPermissionDeniedForever": "Location permission is permanently denied. Enable it from settings.",
   "errorLocationUnknown": "Unable to retrieve current location",
+  "readMore": " more",
+  "readLess": " less",
+  "loadAddress": "Loading address...",
+  "failedToOpenMaps": "Failed to open Google Maps",
+  "cityNotAvailable": "City not available",
 
   "mapPreview": "Map preview",
   "markerSelected": "Your story will show up here",
@@ -115,6 +120,7 @@
   "dateFormatFull": "MMMM d, y",
 
   "copyright": "© 2026 Fleegram",
-  "developedBy": "Developed by Romy",
+  "developedBy": "Developed by",
+  "developerName": "Romy",
   "version": "v1.1.0 – 2512312339"
 }

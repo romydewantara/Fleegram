@@ -1,4 +1,5 @@
 import 'package:fleegram/core/constants/app_assets.dart';
+import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:fleegram/core/utils/time_ago.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
@@ -34,6 +35,12 @@ class StoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorTheme = Theme.of(context).colorScheme;
+    final bool isVerified =
+        (SessionManager.name != null && story.name == SessionManager.name) ||
+        (story.name == l10n.developerName);
+
     return InkWell(
       onTap: onTap,
       child: Column(
@@ -56,16 +63,28 @@ class StoryCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            story.name,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                            ),
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                story.name,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              if (isVerified) ...[
+                                const SizedBox(width: 4),
+                                Image.asset(
+                                  AppAssets.icVerified,
+                                  width: 14,
+                                  height: 14,
+                                ),
+                              ],
+                            ],
                           ),
-                          const SizedBox(width: 6),
                           Text(
-                            '• ${TimeAgo.calculate(story.createdAt).localized(context)}',
+                            ' • ${TimeAgo.calculate(story.createdAt).localized(context)}',
                             style: Theme.of(
                               context,
                             ).textTheme.bodySmall?.copyWith(fontSize: 12),
@@ -73,22 +92,27 @@ class StoryCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 4),
-                      ReadMoreText(
-                        story.description,
-                        trimLines: 4,
-                        trimMode: TrimMode.Line,
-                        trimCollapsedText: ' Selengkapnya',
-                        trimExpandedText: ' Ringkas',
-                        style: const TextStyle(fontSize: 13),
-                        moreStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        lessStyle: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: Theme.of(context).colorScheme.tertiary,
+                      AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                        alignment: Alignment.topCenter,
+                        child: ReadMoreText(
+                          story.description,
+                          trimLines: 4,
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: l10n.readMore,
+                          trimExpandedText: l10n.readLess,
+                          style: const TextStyle(fontSize: 13),
+                          moreStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: colorTheme.tertiary,
+                          ),
+                          lessStyle: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: colorTheme.tertiary,
+                          ),
                         ),
                       ),
                     ],
@@ -140,10 +164,7 @@ class StoryCard extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.only(top: 8),
-            child: Divider(
-              thickness: 0.2,
-              color: Theme.of(context).colorScheme.outline,
-            ),
+            child: Divider(thickness: 0.2, color: colorTheme.outline),
           ),
         ],
       ),

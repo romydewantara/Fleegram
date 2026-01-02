@@ -1,5 +1,6 @@
 import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/utils/date_formatter.dart';
+import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:fleegram/data/models/story_model.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/widgets/story_map_card.dart';
@@ -16,6 +17,9 @@ class DetailStoryPage extends StatelessWidget {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context)!;
     final locale = Localizations.localeOf(context).toString();
+    final bool isVerified =
+        (SessionManager.name != null && story.name == SessionManager.name) ||
+        (story.name == l10n.developerName);
 
     final formattedDate = DateFormatter.formatFull(
       date: story.createdAt,
@@ -33,7 +37,17 @@ class DetailStoryPage extends StatelessWidget {
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 2),
-            Text(story.name, style: theme.textTheme.bodySmall),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(story.name, style: theme.textTheme.bodySmall),
+                if (isVerified) ...[
+                  const SizedBox(width: 4),
+                  Image.asset(AppAssets.icVerified, width: 14, height: 14),
+                ],
+              ],
+            ),
           ],
         ),
       ),
@@ -55,12 +69,26 @@ class DetailStoryPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        story.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            story.name,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                            ),
+                          ),
+                          if (isVerified) ...[
+                            const SizedBox(width: 4),
+                            Image.asset(
+                              AppAssets.icVerified,
+                              width: 14,
+                              height: 14,
+                            ),
+                          ],
+                        ],
                       ),
                       const SizedBox(height: 2),
                       Row(
@@ -119,22 +147,27 @@ class DetailStoryPage extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
-              child: ReadMoreText(
-                story.description,
-                trimLines: 4,
-                trimMode: TrimMode.Line,
-                trimCollapsedText: ' Selengkapnya',
-                trimExpandedText: ' Ringkas',
-                style: const TextStyle(fontSize: 13),
-                moreStyle: const TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.blue,
-                ),
-                lessStyle: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.blue,
+              child: AnimatedSize(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                alignment: Alignment.topCenter,
+                child: ReadMoreText(
+                  story.description,
+                  trimLines: 4,
+                  trimMode: TrimMode.Line,
+                  trimCollapsedText: l10n.readMore,
+                  trimExpandedText: l10n.readLess,
+                  style: const TextStyle(fontSize: 13),
+                  moreStyle: const TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue,
+                  ),
+                  lessStyle: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue,
+                  ),
                 ),
               ),
             ),

@@ -521,31 +521,31 @@ abstract class AppLocalizations {
   /// No description provided for @readMore.
   ///
   /// In id, this message translates to:
-  /// **' Selengkapnya'**
+  /// **' Lainnya'**
   String get readMore;
 
   /// No description provided for @readLess.
   ///
   /// In id, this message translates to:
-  /// **' Ringkas'**
+  /// **' Sembunyikan'**
   String get readLess;
 
   /// No description provided for @loadAddress.
   ///
   /// In id, this message translates to:
-  /// **'Tidak dapat mengambil lokasi saat ini'**
+  /// **'Memuat alamat...'**
   String get loadAddress;
 
   /// No description provided for @failedToOpenMaps.
   ///
   /// In id, this message translates to:
-  /// **'Tidak dapat mengambil lokasi saat ini'**
+  /// **'Gagal membuka Google Maps'**
   String get failedToOpenMaps;
 
   /// No description provided for @cityNotAvailable.
   ///
   /// In id, this message translates to:
-  /// **'Tidak dapat mengambil lokasi saat ini'**
+  /// **'Kota tidak tersedia'**
   String get cityNotAvailable;
 
   /// No description provided for @mapPreview.
@@ -719,8 +719,14 @@ abstract class AppLocalizations {
   /// No description provided for @developedBy.
   ///
   /// In id, this message translates to:
-  /// **'Developed by Romy'**
+  /// **'Developed by'**
   String get developedBy;
+
+  /// No description provided for @developerName.
+  ///
+  /// In id, this message translates to:
+  /// **'Romy'**
+  String get developerName;
 
   /// No description provided for @version.
   ///
