@@ -46,15 +46,19 @@ final router = GoRouter(
         return CustomTransitionPage(
           opaque: false,
           barrierDismissible: true,
-          barrierColor: Colors.black54,
-          transitionDuration: const Duration(milliseconds: 250),
+          barrierColor: Colors.black.withValues(alpha: 0.5),
+          transitionDuration: const Duration(milliseconds: 300),
           transitionsBuilder: (_, animation, _, child) {
+            final curved = CurvedAnimation(
+              parent: animation,
+              curve: Curves.easeOutBack,
+              reverseCurve: Curves.linear,
+            );
+
             return FadeTransition(
               opacity: animation,
               child: ScaleTransition(
-                scale: Tween(begin: 0.9, end: 1.0).animate(
-                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-                ),
+                scale: Tween<double>(begin: 0.9, end: 1.0).animate(curved),
                 child: child,
               ),
             );
