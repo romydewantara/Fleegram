@@ -94,6 +94,26 @@
   "locationDenied": "Akses lokasi ditolak",
   "locationPermanentlyDenied": "Izin lokasi mati permanen, harus diaktifin manual di pengaturan.",
   "locationFailed": "Yah! Gagal dapetin lokasi sekarang",
+  "contactAdminMessage": "Hai {name}! Yuk, coba hubungi administrator atau call center kami ya.",
+    "@contactAdminMessage": {
+      "description": "Pesan ketika user diminta menghubungi admin",
+      "placeholders": {
+        "name": {
+          "type": "String"
+        }
+      }
+    },
+  "userCalled": "Kak",
+  "freeAccountTitle": "Akun Free",
+  "freeAccountDescription": "Akun kamu saat ini masih FREE.\nUpgrade ke PAID untuk membuka fitur lengkap.",
+  "upgradeToPaid": "Upgrade ke PAID",
+  "maybeLater": "Nanti aja",
+  "feature": "Fitur",
+  "freeLabel": "FREE",
+  "paidLabel": "PAID",
+  "addPhoto": "Menambahkan Foto",
+  "addDescription": "Menambahkan Deskripsi",
+  "addLocationFeature": "Menambahkan Lokasi",
 
   "settingTitle": "Pengaturan",
   "preferences": "Preferensi",

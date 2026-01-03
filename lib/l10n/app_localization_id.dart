@@ -281,6 +281,45 @@ class AppLocalizationsId extends AppLocalizations {
   String get locationFailed => 'Yah! Gagal dapetin lokasi sekarang';
 
   @override
+  String contactAdminMessage(String name) {
+    return 'Hai $name! Yuk, coba hubungi administrator atau call center kami ya.';
+  }
+
+  @override
+  String get userCalled => 'Kak';
+
+  @override
+  String get freeAccountTitle => 'Akun Free';
+
+  @override
+  String get freeAccountDescription =>
+      'Akun kamu saat ini masih FREE.\nUpgrade ke PAID untuk membuka fitur lengkap.';
+
+  @override
+  String get upgradeToPaid => 'Upgrade ke PAID';
+
+  @override
+  String get maybeLater => 'Nanti aja';
+
+  @override
+  String get feature => 'Fitur';
+
+  @override
+  String get freeLabel => 'FREE';
+
+  @override
+  String get paidLabel => 'PAID';
+
+  @override
+  String get addPhoto => 'Menambahkan Foto';
+
+  @override
+  String get addDescription => 'Menambahkan Deskripsi';
+
+  @override
+  String get addLocationFeature => 'Menambahkan Lokasi';
+
+  @override
   String get settingTitle => 'Pengaturan';
 
   @override

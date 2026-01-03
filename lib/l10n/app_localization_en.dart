@@ -282,6 +282,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationFailed => 'Failed to get current location';
 
   @override
+  String contactAdminMessage(String name) {
+    return 'Hi $name! Please try contacting our administrator or customer support.';
+  }
+
+  @override
+  String get userCalled => 'there';
+
+  @override
+  String get freeAccountTitle => 'Free Account';
+
+  @override
+  String get freeAccountDescription =>
+      'Your account is currently FREE.\nUpgrade to PAID to unlock all features.';
+
+  @override
+  String get upgradeToPaid => 'Upgrade to PAID';
+
+  @override
+  String get maybeLater => 'Maybe later';
+
+  @override
+  String get feature => 'Feature';
+
+  @override
+  String get freeLabel => 'FREE';
+
+  @override
+  String get paidLabel => 'PAID';
+
+  @override
+  String get addPhoto => 'Add Photo';
+
+  @override
+  String get addDescription => 'Add Description';
+
+  @override
+  String get addLocationFeature => 'Add Location';
+
+  @override
   String get settingTitle => 'Settings';
 
   @override

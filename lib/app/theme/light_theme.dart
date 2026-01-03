@@ -8,6 +8,7 @@ const _surfaceColor = Colors.white;
 const _errorColor = Color(0xFFD32F2F);
 const _textPrimary = Color(0xFF0D1B2A);
 const _textSecondary = Color(0xFF6B7280);
+const _greenColor = Color(0xFF26A69A);
 
 ThemeData lightTheme = ThemeData(
   useMaterial3: true,
@@ -26,6 +27,7 @@ ThemeData lightTheme = ThemeData(
     onSecondary: Colors.black,
     onSurface: _textPrimary,
     onSurfaceVariant: _textSecondary,
+    secondaryContainer: _greenColor,
     onError: Colors.white,
   ),
 

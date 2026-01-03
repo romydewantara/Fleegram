@@ -94,6 +94,26 @@
   "locationDenied": "Location permission denied",
   "locationPermanentlyDenied": "Location permission permanently denied. Enable it from settings.",
   "locationFailed": "Failed to get current location",
+  "contactAdminMessage": "Hi {name}! Please try contacting our administrator or customer support.",
+    "@contactAdminMessage": {
+      "description": "Message shown when the user is asked to contact the administrator or support",
+      "placeholders": {
+        "name": {
+          "type": "String"
+        }
+      }
+    },
+  "userCalled": "there",
+  "freeAccountTitle": "Free Account",
+  "freeAccountDescription": "Your account is currently FREE.\nUpgrade to PAID to unlock all features.",
+  "upgradeToPaid": "Upgrade to PAID",
+  "maybeLater": "Maybe later",
+  "feature": "Feature",
+  "freeLabel": "FREE",
+  "paidLabel": "PAID",
+  "addPhoto": "Add Photo",
+  "addDescription": "Add Description",
+  "addLocationFeature": "Add Location",
 
   "settingTitle": "Settings",
   "preferences": "Preferences",

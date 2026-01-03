@@ -12,7 +12,7 @@
         android:maxSdkVersion="32" />
 
     <application
-        android:label="fleegram"
+        android:label="Fleegram"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

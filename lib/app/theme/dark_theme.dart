@@ -8,6 +8,7 @@ const _surfaceColor = Color(0xFF121212);
 const _errorColor = Colors.redAccent;
 const _textPrimary = Colors.white;
 const _textSecondary = Colors.white70;
+const _greenColor = Color(0xFF2ECC71);
 
 ThemeData darkTheme = ThemeData(
   useMaterial3: true,
@@ -26,6 +27,7 @@ ThemeData darkTheme = ThemeData(
     onSecondary: Colors.black,
     onSurface: _textPrimary,
     onSurfaceVariant: _textSecondary,
+    secondaryContainer: _greenColor,
     onError: Colors.black,
   ),
 

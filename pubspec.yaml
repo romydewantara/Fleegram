@@ -43,6 +43,7 @@ flutter:
     - assets/images/ic_camera.png
     - assets/images/ic_gallery.png
     - assets/images/ic_profile.png
+    - assets/images/ic_star.png
     - assets/images/ic_verified.png
     - assets/lottie/banner.json
     - assets/lottie/credential.json

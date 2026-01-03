@@ -8,6 +8,8 @@ import 'package:fleegram/presentation/pages/post_story_page.dart';
 import 'package:fleegram/presentation/pages/register_page.dart';
 import 'package:fleegram/presentation/pages/settings_page.dart';
 import 'package:fleegram/presentation/pages/splash_page.dart';
+import 'package:fleegram/presentation/widgets/paid_info_dialog.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final router = GoRouter(
@@ -38,5 +40,28 @@ final router = GoRouter(
     ),
     GoRoute(path: '/post', builder: (_, _) => const PostStoryPage()),
     GoRoute(path: '/setting', builder: (_, _) => const SettingsPage()),
+    GoRoute(
+      path: '/paid-info',
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          opaque: false,
+          barrierDismissible: true,
+          barrierColor: Colors.black54,
+          transitionDuration: const Duration(milliseconds: 250),
+          transitionsBuilder: (_, animation, _, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: ScaleTransition(
+                scale: Tween(begin: 0.9, end: 1.0).animate(
+                  CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
+                ),
+                child: child,
+              ),
+            );
+          },
+          child: const PaidInfoDialog(),
+        );
+      },
+    ),
   ],
 );

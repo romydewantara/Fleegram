@@ -37,6 +37,20 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    flavorDimensions += "version"
+    productFlavors {
+        create("free") {
+            dimension = "version"
+            applicationIdSuffix = ".free"
+            resValue("string", "app_name", "Fleegram Free")
+        }
+
+        create("paid") {
+            dimension = "version"
+            resValue("string", "app_name", "Fleegram")
+        }
+    }
 }
 
 flutter {

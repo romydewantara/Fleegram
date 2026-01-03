@@ -1,4 +1,6 @@
 import 'package:fleegram/app/theme/app_theme.dart';
+import 'package:fleegram/core/config/app_config.dart';
+import 'package:fleegram/core/config/flavor_config.dart';
 import 'package:fleegram/core/network/api_client.dart';
 import 'package:fleegram/core/network/multipart_client.dart';
 import 'package:fleegram/data/repositories/auth_repository.dart';
@@ -22,6 +24,9 @@ class Fleegram extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        Provider<AppConfig>(
+          create: (_) => const AppConfig(isPaid: FlavorConfig.isPaid),
+        ),
         ChangeNotifierProvider(create: (_) => ThemeProvider()..load()),
         ChangeNotifierProvider(create: (_) => LocaleProvider()..load()),
         Provider<ApiClient>(create: (_) => ApiClient()),

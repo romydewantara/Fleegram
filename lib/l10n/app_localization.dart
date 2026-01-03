@@ -596,6 +596,78 @@ abstract class AppLocalizations {
   /// **'Yah! Gagal dapetin lokasi sekarang'**
   String get locationFailed;
 
+  /// Pesan ketika user diminta menghubungi admin
+  ///
+  /// In id, this message translates to:
+  /// **'Hai {name}! Yuk, coba hubungi administrator atau call center kami ya.'**
+  String contactAdminMessage(String name);
+
+  /// No description provided for @userCalled.
+  ///
+  /// In id, this message translates to:
+  /// **'Kak'**
+  String get userCalled;
+
+  /// No description provided for @freeAccountTitle.
+  ///
+  /// In id, this message translates to:
+  /// **'Akun Free'**
+  String get freeAccountTitle;
+
+  /// No description provided for @freeAccountDescription.
+  ///
+  /// In id, this message translates to:
+  /// **'Akun kamu saat ini masih FREE.\nUpgrade ke PAID untuk membuka fitur lengkap.'**
+  String get freeAccountDescription;
+
+  /// No description provided for @upgradeToPaid.
+  ///
+  /// In id, this message translates to:
+  /// **'Upgrade ke PAID'**
+  String get upgradeToPaid;
+
+  /// No description provided for @maybeLater.
+  ///
+  /// In id, this message translates to:
+  /// **'Nanti aja'**
+  String get maybeLater;
+
+  /// No description provided for @feature.
+  ///
+  /// In id, this message translates to:
+  /// **'Fitur'**
+  String get feature;
+
+  /// No description provided for @freeLabel.
+  ///
+  /// In id, this message translates to:
+  /// **'FREE'**
+  String get freeLabel;
+
+  /// No description provided for @paidLabel.
+  ///
+  /// In id, this message translates to:
+  /// **'PAID'**
+  String get paidLabel;
+
+  /// No description provided for @addPhoto.
+  ///
+  /// In id, this message translates to:
+  /// **'Menambahkan Foto'**
+  String get addPhoto;
+
+  /// No description provided for @addDescription.
+  ///
+  /// In id, this message translates to:
+  /// **'Menambahkan Deskripsi'**
+  String get addDescription;
+
+  /// No description provided for @addLocationFeature.
+  ///
+  /// In id, this message translates to:
+  /// **'Menambahkan Lokasi'**
+  String get addLocationFeature;
+
   /// No description provided for @settingTitle.
   ///
   /// In id, this message translates to:

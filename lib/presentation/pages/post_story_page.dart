@@ -1,9 +1,14 @@
 import 'dart:io';
 
+import 'package:fleegram/core/config/app_config.dart';
+import 'package:fleegram/core/constants/app_assets.dart';
+import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/story_provider.dart';
 import 'package:fleegram/presentation/utils/snackbar_helper.dart';
 import 'package:fleegram/presentation/widgets/map_picker_sheet.dart';
+import 'package:fleegram/presentation/widgets/premium_locked_tile.dart';
+import 'package:fleegram/presentation/widgets/pulse_badge.dart';
 import 'package:fleegram/presentation/widgets/story_image_picker.dart';
 import 'package:fleegram/presentation/widgets/story_image_source_bottom_sheet.dart';
 import 'package:flutter/material.dart';
@@ -189,47 +194,7 @@ class _PostStoryPageState extends State<PostStoryPage> {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 0,
-                        ),
-                        onTap: _openMapSheet,
-                        leading: Icon(
-                          Icons.location_on_outlined,
-                          color: theme.colorScheme.onSurface,
-                        ),
-                        title: Text(
-                          _selectedAddress ?? l10n.addLocation,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onSurface,
-                          ),
-                        ),
-                        trailing: _selectedAddress == null
-                            ? Icon(
-                                Icons.chevron_right,
-                                color: theme.colorScheme.onSurfaceVariant,
-                              )
-                            : IconButton(
-                                icon: Icon(
-                                  Icons.close,
-                                  color: theme.colorScheme.onSurfaceVariant,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _selectedAddress = null;
-                                    _selectedLatLng = null;
-                                  });
-                                },
-                              ),
-                      ),
-                    ),
+                    _buildPremiumLockedTile(theme, l10n),
                   ],
                 ),
               ),
@@ -278,6 +243,100 @@ class _PostStoryPageState extends State<PostStoryPage> {
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildPremiumLockedTile(ThemeData theme, AppLocalizations l10n) {
+    final bool isPaid = context.read<AppConfig>().isPaid;
+
+    return PremiumLockedTile(
+      isPaid: isPaid,
+      foreground: !isPaid
+          ? Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: Colors.amber.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: Colors.amber.withValues(alpha: 0.6)),
+              ),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(6),
+                onTap: () async {
+                  final result = await context.push<bool>('/paid-info');
+
+                  if (result == true && mounted) {
+                    SnackbarHelper.show(
+                      context,
+                      l10n.contactAdminMessage(
+                        SessionManager.name ?? l10n.userCalled,
+                      ),
+                      type: SnackbarType.info,
+                      marginVertical: 80,
+                    );
+                  }
+                },
+                child: PulseBadge(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 4,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(AppAssets.icStar, width: 16, height: 16),
+                        const SizedBox(width: 4),
+                        Text(
+                          l10n.paidLabel,
+                          style: TextStyle(
+                            color: Color(0xFF8D6E00),
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0.8,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
+          : null,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 0),
+        onTap: isPaid ? _openMapSheet : null,
+        leading: Icon(
+          Icons.location_on_outlined,
+          color: theme.colorScheme.onSurface,
+        ),
+        title: Text(
+          _selectedAddress ?? l10n.addLocation,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
+        trailing: _selectedAddress != null
+            ? IconButton(
+                icon: Icon(
+                  Icons.close,
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _selectedAddress = null;
+                    _selectedLatLng = null;
+                  });
+                },
+              )
+            : isPaid
+            ? Icon(
+                Icons.chevron_right,
+                color: theme.colorScheme.onSurfaceVariant,
+              )
+            : null,
       ),
     );
   }
