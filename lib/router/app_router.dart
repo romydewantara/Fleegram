@@ -1,6 +1,6 @@
 import 'package:fleegram/core/app_state.dart';
 import 'package:fleegram/core/utils/session_manager.dart';
-import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/data/models/story.dart';
 import 'package:fleegram/presentation/pages/detail_story_page.dart';
 import 'package:fleegram/presentation/pages/home_page.dart';
 import 'package:fleegram/presentation/pages/login_page.dart';

@@ -1,8 +1,9 @@
 import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/utils/session_manager.dart';
 import 'package:fleegram/core/utils/time_ago.dart';
-import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/data/models/story.dart';
 import 'package:fleegram/l10n/app_localization.dart';
+import 'package:fleegram/presentation/utils/geocoding_service.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
@@ -91,6 +92,10 @@ class StoryCard extends StatelessWidget {
                           ),
                         ],
                       ),
+                      if (story.lat != null && story.lon != null) ...[
+                        const SizedBox(height: 2),
+                        _buildAddressWidget(context, story.lat!, story.lon!),
+                      ],
                       const SizedBox(height: 4),
                       AnimatedSize(
                         duration: const Duration(milliseconds: 300),
@@ -168,6 +173,46 @@ class StoryCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildAddressWidget(BuildContext context, double lat, double lon) {
+    final l10n = AppLocalizations.of(context)!;
+    final colorTheme = Theme.of(context).colorScheme;
+
+    return FutureBuilder<String?>(
+      future: GeocodingService.resolveCityCountry(lat, lon),
+      builder: (context, snapshot) {
+        final address = snapshot.data;
+        final bool isAddressNotFound = address == null || address.isEmpty;
+
+        final Color iconColor = isAddressNotFound
+            ? Colors.grey
+            : const Color(0xFFEF4444);
+
+        return Row(
+          children: [
+            Icon(
+              isAddressNotFound
+                  ? Icons.location_off_sharp
+                  : Icons.location_on_sharp,
+              size: 12,
+              color: iconColor,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              isAddressNotFound ? l10n.addressNotFound : address,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                fontSize: 11,
+                color: isAddressNotFound ? Colors.grey : colorTheme.tertiary,
+                fontStyle: isAddressNotFound
+                    ? FontStyle.italic
+                    : FontStyle.normal,
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

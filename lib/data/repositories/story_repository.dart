@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:fleegram/core/network/api_client.dart';
 import 'package:fleegram/core/network/multipart_client.dart';
-import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/data/models/story.dart';
 
 class StoryRepository {
   final ApiClient apiClient;

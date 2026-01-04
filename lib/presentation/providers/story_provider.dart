@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:fleegram/core/network/network_exception.dart';
-import 'package:fleegram/data/models/story_model.dart';
+import 'package:fleegram/data/models/story.dart';
 import 'package:fleegram/data/repositories/story_repository.dart';
 import 'package:flutter/material.dart';
 

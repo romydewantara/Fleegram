@@ -85,6 +85,7 @@
   "loadAddress": "Loading address...",
   "failedToOpenMaps": "Failed to open Google Maps",
   "cityNotAvailable": "City not available",
+  "addressNotFound": "Address couldn't be found.",
 
   "mapPreview": "Map preview",
   "markerSelected": "Your story will show up here",

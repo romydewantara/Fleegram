@@ -548,6 +548,12 @@ abstract class AppLocalizations {
   /// **'Kota tidak tersedia'**
   String get cityNotAvailable;
 
+  /// No description provided for @addressNotFound.
+  ///
+  /// In id, this message translates to:
+  /// **'Alamat tidak dapat ditemukan.'**
+  String get addressNotFound;
+
   /// No description provided for @mapPreview.
   ///
   /// In id, this message translates to:

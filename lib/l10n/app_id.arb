@@ -85,6 +85,7 @@
   "loadAddress": "Memuat alamat...",
   "failedToOpenMaps": "Gagal membuka Google Maps",
   "cityNotAvailable": "Kota tidak tersedia",
+  "addressNotFound": "Alamat tidak dapat ditemukan.",
 
   "mapPreview": "Tampilan Peta",
   "markerSelected": "Ceritamu nanti bakal tampil disini",

@@ -1,5 +1,6 @@
 import 'package:fleegram/core/network/api_client.dart';
 import 'package:fleegram/data/models/login_response.dart';
+import 'package:fleegram/data/models/login_result.dart';
 
 class AuthRepository {
   final ApiClient apiClient;

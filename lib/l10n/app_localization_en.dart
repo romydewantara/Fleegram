@@ -256,6 +256,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cityNotAvailable => 'City not available';
 
   @override
+  String get addressNotFound => 'Address couldn\'t be found.';
+
+  @override
   String get mapPreview => 'Map preview';
 
   @override

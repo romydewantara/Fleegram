@@ -255,6 +255,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get cityNotAvailable => 'Kota tidak tersedia';
 
   @override
+  String get addressNotFound => 'Alamat tidak dapat ditemukan.';
+
+  @override
   String get mapPreview => 'Tampilan Peta';
 
   @override
