@@ -60,9 +60,13 @@ class DetailStoryPage extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 18,
-                    backgroundImage: AssetImage(AppAssets.icProfile),
+                    backgroundImage: AssetImage(
+                      story.name == l10n.developerName
+                          ? AppAssets.icProfileDev
+                          : AppAssets.icProfile,
+                    ),
                   ),
                   const SizedBox(width: 12),
 

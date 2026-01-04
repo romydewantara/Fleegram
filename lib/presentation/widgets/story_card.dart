@@ -54,7 +54,11 @@ class StoryCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 20,
-                  backgroundImage: const AssetImage(AppAssets.icProfile),
+                  backgroundImage: AssetImage(
+                    story.name == l10n.developerName
+                        ? AppAssets.icProfileDev
+                        : AppAssets.icProfile,
+                  ),
                 ),
                 const SizedBox(width: 12),
 
