@@ -2,6 +2,7 @@ import 'package:fleegram/core/constants/app_assets.dart';
 import 'package:fleegram/core/network/api_exception.dart';
 import 'package:fleegram/l10n/app_localization.dart';
 import 'package:fleegram/presentation/providers/auth_provider.dart';
+import 'package:fleegram/presentation/providers/locale_provider.dart';
 import 'package:fleegram/presentation/utils/snackbar_helper.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +85,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localeProvider = context.watch<LocaleProvider>();
     final authProvider = context.watch<AuthProvider>();
     final l10n = AppLocalizations.of(context)!;
 
@@ -102,6 +104,37 @@ class _LoginPageState extends State<LoginPage> {
       behavior: HitTestBehavior.translucent,
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: true,
+          title: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            decoration: BoxDecoration(
+              color: Theme.of(
+                context,
+              ).colorScheme.surface.withValues(alpha: 0.6),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<Locale>(
+                value: localeProvider.locale,
+                onChanged: (locale) {
+                  if (locale != null) {
+                    context.read<LocaleProvider>().setLocale(locale);
+                  }
+                },
+                items: const [
+                  DropdownMenuItem(
+                    value: Locale('id'),
+                    child: Text('Indonesia'),
+                  ),
+                  DropdownMenuItem(value: Locale('en'), child: Text('English')),
+                ],
+              ),
+            ),
+          ),
+        ),
         body: Center(
           child: SingleChildScrollView(
             child: Column(
