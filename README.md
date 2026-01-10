@@ -1,13 +1,5 @@
 # Fleegram
 
-**Fleegram** is a simple Flutter app for sharing short stories, created as a final project for the  
-**Belajar Pengembangan Aplikasi Flutter Intermediate** course. This project emphasizes **clean code practices**, **state management**, and modern **Flutter navigation 2.0**.
-```
-Developer: Romy Dewantara
-```
----
-## Technologies & Packages Used
-
 [![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev/)
 [![go_router](https://img.shields.io/badge/go_router-FF6F00?style=for-the-badge&logo=flutter&logoColor=white)](https://pub.dev/packages/go_router)
@@ -15,6 +7,24 @@ Developer: Romy Dewantara
 [![SharedPreferences](https://img.shields.io/badge/SharedPreferences-F57C00?style=for-the-badge&logo=flutter&logoColor=white)](https://pub.dev/packages/shared_preferences)
 [![Image Cropper](https://img.shields.io/badge/Image%20Cropper-8E24AA?style=for-the-badge&logo=flutter&logoColor=white)](https://pub.dev/packages/image_cropper)
 [![Flutter Lints](https://img.shields.io/badge/Flutter%20Lints-0D47A1?style=for-the-badge&logo=flutter&logoColor=white)](https://pub.dev/packages/flutter_lints)
+
+![Overview](screenshots/overview.png)
+
+**Fleegram** is a simple Flutter app for sharing short stories, created as a final project for the  
+**Belajar Pengembangan Aplikasi Flutter Intermediate** course. This project emphasizes **clean code practices**, **state management**, and modern **Flutter navigation 2.0**.
+
+**Developer:** Romy Dewantara
+
+---
+## Features
+
+- **Login & Registration** – Secure authentication flow
+- **Session Management** – Persist login across app restarts using **SharedPreferences**
+- **Post Stories** – Upload text & images, optionally cropped
+- **Story List & Detail** – Browse all stories with detailed view
+
+---
+## Technologies & Packages Used
 
 - **Dart & Flutter** – Core development language and framework
 - **go_router** – Navigation 2.0 for structured and declarative routing
@@ -26,22 +36,15 @@ Developer: Romy Dewantara
 
 ---
 
-## Features
-
-- **Login & Registration** – Secure authentication flow
-- **Session Management** – Persist login across app restarts using **SharedPreferences**
-- **Post Stories** – Upload text & images, optionally cropped
-- **Story List & Detail** – Browse all stories with detailed view
-
----
-
 ## Prerequisites
 - Flutter SDK >= 3.38.5
 - Dart >= 3.10.4
-- Android Studio / VS Code
-- A connected device or emulator
+- Android Studio / Visual Studio Code
+- Android SDK & Platform Tools
+- An Android emulator or a physical device
+- Internet connection (for API access and package dependencies)
 
-## LICENSE
+## License
 
 MIT License
 

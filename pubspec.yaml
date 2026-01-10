@@ -46,10 +46,12 @@ flutter:
     - assets/images/dicoding_logo.png
     - assets/images/ic_add_image.png
     - assets/images/ic_camera.png
+    - assets/images/ic_endorse_line.png
     - assets/images/ic_gallery.png
     - assets/images/ic_profile.png
     - assets/images/ic_profile_dev.png
     - assets/images/ic_star.png
+    - assets/images/ic_tagline.png
     - assets/images/ic_verified.png
     - assets/lottie/banner.json
     - assets/lottie/credential.json

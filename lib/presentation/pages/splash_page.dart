@@ -55,40 +55,26 @@ class _SplashPageState extends State<SplashPage>
             ),
           ),
           Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Fleegram',
-                  style: const TextStyle(
-                    fontFamily: 'Satisfy',
-                    fontSize: 58,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                const Text(
-                  'Share your moments',
-                  style: TextStyle(fontSize: 13, color: Colors.white70),
-                ),
-              ],
+            child: Image.asset(
+              /// `Moments, Made Easy` is a globally understandable phrase.
+              /// This project aims to build a 'globally' accessible brand
+              /// that avoids country specific or `local idioms`.
+              /// For example: "Instagram – Create, share and connect.".
+              AppAssets.icTagline,
+              width: 240,
+              fit: BoxFit.contain,
             ),
           ),
           Positioned(
             bottom: 24,
             left: 0,
             right: 0,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  'Powered by',
-                  style: TextStyle(color: Colors.white70, fontSize: 12),
-                ),
-                const SizedBox(height: 4),
-                Image.asset(AppAssets.dicodingLogo, width: 60),
-              ],
+            child: Image.asset(
+              /// `Powered by` is kept in English because it is well known globally
+              /// and keeps branding consistent across countries.
+              AppAssets.icEndorseLine,
+              height: 40,
+              fit: BoxFit.contain,
             ),
           ),
         ],
