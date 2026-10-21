@@ -13,28 +13,35 @@
 **Fleegram** is a simple Flutter app for sharing short stories, created as a final project for the  
 **Belajar Pengembangan Aplikasi Flutter Intermediate** course. This project emphasizes **clean code practices**, **state management**, and modern **Flutter navigation 2.0**.
 
-**Developer:** Romy Dewantara
+**Developed by:** Romy Dewantara
 
----
 ## Features
 
-- **Login & Registration** – Secure authentication flow
-- **Session Management** – Persist login across app restarts using **SharedPreferences**
-- **Post Stories** – Upload text & images, optionally cropped
-- **Story List & Detail** – Browse all stories with detailed view
+- **Authentication** – Login and registration flow
+- **Session Management** – Persist login across app restarts using SharedPreferences
+- **Post Stories** – Upload a story with text and an image, picked from gallery/camera and optionally cropped
+- **Location Tagging** – Attach a location to a story using Google Maps, Geolocator, and Geocoding
+- **Story List & Detail** – Browse all stories and view full details, with expandable text
+- **Localization** – Multi-language support with Flutter localization and `intl`
+- **Animations** – Lottie animations for a more engaging UI
 
----
 ## Technologies & Packages Used
 
 - **Dart & Flutter** – Core development language and framework
 - **go_router** – Navigation 2.0 for structured and declarative routing
 - **provider** – State management and dependency injection
-- **image_cropper** – Crop and edit images before posting stories
+- **http** – REST API communication
 - **shared_preferences** – Persist login session and user preferences locally
-- **clean architecture** principles – Separation of UI, business logic, and data
+- **image_picker & image_cropper** – Select and crop images before posting stories
+- **google_maps_flutter, geolocator & geocoding** – Location picking, current position, and address lookup
+- **intl & flutter_localizations** – Localization and formatting
+- **lottie** – Lightweight animations
+- **freezed & json_serializable** – Immutable models and JSON serialization
 - **flutter_lints** – Linting for consistent, maintainable code
 
----
+## Architecture
+
+- **Clean Code** – Separation of UI, business logic, and data
 
 ## Prerequisites
 - Flutter SDK >= 3.38.5
